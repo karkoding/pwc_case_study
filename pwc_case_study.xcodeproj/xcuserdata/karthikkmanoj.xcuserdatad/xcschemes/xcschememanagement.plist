@@ -9,10 +9,15 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>pwc_case_study.xcscheme_^#shared#^_</key>
+		<key>SharediOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>pwc_case_study.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 </dict>
