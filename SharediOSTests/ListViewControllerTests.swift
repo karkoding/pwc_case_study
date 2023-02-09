@@ -52,12 +52,15 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
         let sut = makeSUT()
-        let item1 = SectionController(headerController: FakeHeaderController(), controllers: [FakeCellController()])
+        let cell = UITableViewCell()
+        let cellController = FakeCellController(tableViewCell: cell)
+        let item1 = SectionController(headerController: FakeHeaderController(), controllers: [cellController])
         
         sut.updateTableModel(sectionController: [item1])
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
+        XCTAssertEqual(sut.item(at: 0, in: 0), cell)
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
     }
     
@@ -88,9 +91,15 @@ final class ListViewControllerTests: XCTestCase {
     }
     
     private final class FakeCellController: NSObject, CellController {
+        private let tableViewCell: UITableViewCell
+        
+        init(tableViewCell: UITableViewCell = UITableViewCell()) {
+            self.tableViewCell = tableViewCell
+        }
+        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
     }
     
     private final class FakeHeaderController: HeaderController {
@@ -115,4 +124,9 @@ private extension ListViewController {
         return delegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
     
+    func item(at row: Int, in section: Int) -> UITableViewCell? {
+        let dataSource = tableView.dataSource!
+        let indexPath = IndexPath(row: row, section: section)
+        return dataSource.tableView(tableView, cellForRowAt: indexPath)
+    }
 }
