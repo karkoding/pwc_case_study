@@ -13,7 +13,7 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         
         var callCount = 0
-        sut.onViewDidLoad = {  callCount += 1 }
+        sut.onViewDidLoad = { callCount += 1 }
         
         sut.loadViewIfNeeded()
         
