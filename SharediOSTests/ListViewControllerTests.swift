@@ -53,7 +53,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
         let sut = makeSUT()
         let cell = UITableViewCell()
-        let cellController = FakeCellController(tableViewCell: cell)
+        let cellController = CellControllerStub(tableViewCell: cell)
         let item1 = SectionController(headerController: FakeHeaderController(), controllers: [cellController])
         
         sut.updateTableModel(sectionController: [item1])
@@ -66,7 +66,7 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_updateTableModel_rendersItemsWithoutSectionForAnItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
-        let item1 = SectionController(headerController: nil, controllers: [FakeCellController()])
+        let item1 = SectionController(headerController: nil, controllers: [CellControllerStub()])
         
         sut.updateTableModel(sectionController: [item1])
         
@@ -90,7 +90,7 @@ final class ListViewControllerTests: XCTestCase {
         ListViewController()
     }
     
-    private final class FakeCellController: NSObject, CellController {
+    private final class .: NSObject, CellController {
         private let tableViewCell: UITableViewCell
         
         init(tableViewCell: UITableViewCell = UITableViewCell()) {
