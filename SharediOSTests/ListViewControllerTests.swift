@@ -55,7 +55,7 @@ final class ListViewControllerTests: XCTestCase {
         let givenCell = UITableViewCell()
         let givenView = UIView()
         let cellController = CellControllerStub(tableViewCell: givenCell)
-        let headerController = FakeHeaderController(view: givenView)
+        let headerController = HeaderControllerStub(view: givenView)
         let item1 = SectionController(headerController: headerController, controllers: [cellController])
         
         sut.updateTableModel(sectionController: [item1])
@@ -80,7 +80,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_updateTableModel_rendersSectionWithoutItemsForAnItemWithSectionAndEmptyList() {
         let sut = makeSUT()
         let givenView = UIView()
-        let headerController = FakeHeaderController(view: givenView)
+        let headerController = HeaderControllerStub(view: givenView)
         let item1 = SectionController(headerController: headerController, controllers: [])
         
         sut.updateTableModel(sectionController: [item1])
@@ -106,7 +106,7 @@ final class ListViewControllerTests: XCTestCase {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
     }
     
-    private final class FakeHeaderController: HeaderController {
+    private final class HeaderControllerStub: HeaderController {
         private let view: UIView
         
         init(view: UIView) {
