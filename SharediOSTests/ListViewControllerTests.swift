@@ -34,9 +34,20 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.updateTableModel(sectionController: [item1])
         
-        XCTAssertEqual(sut.numberOfSections(), 1)
-        XCTAssertNil(sut.viewForHeaderIn(section: 0))
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 0)
+        XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
+        XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
+        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 0, "Expected not to render any items")
+    }
+    
+    func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
+        let sut = ListViewController()
+        let item1 = SectionController(headerController: FakeHeaderController(), controllers: [FakeCellController()])
+        
+        sut.updateTableModel(sectionController: [item1])
+        
+        XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
+        XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
+        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1, "Expected to render an item")
     }
     
     func test_updateTableModel_rendersOneSectionWithOneItem() {
@@ -49,10 +60,18 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1)
     }
     
-    class FakeCellController: NSObject, CellController {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
+        ListViewController()
+    }
+    
+    private final class FakeCellController: NSObject, CellController {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
+    }
+    
+    private final class FakeHeaderController: HeaderController {
+        func makeHeaderView() -> UIView { UIView() }
     }
 
 }
@@ -60,8 +79,7 @@ final class ListViewControllerTests: XCTestCase {
 private extension ListViewController {
     func numberOfSections() -> Int {
         let dataSource = tableView.dataSource!
-        let itemsCount = dataSource.numberOfSections?(in: tableView)
-        return itemsCount ?? .zero
+        return dataSource.numberOfSections?(in: tableView) ?? .zero
     }
     
     func numberOfItemsRenderedIn(section: Int) -> Int {
