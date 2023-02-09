@@ -53,7 +53,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
-        let givenView = UITableViewCell()
+        let givenView = UIView()
         let cellController = CellControllerStub(tableViewCell: givenCell)
         let headerController = FakeHeaderController(view: givenView)
         let item1 = SectionController(headerController: headerController, controllers: [cellController])
@@ -61,7 +61,7 @@ final class ListViewControllerTests: XCTestCase {
         sut.updateTableModel(sectionController: [item1])
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
-        XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
+        XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
         XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
     }
@@ -80,12 +80,13 @@ final class ListViewControllerTests: XCTestCase {
     func test_updateTableModel_rendersSectionWithoutItemsForAnItemWithSectionAndEmptyList() {
         let sut = makeSUT()
         let givenView = UIView()
-        let item1 = SectionController(headerController: FakeHeaderController(view: givenView), controllers: [])
+        let headerController = FakeHeaderController(view: givenView)
+        let item1 = SectionController(headerController: headerController, controllers: [])
         
         sut.updateTableModel(sectionController: [item1])
         
         XCTAssertEqual(sut.numberOfSections(), 1)
-        XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
+        XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
