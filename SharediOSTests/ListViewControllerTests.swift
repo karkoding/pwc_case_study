@@ -41,9 +41,9 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_updateTableModel_doesNotRenderSectionOrItemsForAnItemWithNoSectionAndEmptyList() {
         let sut = makeSUT()
-        let item1 = SectionController(headerController: nil, controllers: [])
+        let section1 = SectionController(headerController: nil, controllers: [])
         
-        sut.updateTableModel(sectionController: [item1])
+        sut.updateTableModel(sectionController: [section1])
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
@@ -56,9 +56,9 @@ final class ListViewControllerTests: XCTestCase {
         let givenView = UIView()
         let cellController = CellControllerStub(tableViewCell: givenCell)
         let headerController = HeaderControllerStub(view: givenView)
-        let item1 = SectionController(headerController: headerController, controllers: [cellController])
+        let section1 = SectionController(headerController: headerController, controllers: [cellController])
         
-        sut.updateTableModel(sectionController: [item1])
+        sut.updateTableModel(sectionController: [section1])
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
@@ -70,9 +70,9 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
         let cellController = CellControllerStub(tableViewCell: givenCell)
-        let item1 = SectionController(headerController: nil, controllers: [cellController])
+        let section1 = SectionController(headerController: nil, controllers: [cellController])
         
-        sut.updateTableModel(sectionController: [item1])
+        sut.updateTableModel(sectionController: [section1])
         
         XCTAssertEqual(sut.numberOfSections(), 1)
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
@@ -84,9 +84,9 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let givenView = UIView()
         let headerController = HeaderControllerStub(view: givenView)
-        let item1 = SectionController(headerController: headerController, controllers: [])
+        let section1 = SectionController(headerController: headerController, controllers: [])
         
-        sut.updateTableModel(sectionController: [item1])
+        sut.updateTableModel(sectionController: [section1])
         
         XCTAssertEqual(sut.numberOfSections(), 1)
         XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
