@@ -12,10 +12,10 @@
 		DA05C0B72994268F00F61DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0B62994268F00F61DDC /* ViewController.swift */; };
 		DA05C0BC2994269100F61DDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA05C0BB2994269100F61DDC /* Assets.xcassets */; };
 		DA05C0BF2994269100F61DDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA05C0BD2994269100F61DDC /* LaunchScreen.storyboard */; };
-		DA05C0D52994284D00F61DDC /* ListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* ListiOS.framework */; };
+		DA05C0D52994284D00F61DDC /* SharediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; };
 		DA05C0DC2994284D00F61DDC /* ListiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */; };
-		DA05C0E02994284D00F61DDC /* ListiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* ListiOS.framework */; };
-		DA05C0E12994284D00F61DDC /* ListiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* ListiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DA05C0E02994284D00F61DDC /* SharediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; };
+		DA05C0E12994284D00F61DDC /* SharediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA05C0EA2994288E00F61DDC /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0E92994288E00F61DDC /* ListViewController.swift */; };
 		DA05C0EC299429C800F61DDC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0EB299429C800F61DDC /* NavigationController.swift */; };
 /* End PBXBuildFile section */
@@ -51,7 +51,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DA05C0E12994284D00F61DDC /* ListiOS.framework in Embed Frameworks */,
+				DA05C0E12994284D00F61DDC /* SharediOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,8 +66,8 @@
 		DA05C0BB2994269100F61DDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA05C0BE2994269100F61DDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA05C0C02994269100F61DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA05C0CB2994284D00F61DDC /* ListiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ListiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA05C0D42994284D00F61DDC /* ListiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA05C0CB2994284D00F61DDC /* SharediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA05C0D42994284D00F61DDC /* SharediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListiOSTests.swift; sourceTree = "<group>"; };
 		DA05C0E92994288E00F61DDC /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DA05C0EB299429C800F61DDC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA05C0E02994284D00F61DDC /* ListiOS.framework in Frameworks */,
+				DA05C0E02994284D00F61DDC /* SharediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA05C0D52994284D00F61DDC /* ListiOS.framework in Frameworks */,
+				DA05C0D52994284D00F61DDC /* SharediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				DA05C0B12994268F00F61DDC /* pwc_case_study */,
-				DA05C0CC2994284D00F61DDC /* ListiOS */,
-				DA05C0DA2994284D00F61DDC /* ListiOSTests */,
+				DA05C0CC2994284D00F61DDC /* SharediOS */,
+				DA05C0DA2994284D00F61DDC /* SharediOSTests */,
 				DA05C0B02994268F00F61DDC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				DA05C0AF2994268F00F61DDC /* pwc_case_study.app */,
-				DA05C0CB2994284D00F61DDC /* ListiOS.framework */,
-				DA05C0D42994284D00F61DDC /* ListiOSTests.xctest */,
+				DA05C0CB2994284D00F61DDC /* SharediOS.framework */,
+				DA05C0D42994284D00F61DDC /* SharediOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,21 +133,21 @@
 			path = pwc_case_study;
 			sourceTree = "<group>";
 		};
-		DA05C0CC2994284D00F61DDC /* ListiOS */ = {
+		DA05C0CC2994284D00F61DDC /* SharediOS */ = {
 			isa = PBXGroup;
 			children = (
 				DA05C0E92994288E00F61DDC /* ListViewController.swift */,
 				DA05C0EB299429C800F61DDC /* NavigationController.swift */,
 			);
-			path = ListiOS;
+			path = SharediOS;
 			sourceTree = "<group>";
 		};
-		DA05C0DA2994284D00F61DDC /* ListiOSTests */ = {
+		DA05C0DA2994284D00F61DDC /* SharediOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */,
 			);
-			path = ListiOSTests;
+			path = SharediOSTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,9 +182,9 @@
 			productReference = DA05C0AF2994268F00F61DDC /* pwc_case_study.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA05C0CA2994284D00F61DDC /* ListiOS */ = {
+		DA05C0CA2994284D00F61DDC /* SharediOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA05C0E22994284D00F61DDC /* Build configuration list for PBXNativeTarget "ListiOS" */;
+			buildConfigurationList = DA05C0E22994284D00F61DDC /* Build configuration list for PBXNativeTarget "SharediOS" */;
 			buildPhases = (
 				DA05C0C62994284D00F61DDC /* Headers */,
 				DA05C0C72994284D00F61DDC /* Sources */,
@@ -195,14 +195,14 @@
 			);
 			dependencies = (
 			);
-			name = ListiOS;
+			name = SharediOS;
 			productName = ListiOS;
-			productReference = DA05C0CB2994284D00F61DDC /* ListiOS.framework */;
+			productReference = DA05C0CB2994284D00F61DDC /* SharediOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DA05C0D32994284D00F61DDC /* ListiOSTests */ = {
+		DA05C0D32994284D00F61DDC /* SharediOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA05C0E62994284D00F61DDC /* Build configuration list for PBXNativeTarget "ListiOSTests" */;
+			buildConfigurationList = DA05C0E62994284D00F61DDC /* Build configuration list for PBXNativeTarget "SharediOSTests" */;
 			buildPhases = (
 				DA05C0D02994284D00F61DDC /* Sources */,
 				DA05C0D12994284D00F61DDC /* Frameworks */,
@@ -214,9 +214,9 @@
 				DA05C0D72994284D00F61DDC /* PBXTargetDependency */,
 				DA05C0D92994284D00F61DDC /* PBXTargetDependency */,
 			);
-			name = ListiOSTests;
+			name = SharediOSTests;
 			productName = ListiOSTests;
-			productReference = DA05C0D42994284D00F61DDC /* ListiOSTests.xctest */;
+			productReference = DA05C0D42994284D00F61DDC /* SharediOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -256,8 +256,8 @@
 			projectRoot = "";
 			targets = (
 				DA05C0AE2994268F00F61DDC /* pwc_case_study */,
-				DA05C0CA2994284D00F61DDC /* ListiOS */,
-				DA05C0D32994284D00F61DDC /* ListiOSTests */,
+				DA05C0CA2994284D00F61DDC /* SharediOS */,
+				DA05C0D32994284D00F61DDC /* SharediOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,7 +321,7 @@
 /* Begin PBXTargetDependency section */
 		DA05C0D72994284D00F61DDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA05C0CA2994284D00F61DDC /* ListiOS */;
+			target = DA05C0CA2994284D00F61DDC /* SharediOS */;
 			targetProxy = DA05C0D62994284D00F61DDC /* PBXContainerItemProxy */;
 		};
 		DA05C0D92994284D00F61DDC /* PBXTargetDependency */ = {
@@ -331,7 +331,7 @@
 		};
 		DA05C0DF2994284D00F61DDC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DA05C0CA2994284D00F61DDC /* ListiOS */;
+			target = DA05C0CA2994284D00F61DDC /* SharediOS */;
 			targetProxy = DA05C0DE2994284D00F61DDC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -632,7 +632,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA05C0E22994284D00F61DDC /* Build configuration list for PBXNativeTarget "ListiOS" */ = {
+		DA05C0E22994284D00F61DDC /* Build configuration list for PBXNativeTarget "SharediOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA05C0E32994284D00F61DDC /* Debug */,
@@ -641,7 +641,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA05C0E62994284D00F61DDC /* Build configuration list for PBXNativeTarget "ListiOSTests" */ = {
+		DA05C0E62994284D00F61DDC /* Build configuration list for PBXNativeTarget "SharediOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA05C0E72994284D00F61DDC /* Debug */,

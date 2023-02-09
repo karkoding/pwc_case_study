@@ -27,6 +27,7 @@ public class NavigationController: UINavigationController {
     private let navItem: RootNavigationItem
     
     var rightButtonTapped: (() -> Void)?
+    var leftButtonTapped: (() -> Void)?
     
     public init(rootViewController: UIViewController, navItem: RootNavigationItem) {
         self.navItem = navItem
@@ -60,6 +61,7 @@ public class NavigationController: UINavigationController {
     }
     
     @objc func handleLeftButtonTap() {
+        leftButtonTapped?()
         dismiss(animated: true)
     }
     
