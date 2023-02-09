@@ -50,14 +50,15 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1, "Expected to render an item")
     }
     
-    func test_updateTableModel_rendersOneSectionWithOneItem() {
+    func test_updateTableModel_rendersItemsWithoutSectionForAnItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let item1 = SectionController(headerController: nil, controllers: [FakeCellController()])
         
         sut.updateTableModel(sectionController: [item1])
         
         XCTAssertEqual(sut.numberOfSections(), 1)
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1)
+        XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
+        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1, "Expected to render an item")
     }
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
