@@ -10,7 +10,7 @@ import SharediOS
 
 final class ListViewControllerTests: XCTestCase {
     func test_viewDidLoad_messagesOnViewDidLoadOnce() {
-        let sut = ListViewController()
+        let sut = makeSUT()
         
         var callCount = 0
         sut.onViewDidLoad = {  callCount += 1 }
@@ -21,7 +21,7 @@ final class ListViewControllerTests: XCTestCase {
     }
     
     func test_updateTableModel_doesNotRenderListOnEmptyList() {
-        let sut = ListViewController()
+        let sut = makeSUT()
         
         sut.updateTableModel(sectionController: [])
         
@@ -29,7 +29,7 @@ final class ListViewControllerTests: XCTestCase {
     }
     
     func test_updateTableModel_doesNotRenderSectionOrItemsForAnItemWithNoSectionAndEmptyList() {
-        let sut = ListViewController()
+        let sut = makeSUT()
         let item1 = SectionController(headerController: nil, controllers: [])
         
         sut.updateTableModel(sectionController: [item1])
@@ -40,7 +40,7 @@ final class ListViewControllerTests: XCTestCase {
     }
     
     func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
-        let sut = ListViewController()
+        let sut = makeSUT()
         let item1 = SectionController(headerController: FakeHeaderController(), controllers: [FakeCellController()])
         
         sut.updateTableModel(sectionController: [item1])
@@ -51,7 +51,7 @@ final class ListViewControllerTests: XCTestCase {
     }
     
     func test_updateTableModel_rendersOneSectionWithOneItem() {
-        let sut = ListViewController()
+        let sut = makeSUT()
         let item1 = SectionController(headerController: nil, controllers: [FakeCellController()])
         
         sut.updateTableModel(sectionController: [item1])
