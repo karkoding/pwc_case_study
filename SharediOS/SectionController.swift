@@ -9,6 +9,10 @@ import UIKit
 
 public typealias CellController = UITableViewDataSource & UITableViewDelegate
 
+public protocol HeaderController {
+    func makeHeaderView() -> UIView
+}
+
 public struct SectionController {
     public let headerController: HeaderController?
     public let controllers: [CellController]
@@ -16,13 +20,5 @@ public struct SectionController {
     public init(headerController: HeaderController?, controllers: [CellController]) {
         self.headerController = headerController
         self.controllers = controllers
-    }
-}
-
-public struct HeaderController {
-    public let headerView: UIView
-    
-    public init(headerView: UIView) {
-        self.headerView = headerView
     }
 }

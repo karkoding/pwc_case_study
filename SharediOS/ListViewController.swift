@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 public final class ListViewController: UITableViewController {
     
     private var tableModel = [SectionController]() {
@@ -57,7 +55,7 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        tableModel[section].headerController?.headerView
+        tableModel[section].headerController?.makeHeaderView()
     }
     
     public func updateTableModel(sectionController: [SectionController]) {
