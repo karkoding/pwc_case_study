@@ -13,7 +13,7 @@
 		DA05C0BC2994269100F61DDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA05C0BB2994269100F61DDC /* Assets.xcassets */; };
 		DA05C0BF2994269100F61DDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA05C0BD2994269100F61DDC /* LaunchScreen.storyboard */; };
 		DA05C0D52994284D00F61DDC /* SharediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; };
-		DA05C0DC2994284D00F61DDC /* ListiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */; };
+		DA05C0DC2994284D00F61DDC /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0DB2994284D00F61DDC /* ListViewControllerTests.swift */; };
 		DA05C0E02994284D00F61DDC /* SharediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; };
 		DA05C0E12994284D00F61DDC /* SharediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DA05C0CB2994284D00F61DDC /* SharediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA05C0EA2994288E00F61DDC /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0E92994288E00F61DDC /* ListViewController.swift */; };
@@ -69,7 +69,7 @@
 		DA05C0C02994269100F61DDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA05C0CB2994284D00F61DDC /* SharediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA05C0D42994284D00F61DDC /* SharediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SharediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListiOSTests.swift; sourceTree = "<group>"; };
+		DA05C0DB2994284D00F61DDC /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		DA05C0E92994288E00F61DDC /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DA05C0EB299429C800F61DDC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		DA05C0ED2995476200F61DDC /* SectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionController.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		DA05C0DA2994284D00F61DDC /* SharediOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA05C0DB2994284D00F61DDC /* ListiOSTests.swift */,
+				DA05C0DB2994284D00F61DDC /* ListViewControllerTests.swift */,
 			);
 			path = SharediOSTests;
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA05C0DC2994284D00F61DDC /* ListiOSTests.swift in Sources */,
+				DA05C0DC2994284D00F61DDC /* ListViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
