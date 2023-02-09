@@ -20,6 +20,17 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
+    func test_viewDidLoad_messagesConfigureTableViewOnce() {
+        let sut = makeSUT()
+        
+        var callCount = 0
+        sut.configureTableView = { _ in callCount += 1 }
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(callCount, 1)
+    }
+    
     func test_updateTableModel_doesNotRenderSectionOrItemstOnEmptyList() {
         let sut = makeSUT()
         
