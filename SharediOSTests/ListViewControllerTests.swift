@@ -20,7 +20,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
-    func test_updateTableModel_rendersEmptyViewsOnLoadingEmptyList() {
+    func test_updateTableModel_doesNotRenderOnEmptyList() {
         let sut = ListViewController()
         
         sut.updateTableModel(sectionController: [])
