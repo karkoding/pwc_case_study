@@ -28,7 +28,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfItemsRendered(), 0)
     }
     
-    func test_updateTableModel_rendersOneItemWithOneItemInTheList() {
+    func test_updateTableModel_rendersOneItemOnListWithOneItem() {
         let sut = ListViewController()
         let item1 = SectionController(headerController: nil, controllers: [])
         
