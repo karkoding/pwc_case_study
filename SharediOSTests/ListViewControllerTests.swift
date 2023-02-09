@@ -93,6 +93,21 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
+    func test_updateTableModel_rendersMultipleItemsInASection() {
+        let sut = makeSUT()
+        let givenCell1 = UITableViewCell()
+        let givenCell2 = UITableViewCell()
+        let cellController1 = CellControllerStub(tableViewCell: givenCell1)
+        let cellController2 = CellControllerStub(tableViewCell: givenCell2)
+        let section1 = SectionController(headerController: nil, controllers: [cellController1, cellController2])
+        
+        sut.updateTableModel(sectionController: [section1])
+        
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2)
+        XCTAssertEqual(sut.item(at: 0, in: 0), givenCell1)
+        XCTAssertEqual(sut.item(at: 1, in: 0), givenCell2)
+    }
+    
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
     }
