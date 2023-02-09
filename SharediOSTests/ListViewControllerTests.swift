@@ -62,19 +62,22 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
-        XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
+        XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
     }
     
     func test_updateTableModel_rendersItemsWithoutSectionForAnItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
-        let item1 = SectionController(headerController: nil, controllers: [CellControllerStub()])
+        let givenCell = UITableViewCell()
+        let cellController = CellControllerStub(tableViewCell: givenCell)
+        let item1 = SectionController(headerController: nil, controllers: [cellController])
         
         sut.updateTableModel(sectionController: [item1])
         
         XCTAssertEqual(sut.numberOfSections(), 1)
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
+        XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
     }
     
     func test_updateTableModel_rendersSectionWithoutItemsForAnItemWithSectionAndEmptyList() {
@@ -115,7 +118,6 @@ final class ListViewControllerTests: XCTestCase {
         
         func makeHeaderView() -> UIView { view }
     }
-
 }
 
 private extension ListViewController {
