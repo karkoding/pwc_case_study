@@ -90,7 +90,7 @@ final class ListViewControllerTests: XCTestCase {
         ListViewController()
     }
     
-    private final class .: NSObject, CellController {
+    private final class CellControllerStub: NSObject, CellController {
         private let tableViewCell: UITableViewCell
         
         init(tableViewCell: UITableViewCell = UITableViewCell()) {
