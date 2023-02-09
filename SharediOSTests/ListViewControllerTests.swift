@@ -47,7 +47,7 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 0, "Expected not to render any items")
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
     
     func test_updateTableModel_renderSectionAndItemsForAnItemWithSectionAndNonEmptyList() {
@@ -58,7 +58,7 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
         XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1, "Expected to render an item")
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
     }
     
     func test_updateTableModel_rendersItemsWithoutSectionForAnItemWithNoSectionAndNonEmptyList() {
@@ -69,7 +69,7 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(), 1)
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 1, "Expected to render an item")
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
     }
     
     func test_updateTableModel_rendersSectionWithoutItemsForAnItemWithSectionAndEmptyList() {
@@ -80,7 +80,7 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(), 1)
         XCTAssertNotNil(sut.viewForHeaderIn(section: 0), "Expected to render a header view")
-        XCTAssertEqual(sut.numberOfItemsRenderedIn(section: 0), 0, "Expected not to render any item")
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
@@ -105,7 +105,7 @@ private extension ListViewController {
         return dataSource.numberOfSections?(in: tableView) ?? .zero
     }
     
-    func numberOfItemsRenderedIn(section: Int) -> Int {
+    func numberOfRenderedItemsIn(section: Int) -> Int {
         let dataSource = tableView.dataSource!
         return dataSource.tableView(tableView, numberOfRowsInSection: section)
     }
@@ -114,4 +114,5 @@ private extension ListViewController {
         let delegate = tableView.delegate
         return delegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
+    
 }
