@@ -31,7 +31,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
-    func test_updateTableModel_doesNotRenderSectionOrItemstOnEmptyList() {
+    func test_update_doesNotRenderList() {
         let sut = makeSUT()
         
         sut.update(sectionController: [])
@@ -39,7 +39,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfSections(), 0)
     }
     
-    func test_updateTableModel_doesNotRenderSectionOrItems_ForSectionItemWithNoSectionAndEmptyList() {
+    func test_update_doesNotRenderSectionOrItems_ForSectionItemWithNoSectionAndEmptyList() {
         let sut = makeSUT()
         let section1 = SectionController(headerController: nil, controllers: [])
         
@@ -50,7 +50,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
     
-    func test_updateTableModel_renderSectionAndItems_ForSectionItemWithSectionAndNonEmptyList() {
+    func test_update_renderSectionAndItems_ForSectionItemWithSectionAndNonEmptyList() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
         let givenView = UIView()
@@ -66,7 +66,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
     }
     
-    func test_updateTableModel_rendersItemsWithoutSection_ForSectionItemWithNoSectionAndNonEmptyList() {
+    func test_update_rendersItemsWithoutSection_ForSectionItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
         let cellController = CellControllerSpy(tableViewCell: givenCell)
@@ -80,7 +80,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 0, in: 0), givenCell, "Expected to render the given cell")
     }
     
-    func test_updateTableModel_rendersSectionWithoutItems_ForSectionItemWithSectionAndEmptyList() {
+    func test_update_rendersSectionWithoutItems_ForSectionItemWithSectionAndEmptyList() {
         let sut = makeSUT()
         let givenView = UIView()
         let headerController = HeaderControllerStub(view: givenView)
@@ -93,7 +93,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
-    func test_updateTableModel_rendersMultipleItemsInSection() {
+    func test_update_rendersMultipleItemsInSection() {
         let sut = makeSUT()
         let givenCell1 = UITableViewCell()
         let givenCell2 = UITableViewCell()
@@ -108,7 +108,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 1, in: 0), givenCell2)
     }
     
-    func test_updateTableModel_rendersUpdatedItems() {
+    func test_update_rendersUpdatedItems() {
         let sut = makeSUT()
         let section = SectionController(headerController: nil, controllers: [CellControllerSpy()])
         
