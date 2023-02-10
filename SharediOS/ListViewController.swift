@@ -58,7 +58,7 @@ public final class ListViewController: UITableViewController {
         tableModel[section].headerController?.makeHeaderView()
     }
     
-    public func updateTableModel(sectionController: [SectionController]) {
+    public func update(sectionController: [SectionController]) {
         tableModel = sectionController
     }
 }
