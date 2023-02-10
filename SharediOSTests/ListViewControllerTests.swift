@@ -36,7 +36,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 0)
+        XCTAssertEqual(sut.numberOfRenderedSections, 0)
     }
     
     func test_update_doesNotRenderSectionOrItems_ForSectionItemWithNoSectionAndEmptyList() {
@@ -45,7 +45,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to render one section")
+        XCTAssertEqual(sut.numberOfRenderedSections, 1, "Expected to render one section")
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
@@ -60,7 +60,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to render one section")
+        XCTAssertEqual(sut.numberOfRenderedSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
         
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
@@ -75,7 +75,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to render one section")
+        XCTAssertEqual(sut.numberOfRenderedSections, 1, "Expected to render one section")
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
         
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
@@ -90,7 +90,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to render one section")
+        XCTAssertEqual(sut.numberOfRenderedSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.viewForHeaderIn(section: 0), givenView, "Expected to render given view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
@@ -116,7 +116,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.update(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to render 1 section")
+        XCTAssertEqual(sut.numberOfRenderedSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
 
         let section1 = SectionController(headerController: nil, controllers: [CellControllerSpy(), CellControllerSpy()])
@@ -124,7 +124,7 @@ final class ListViewControllerTests: XCTestCase {
 
         sut.update(sectionController: [section1, section2])
 
-        XCTAssertEqual(sut.numberOfRenderedSection(), 2, "Expected to render two sections")
+        XCTAssertEqual(sut.numberOfRenderedSections, 2, "Expected to render two sections")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2, "Expected to render 2 items in section 1")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render 1 item in section 2")
     }
@@ -191,7 +191,7 @@ private extension ListViewController {
         tableView.numberOfRows(inSection: section)
     }
     
-    func numberOfRenderedSection() -> Int {
+    var numberOfRenderedSections: Int {
         tableView.numberOfSections
     }
 }
