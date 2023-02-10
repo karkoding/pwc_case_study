@@ -9,9 +9,7 @@ import UIKit
 
 public final class ListViewController: UITableViewController {
     private var tableModel = [SectionController]() {
-        didSet {
-            tableView.reloadData()
-        }
+        didSet { tableView.reloadData() }
     }
     
     public var onViewDidLoad: (() -> Void)?
