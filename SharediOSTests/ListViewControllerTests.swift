@@ -129,7 +129,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render 1 item in section 2")
     }
     
-    func test_didSelectFirstItemInSection_requestsDidSelectOnce() {
+    func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
         let cellController1 = CellControllerSpy(tableViewCell: givenCell)
@@ -140,15 +140,16 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(cellController1.didSelectCellCount, 1)
     }
-    
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
+}
+
+private extension ListViewControllerTests {
+    func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
     }
     
-    private final class CellControllerSpy: NSObject, CellController {
+    final class CellControllerSpy: NSObject, CellController {
         private let tableViewCell: UITableViewCell
-        var didSelectCellCount = 0
-        var didRenderCellCount = 0
+        private(set) var didSelectCellCount = 0
         
         init(tableViewCell: UITableViewCell = UITableViewCell()) {
             self.tableViewCell = tableViewCell
@@ -156,17 +157,14 @@ final class ListViewControllerTests: XCTestCase {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            didRenderCellCount += 1
-            return tableViewCell
-        }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             didSelectCellCount += 1
         }
     }
     
-    private final class HeaderControllerStub: HeaderController {
+    final class HeaderControllerStub: HeaderController {
         private let view: UIView
         
         init(view: UIView) {
