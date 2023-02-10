@@ -46,7 +46,7 @@ final class ListViewControllerTests: XCTestCase {
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertNil(sut.headerViewIn(section: 0), "Expected not to render a header view")
+        XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
     
@@ -80,7 +80,7 @@ final class ListViewControllerTests: XCTestCase {
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected header view to be header view")
+        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
         
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
@@ -95,7 +95,7 @@ final class ListViewControllerTests: XCTestCase {
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertNil(sut.headerViewIn(section: 0), "Expected not to render a header view")
+        XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
         
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
@@ -110,7 +110,7 @@ final class ListViewControllerTests: XCTestCase {
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected header view to be header view")
+        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
