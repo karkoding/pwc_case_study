@@ -140,6 +140,18 @@ final class ListViewControllerTests: XCTestCase {
         
         XCTAssertEqual(cellController.didSelectCellCount, 1)
     }
+    
+    func test_didDeselectItem_requestsDidDeselectOnce() {
+        let sut = makeSUT()
+        let givenCell = UITableViewCell()
+        let cellController = CellControllerSpy(tableViewCell: givenCell)
+        let section = SectionController(headerController: nil, controllers: [cellController])
+        
+        sut.update(sectionController: [section])
+        sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertEqual(cellController.didDeselectCellCount, 1)
+    }
 }
 
 private extension ListViewControllerTests {
@@ -150,6 +162,7 @@ private extension ListViewControllerTests {
     final class CellControllerSpy: NSObject, CellController {
         private let tableViewCell: UITableViewCell
         private(set) var didSelectCellCount = 0
+        private(set) var didDeselectCellCount = 0
         
         init(tableViewCell: UITableViewCell = UITableViewCell()) {
             self.tableViewCell = tableViewCell
@@ -160,6 +173,8 @@ private extension ListViewControllerTests {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelectCellCount += 1 }
+        
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselectCellCount += 1 }
     }
     
     final class HeaderControllerStub: HeaderController {
