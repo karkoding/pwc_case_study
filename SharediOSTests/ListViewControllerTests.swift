@@ -36,7 +36,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.updateTableModel(sectionController: [])
         
-        XCTAssertEqual(sut.numberOfSections(), 0)
+        XCTAssertEqual(sut.numberOfRenderedSection(), 0)
     }
     
     func test_updateTableModel_doesNotRenderSectionOrItems_ForSectionItemWithNoSectionAndEmptyList() {
@@ -106,6 +106,26 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2)
         XCTAssertEqual(sut.item(at: 0, in: 0), givenCell1)
         XCTAssertEqual(sut.item(at: 1, in: 0), givenCell2)
+    }
+    
+    func test_updateTableModel_rendersLatestItem() {
+        let sut = makeSUT()
+        let givenCell1 = UITableViewCell()
+        let givenCell2 = UITableViewCell()
+        let cellController1 = CellControllerStub(tableViewCell: givenCell1)
+        let cellController2 = CellControllerStub(tableViewCell: givenCell2)
+
+        let section = SectionController(headerController: nil, controllers: [cellController1])
+        
+        sut.updateTableModel(sectionController: [section])
+        
+        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 1, "Expected to render one item")
+
+        let updatedSection = SectionController(headerController: nil, controllers: [cellController1, cellController2])
+
+        sut.updateTableModel(sectionController: [updatedSection])
+
+        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 2, "Expected to render two items")
     }
     
     func test_didSelectFirstItemInSection_requestsDidSelectOnce() {
@@ -182,5 +202,13 @@ private extension ListViewController {
     @discardableResult
     func simulateItemVisible(at row: Int, section: Int) -> UITableViewCell? {
         item(at: row, in: section)
+    }
+    
+    func numberOfRenderedItemsInTableView(section: Int) -> Int {
+        tableView.numberOfRows(inSection: section)
+    }
+    
+    func numberOfRenderedSection() -> Int {
+        tableView.numberOfSections
     }
 }
