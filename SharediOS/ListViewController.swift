@@ -8,7 +8,6 @@
 import UIKit
 
 public final class ListViewController: UITableViewController {
-    
     private var tableModel = [SectionController]() {
         didSet {
             tableView.reloadData()
@@ -38,8 +37,7 @@ public final class ListViewController: UITableViewController {
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionController = tableModel[indexPath.section]
         let cellController = sectionController.controllers[indexPath.row]
-        let cell = cellController.tableView(tableView, cellForRowAt: indexPath)
-        return cell
+        return cellController.tableView(tableView, cellForRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
