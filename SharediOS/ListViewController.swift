@@ -11,7 +11,7 @@ public final class ListViewController: UITableViewController {
     
     private var tableModel = [SectionController]() {
         didSet {
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
     
