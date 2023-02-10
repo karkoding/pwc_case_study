@@ -34,7 +34,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_update_doesNotRenderOnEmptyList() {
         let sut = makeSUT()
         
-        sut.update(sectionController: [])
+        sut.display(sectionController: [])
         
         XCTAssertEqual(sut.numberOfSections, 0)
     }
@@ -43,7 +43,7 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
@@ -54,7 +54,7 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
@@ -62,7 +62,7 @@ final class ListViewControllerTests: XCTestCase {
         let sectionController1 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy(), CellControllerSpy()])
         let sectionController2 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
 
-        sut.update(sectionController: [sectionController1, sectionController2])
+        sut.display(sectionController: [sectionController1, sectionController2])
 
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two sections")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2, "Expected to render 2 items in section 1")
@@ -77,7 +77,7 @@ final class ListViewControllerTests: XCTestCase {
         let headerController = HeaderControllerStub(view: headerView)
         let sectionController = makeSectionController(headerController: headerController, cellControllers: [cellController])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
@@ -92,7 +92,7 @@ final class ListViewControllerTests: XCTestCase {
         let cellController = CellControllerSpy(tableViewCell: itemCell)
         let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
@@ -107,7 +107,7 @@ final class ListViewControllerTests: XCTestCase {
         let headerController = HeaderControllerStub(view: headerView)
         let sectionController = makeSectionController(headerController: headerController, cellControllers: [])
 
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
@@ -122,7 +122,7 @@ final class ListViewControllerTests: XCTestCase {
         let cellController2 = CellControllerSpy(tableViewCell: itemCell2)
         let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController1, cellController2])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2, "Expected to render two items")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell1, "Expected rendered item to be item cell 1")
@@ -134,7 +134,7 @@ final class ListViewControllerTests: XCTestCase {
         let cellController = CellControllerSpy()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         
         XCTAssertEqual(cellController.didSelectCellCount, 1)
@@ -145,7 +145,7 @@ final class ListViewControllerTests: XCTestCase {
         let cellController = CellControllerSpy()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
-        sut.update(sectionController: [sectionController])
+        sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
         
         XCTAssertEqual(cellController.didDeselectCellCount, 1)
