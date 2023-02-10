@@ -12,12 +12,12 @@ public final class ListViewController: UITableViewController {
         didSet { tableView.reloadData() }
     }
     
-    public var onViewDidLoad: (() -> Void)?
+    public var onRefresh: (() -> Void)?
     public var configureTableView: ((UITableView) -> Void)?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        onViewDidLoad?()
+        onRefresh?()
         
         configureTableView?(tableView)
         tableView.separatorStyle = .none

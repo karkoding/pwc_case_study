@@ -9,11 +9,11 @@ import XCTest
 import SharediOS
 
 final class ListViewControllerTests: XCTestCase {
-    func test_viewDidLoad_messagesOnViewDidLoadOnce() {
+    func test_viewDidLoad_messagesOnRefreshOnce() {
         let sut = makeSUT()
         
         var callCount = 0
-        sut.onViewDidLoad = { callCount += 1 }
+        sut.onRefresh = { callCount += 1 }
         
         sut.loadViewIfNeeded()
         
