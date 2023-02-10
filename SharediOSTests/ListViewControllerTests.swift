@@ -41,7 +41,7 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_update_doesNotRenderHeaderOrItems_forItemWithNoSectionAndEmptyList() {
         let sut = makeSUT()
-        let sectionController = SectionController(headerController: nil, controllers: [])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [])
         
         sut.update(sectionController: [sectionController])
         
@@ -52,15 +52,15 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_update_rendersUpdatedItems() {
         let sut = makeSUT()
-        let sectionController = SectionController(headerController: nil, controllers: [CellControllerSpy()])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
         
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
 
-        let sectionController1 = SectionController(headerController: nil, controllers: [CellControllerSpy(), CellControllerSpy()])
-        let sectionController2 = SectionController(headerController: nil, controllers: [CellControllerSpy()])
+        let sectionController1 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy(), CellControllerSpy()])
+        let sectionController2 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
 
         sut.update(sectionController: [sectionController1, sectionController2])
 
@@ -75,7 +75,7 @@ final class ListViewControllerTests: XCTestCase {
         let headerView = UIView()
         let cellController = CellControllerSpy(tableViewCell: itemCell)
         let headerController = HeaderControllerStub(view: headerView)
-        let sectionController = SectionController(headerController: headerController, controllers: [cellController])
+        let sectionController = makeSectionController(headerController: headerController, cellControllers: [cellController])
         
         sut.update(sectionController: [sectionController])
         
@@ -90,7 +90,7 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
         let cellController = CellControllerSpy(tableViewCell: itemCell)
-        let sectionController = SectionController(headerController: nil, controllers: [cellController])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
         sut.update(sectionController: [sectionController])
         
@@ -105,8 +105,8 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let headerView = UIView()
         let headerController = HeaderControllerStub(view: headerView)
-        let sectionController = SectionController(headerController: headerController, controllers: [])
-        
+        let sectionController = makeSectionController(headerController: headerController, cellControllers: [])
+
         sut.update(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
@@ -120,7 +120,7 @@ final class ListViewControllerTests: XCTestCase {
         let itemCell2 = UITableViewCell()
         let cellController1 = CellControllerSpy(tableViewCell: itemCell1)
         let cellController2 = CellControllerSpy(tableViewCell: itemCell2)
-        let sectionController = SectionController(headerController: nil, controllers: [cellController1, cellController2])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController1, cellController2])
         
         sut.update(sectionController: [sectionController])
         
@@ -132,7 +132,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
         let cellController = CellControllerSpy()
-        let sectionController = SectionController(headerController: nil, controllers: [cellController])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
         sut.update(sectionController: [sectionController])
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
@@ -143,7 +143,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_didDeselectItem_requestsDidDeselectOnce() {
         let sut = makeSUT()
         let cellController = CellControllerSpy()
-        let sectionController = SectionController(headerController: nil, controllers: [cellController])
+        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
         
         sut.update(sectionController: [sectionController])
         sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
@@ -155,6 +155,10 @@ final class ListViewControllerTests: XCTestCase {
 private extension ListViewControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
+    }
+    
+    func makeSectionController(headerController: HeaderController?, cellControllers: [CellController]) -> SectionController {
+        SectionController(headerController: headerController, controllers: cellControllers)
     }
     
     final class CellControllerSpy: NSObject, CellController {
