@@ -108,12 +108,26 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 1, in: 0), givenCell2)
     }
     
+    func test_didSelectFirstItemInSection_requestsDidSelectOnce() {
+        let sut = makeSUT()
+        let givenCell = UITableViewCell()
+        let cellController1 = CellControllerStub(tableViewCell: givenCell)
+        let section1 = SectionController(headerController: nil, controllers: [cellController1])
+        
+        sut.updateTableModel(sectionController: [section1])
+        sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertEqual(cellController1.didSelectCellCount, 1)
+    }
+    
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
     }
     
     private final class CellControllerStub: NSObject, CellController {
         private let tableViewCell: UITableViewCell
+        var didSelectCellCount = 0
+        var didRenderCellCount = 0
         
         init(tableViewCell: UITableViewCell = UITableViewCell()) {
             self.tableViewCell = tableViewCell
@@ -121,7 +135,14 @@ final class ListViewControllerTests: XCTestCase {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            didRenderCellCount += 1
+            return tableViewCell
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            didSelectCellCount += 1
+        }
     }
     
     private final class HeaderControllerStub: HeaderController {
@@ -151,9 +172,15 @@ private extension ListViewController {
         return delegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
     
+    @discardableResult
     func item(at row: Int, in section: Int) -> UITableViewCell? {
         let dataSource = tableView.dataSource!
         let indexPath = IndexPath(row: row, section: section)
         return dataSource.tableView(tableView, cellForRowAt: indexPath)
+    }
+    
+    @discardableResult
+    func simulateItemVisible(at row: Int, section: Int) -> UITableViewCell? {
+        item(at: row, in: section)
     }
 }
