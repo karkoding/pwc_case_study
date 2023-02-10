@@ -31,7 +31,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
-    func test_update_doesNotRenderOnEmptyList() {
+    func test_display_doesNotRenderOnEmptyList() {
         let sut = makeSUT()
         
         sut.display(sectionController: [])
@@ -39,7 +39,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfSections, 0)
     }
     
-    func test_update_doesNotRenderHeaderOrItems_forItemWithNoSectionAndEmptyList() {
+    func test_display_doesNotRenderHeaderOrItems_forItemWithNoSectionAndEmptyList() {
         let sut = makeSUT()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [])
         
@@ -50,7 +50,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
     
-    func test_update_rendersUpdatedItems() {
+    func test_display_rendersLatestItems() {
         let sut = makeSUT()
         let sectionController = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
         
@@ -69,7 +69,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render 1 item in section 2")
     }
     
-    func test_update_renderSectionHeaderAndItems_forItemWithSectionAndNonEmptyList() {
+    func test_display_renderSectionHeaderAndItems_forItemWithSectionAndNonEmptyList() {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
         let headerView = UIView()
@@ -86,7 +86,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
     }
     
-    func test_update_rendersItemsWithoutSectionHeader_forItemWithNoSectionAndNonEmptyList() {
+    func test_display_rendersItemsWithoutSectionHeader_forItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
         let cellController = CellControllerSpy(tableViewCell: itemCell)
@@ -101,7 +101,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
     }
     
-    func test_update_rendersSectionHeaderWithoutItems_forItemWithSectionAndEmptyList() {
+    func test_display_rendersSectionHeaderWithoutItems_forItemWithSectionAndEmptyList() {
         let sut = makeSUT()
         let headerView = UIView()
         let headerController = HeaderControllerStub(view: headerView)
@@ -114,7 +114,7 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
     }
     
-    func test_update_rendersMultipleItemsInSection() {
+    func test_display_rendersMultipleItemsInSection() {
         let sut = makeSUT()
         let itemCell1 = UITableViewCell()
         let itemCell2 = UITableViewCell()
