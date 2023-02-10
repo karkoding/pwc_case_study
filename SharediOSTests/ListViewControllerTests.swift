@@ -54,7 +54,7 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
         let givenView = UIView()
-        let cellController = CellControllerStub(tableViewCell: givenCell)
+        let cellController = CellControllerSpy(tableViewCell: givenCell)
         let headerController = HeaderControllerStub(view: givenView)
         let section1 = SectionController(headerController: headerController, controllers: [cellController])
         
@@ -69,7 +69,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_updateTableModel_rendersItemsWithoutSection_ForSectionItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
-        let cellController = CellControllerStub(tableViewCell: givenCell)
+        let cellController = CellControllerSpy(tableViewCell: givenCell)
         let section1 = SectionController(headerController: nil, controllers: [cellController])
         
         sut.updateTableModel(sectionController: [section1])
@@ -97,8 +97,8 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let givenCell1 = UITableViewCell()
         let givenCell2 = UITableViewCell()
-        let cellController1 = CellControllerStub(tableViewCell: givenCell1)
-        let cellController2 = CellControllerStub(tableViewCell: givenCell2)
+        let cellController1 = CellControllerSpy(tableViewCell: givenCell1)
+        let cellController2 = CellControllerSpy(tableViewCell: givenCell2)
         let section1 = SectionController(headerController: nil, controllers: [cellController1, cellController2])
         
         sut.updateTableModel(sectionController: [section1])
@@ -110,15 +110,15 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_updateTableModel_rendersUpdatedItems() {
         let sut = makeSUT()
-        let section = SectionController(headerController: nil, controllers: [CellControllerStub()])
+        let section = SectionController(headerController: nil, controllers: [CellControllerSpy()])
         
         sut.updateTableModel(sectionController: [section])
         
         XCTAssertEqual(sut.numberOfSections(), 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 1, "Expected to render 1 item")
 
-        let section1 = SectionController(headerController: nil, controllers: [CellControllerStub(), CellControllerStub()])
-        let section2 = SectionController(headerController: nil, controllers: [CellControllerStub()])
+        let section1 = SectionController(headerController: nil, controllers: [CellControllerSpy(), CellControllerSpy()])
+        let section2 = SectionController(headerController: nil, controllers: [CellControllerSpy()])
 
         sut.updateTableModel(sectionController: [section1, section2])
 
@@ -130,7 +130,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_didSelectFirstItemInSection_requestsDidSelectOnce() {
         let sut = makeSUT()
         let givenCell = UITableViewCell()
-        let cellController1 = CellControllerStub(tableViewCell: givenCell)
+        let cellController1 = CellControllerSpy(tableViewCell: givenCell)
         let section1 = SectionController(headerController: nil, controllers: [cellController1])
         
         sut.updateTableModel(sectionController: [section1])
@@ -143,7 +143,7 @@ final class ListViewControllerTests: XCTestCase {
         ListViewController()
     }
     
-    private final class CellControllerStub: NSObject, CellController {
+    private final class CellControllerSpy: NSObject, CellController {
         private let tableViewCell: UITableViewCell
         var didSelectCellCount = 0
         var didRenderCellCount = 0
