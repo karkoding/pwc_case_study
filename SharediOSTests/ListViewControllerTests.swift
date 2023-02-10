@@ -158,7 +158,7 @@ private extension ListViewControllerTests {
     }
     
     func makeSectionController(headerController: HeaderController?, cellControllers: [CellController]) -> SectionController {
-        SectionController(headerController: headerController, controllers: cellControllers)
+        SectionController(headerController: headerController, cellControllers: cellControllers)
     }
     
     final class CellControllerSpy: NSObject, CellController {

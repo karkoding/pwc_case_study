@@ -31,24 +31,24 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableModel[section].controllers.count
+        tableModel[section].cellControllers.count
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionController = tableModel[indexPath.section]
-        let cellController = sectionController.controllers[indexPath.row]
+        let cellController = sectionController.cellControllers[indexPath.row]
         return cellController.tableView(tableView, cellForRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionController = tableModel[indexPath.section]
-        let cellController = sectionController.controllers[indexPath.row]
+        let cellController = sectionController.cellControllers[indexPath.row]
         cellController.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let sectionController = tableModel[indexPath.section]
-        let cellController = sectionController.controllers[indexPath.row]
+        let cellController = sectionController.cellControllers[indexPath.row]
         cellController.tableView?(tableView, didDeselectRowAt: indexPath)
     }
     

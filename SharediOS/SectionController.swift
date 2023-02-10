@@ -15,10 +15,10 @@ public protocol HeaderController {
 
 public struct SectionController {
     public let headerController: HeaderController?
-    public let controllers: [CellController]
+    public let cellControllers: [CellController]
     
-    public init(headerController: HeaderController?, controllers: [CellController]) {
+    public init(headerController: HeaderController?, cellControllers: [CellController]) {
         self.headerController = headerController
-        self.controllers = controllers
+        self.cellControllers = cellControllers
     }
 }
