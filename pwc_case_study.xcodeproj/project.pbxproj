@@ -140,10 +140,8 @@
 		DA05C0CC2994284D00F61DDC /* SharediOS */ = {
 			isa = PBXGroup;
 			children = (
-				DA05C0E92994288E00F61DDC /* ListViewController.swift */,
-				DA05C0EB299429C800F61DDC /* NavigationController.swift */,
-				DA05C0ED2995476200F61DDC /* SectionController.swift */,
-				DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */,
+				DA38B4DA2996AF9B00C89A02 /* Controllers */,
+				DA38B4DB2996AFBA00C89A02 /* Views */,
 			);
 			path = SharediOS;
 			sourceTree = "<group>";
@@ -154,6 +152,32 @@
 				DA05C0DB2994284D00F61DDC /* ListViewControllerTests.swift */,
 			);
 			path = SharediOSTests;
+			sourceTree = "<group>";
+		};
+		DA38B4DA2996AF9B00C89A02 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA05C0ED2995476200F61DDC /* SectionController.swift */,
+				DA05C0E92994288E00F61DDC /* ListViewController.swift */,
+				DA05C0EB299429C800F61DDC /* NavigationController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DA38B4DB2996AFBA00C89A02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DA38B4DC2996AFC200C89A02 /* Helpers */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DA38B4DC2996AFC200C89A02 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
