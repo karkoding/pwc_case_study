@@ -36,7 +36,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.updateTableModel(sectionController: [])
         
-        XCTAssertEqual(sut.numberOfRenderedSection(), 0)
+        XCTAssertEqual(sut.numberOfSections(), 0)
     }
     
     func test_updateTableModel_doesNotRenderSectionOrItems_ForSectionItemWithNoSectionAndEmptyList() {
@@ -45,7 +45,7 @@ final class ListViewControllerTests: XCTestCase {
         
         sut.updateTableModel(sectionController: [section1])
         
-        XCTAssertEqual(sut.numberOfSections(), 1, "Expected to have a one section")
+        XCTAssertEqual(sut.numberOfRenderedSection(), 1, "Expected to have a one section")
         XCTAssertNil(sut.viewForHeaderIn(section: 0), "Expected not to render a header view")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
     }
@@ -108,24 +108,23 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 1, in: 0), givenCell2)
     }
     
-    func test_updateTableModel_rendersLatestItem() {
+    func test_updateTableModel_rendersUpdatedItems() {
         let sut = makeSUT()
-        let givenCell1 = UITableViewCell()
-        let givenCell2 = UITableViewCell()
-        let cellController1 = CellControllerStub(tableViewCell: givenCell1)
-        let cellController2 = CellControllerStub(tableViewCell: givenCell2)
-
-        let section = SectionController(headerController: nil, controllers: [cellController1])
+        let section = SectionController(headerController: nil, controllers: [CellControllerStub()])
         
         sut.updateTableModel(sectionController: [section])
         
-        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 1, "Expected to render one item")
+        XCTAssertEqual(sut.numberOfSections(), 1, "Expected to render 1 section")
+        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 1, "Expected to render 1 item")
 
-        let updatedSection = SectionController(headerController: nil, controllers: [cellController1, cellController2])
+        let section1 = SectionController(headerController: nil, controllers: [CellControllerStub(), CellControllerStub()])
+        let section2 = SectionController(headerController: nil, controllers: [CellControllerStub()])
 
-        sut.updateTableModel(sectionController: [updatedSection])
+        sut.updateTableModel(sectionController: [section1, section2])
 
-        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 2, "Expected to render two items")
+        XCTAssertEqual(sut.numberOfSections(), 2, "Expected to render two sections")
+        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 0), 2, "Expected to render 2 items in section 1")
+        XCTAssertEqual(sut.numberOfRenderedItemsInTableView(section: 1), 1, "Expected to render 1 item in section 2")
     }
     
     func test_didSelectFirstItemInSection_requestsDidSelectOnce() {
