@@ -186,7 +186,16 @@ private extension ListViewControllerTests {
     }
 }
 
+// Test DSL Helpers
 private extension ListViewController {
+    var numberOfSections: Int {
+        tableView.numberOfSections
+    }
+    
+    func numberOfRenderedItemsIn(section: Int) -> Int {
+        tableView.numberOfRows(inSection: section)
+    }
+    
     func viewForHeaderIn(section: Int) -> UIView? {
         let delegate = tableView.delegate
         return delegate?.tableView?(tableView, viewForHeaderInSection: section)
@@ -196,13 +205,5 @@ private extension ListViewController {
         let dataSource = tableView.dataSource!
         let indexPath = IndexPath(row: row, section: section)
         return dataSource.tableView(tableView, cellForRowAt: indexPath)
-    }
-    
-    func numberOfRenderedItemsIn(section: Int) -> Int {
-        tableView.numberOfRows(inSection: section)
-    }
-    
-    var numberOfSections: Int {
-        tableView.numberOfSections
     }
 }
