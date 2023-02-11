@@ -11,7 +11,7 @@ import SharediOS
 final class NavigationControllerTests: XCTestCase {
     func test_init_viewContollerList_deliversRootViewController() {
         let rootViewController = UIViewController()
-        let navItem = makeRootNavigationItem(title: nil, leftButton: (nil, false), rightButton: (nil, false))
+        let navItem = makeRootNavigationItem()
         let sut = makeSUT(rootViewController: rootViewController, navItem: navItem)
         
         XCTAssertEqual(sut.viewControllers, [rootViewController])
@@ -19,12 +19,12 @@ final class NavigationControllerTests: XCTestCase {
     
     func test_init_topViewControllerTitle() {
         let title = "Home"
-        let navItem = makeRootNavigationItem(title: title, leftButton: ("", true), rightButton: ("", true))
+        let navItem = makeRootNavigationItem(title: title)
         let sut = makeSUT(navItem: navItem)
         
         XCTAssertEqual(sut.rootNavigationItem?.title, title, "Expected title to be \(title)")
         
-        let navItem1 = makeRootNavigationItem(title: nil, leftButton: ("", true), rightButton: ("", true))
+        let navItem1 = makeRootNavigationItem(title: nil)
         let sut1 = NavigationController(rootViewController: UIViewController(), navItem: navItem1)
         
         XCTAssertNil(sut1.rootNavigationItem?.title, "Expected no title")
@@ -33,12 +33,18 @@ final class NavigationControllerTests: XCTestCase {
     func test_init_topViewControllerBarButtonTitle() {
         let leftButton: (title: String, isEnabled: Bool) = ("Cancel", true)
         let rightButton: (title: String, isEnabled: Bool) = ("Done", true)
-        let navItem = makeRootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
+        let navItem = makeRootNavigationItem(leftButton: leftButton, rightButton: rightButton)
         
         let sut = makeSUT(navItem: navItem)
         
         XCTAssertEqual(sut.leftBarButtonItem?.title, leftButton.title, "Expected left button title to be \(leftButton.title)")
         XCTAssertEqual(sut.rightBarButtonItem?.title, rightButton.title, "Expected right button title to be \(rightButton.title)")
+        
+        
+        let sut1 = makeSUT(navItem: makeRootNavigationItem(leftButton: ("", true), rightButton: ("", true)))
+        
+        XCTAssertEqual(sut1.leftBarButtonItem?.title, "", "Expected left button title to be empty")
+        XCTAssertEqual(sut1.rightBarButtonItem?.title, "", "Expected right button title to be empty")
     }
     
     func test_init_topViewControllerBarButtonisEnabled() {
@@ -72,7 +78,7 @@ final class NavigationControllerTests: XCTestCase {
         return sut
     }
     
-    func makeRootNavigationItem(title: String?, leftButton: (title: String?, isEnabled: Bool), rightButton: (title: String?, isEnabled: Bool)) -> NavigationController.RootNavigationItem {
+    func makeRootNavigationItem(title: String? = nil, leftButton: (title: String, isEnabled: Bool)? = nil, rightButton: (title: String, isEnabled: Bool)? = nil) -> NavigationController.RootNavigationItem {
         NavigationController.RootNavigationItem(title: title, leftButton: leftButton, rightButton: rightButton)
     }
 }
