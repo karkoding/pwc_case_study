@@ -80,4 +80,8 @@ public class NavigationController: UINavigationController {
     public func updateRightButton(isEnabled: Bool) {
         rootNavigationItem?.rightBarButtonItem?.isEnabled = isEnabled
     }
+    
+    public func updateLeftButton(isEnabled: Bool) {
+        rootNavigationItem?.leftBarButtonItem?.isEnabled = isEnabled
+    }
 }

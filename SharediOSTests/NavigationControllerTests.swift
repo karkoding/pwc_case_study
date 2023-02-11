@@ -99,6 +99,18 @@ final class NavigationControllerTests: XCTestCase {
         sut.updateRightButton(isEnabled: true)
         XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, true, "Expected right button to be enabled back")
     }
+    
+    func test_updateLeftButton_togglesIsEnabled() {
+        let sut = makeSUT(navItem: makeRootNavigationItem(leftButton: ("Cancel", true)))
+        
+        XCTAssertEqual(sut.leftBarButtonItem?.isEnabled, true, "Expected left button to be enabled")
+        
+        sut.updateLeftButton(isEnabled: false)
+        XCTAssertEqual(sut.leftBarButtonItem?.isEnabled, false, "Expected left button to be disabled")
+        
+        sut.updateLeftButton(isEnabled: true)
+        XCTAssertEqual(sut.leftBarButtonItem?.isEnabled, true, "Expected left button to be enabled back")
+    }
 }
 
 private extension NavigationControllerTests {
