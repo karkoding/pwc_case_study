@@ -70,9 +70,7 @@ final class NavigationControllerTests: XCTestCase {
         let sut = makeSUT(navItem: makeRootNavigationItem(leftButton: ("Cancel", true)))
         
         var callCount = 0
-        sut.leftButtonTapped = {
-            callCount += 1
-        }
+        sut.leftButtonTapped = { callCount += 1 }
         
         sut.perform(sut.leftBarButtonItem?.action)
         
@@ -83,9 +81,7 @@ final class NavigationControllerTests: XCTestCase {
         let sut = makeSUT(navItem: makeRootNavigationItem(rightButton: ("Done", true)))
         
         var callCount = 0
-        sut.rightButtonTapped = {
-            callCount += 1
-        }
+        sut.rightButtonTapped = { callCount += 1 }
         
         sut.perform(sut.rightBarButtonItem?.action)
         
