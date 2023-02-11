@@ -43,26 +43,27 @@ public class NavigationController: UINavigationController {
     private func configureNavigationItem() {
         rootNavigationItem?.title = navItem.title
         
-        if navItem.leftButton != nil {
+        if let leftButton = navItem.leftButton {
             rootNavigationItem?.leftBarButtonItem = UIBarButtonItem(
                 title: navItem.leftButton?.title,
                 image: nil,
                 target: self,
                 action: #selector(handleLeftButtonTap)
             )
+            
+            rootNavigationItem?.leftBarButtonItem?.isEnabled = leftButton.isEnabled
         }
         
-        if navItem.rightButton != nil {
+        if let rightButton = navItem.rightButton {
             rootNavigationItem?.rightBarButtonItem = UIBarButtonItem(
                 title: navItem.rightButton?.title,
                 image: nil,
                 target: self,
                 action: #selector(handleRightButtonTap)
             )
+            
+            rootNavigationItem?.rightBarButtonItem?.isEnabled = rightButton.isEnabled
         }
-    
-        rootNavigationItem?.leftBarButtonItem?.isEnabled = navItem.leftButton?.isEnabled ?? true
-        rootNavigationItem?.rightBarButtonItem?.isEnabled = navItem.rightButton?.isEnabled ?? true
     }
     
     required init?(coder aDecoder: NSCoder) {
