@@ -20,6 +20,7 @@
 		DA05C0EC299429C800F61DDC /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0EB299429C800F61DDC /* NavigationController.swift */; };
 		DA05C0EE2995476200F61DDC /* SectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05C0ED2995476200F61DDC /* SectionController.swift */; };
 		DA38B4D82996AE1600C89A02 /* UITableView+dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */; };
+		DA38B4DF299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B4DE299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		DA05C0EB299429C800F61DDC /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		DA05C0ED2995476200F61DDC /* SectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionController.swift; sourceTree = "<group>"; };
 		DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeueing.swift"; sourceTree = "<group>"; };
+		DA38B4DE299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+trackForMemoryLeak.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		DA05C0DA2994284D00F61DDC /* SharediOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				DA38B4DD299763A800C89A02 /* Helpers */,
 				DA05C0DB2994284D00F61DDC /* ListViewControllerTests.swift */,
 			);
 			path = SharediOSTests;
@@ -176,6 +179,14 @@
 			isa = PBXGroup;
 			children = (
 				DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DA38B4DD299763A800C89A02 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DA38B4DE299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -344,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA38B4DF299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift in Sources */,
 				DA05C0DC2994284D00F61DDC /* ListViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

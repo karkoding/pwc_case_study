@@ -174,7 +174,9 @@ final class ListViewControllerTests: XCTestCase {
 // MARK: - Helpers
 extension ListViewControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
-        ListViewController()
+        let sut = ListViewController()
+        trackForMemoryLeak(sut, file: file, line: line)
+        return sut
     }
     
     func makeSectionController(headerController: HeaderController?, cellControllers: [CellController]) -> SectionController {
