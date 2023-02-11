@@ -103,8 +103,10 @@ final class NavigationControllerTests: XCTestCase {
         sut.updateRightButton(isEnabled: true)
         XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, true, "Expected right button to be enabled back")
     }
-    
-    private func makeSUT(
+}
+
+private extension NavigationControllerTests {
+    func makeSUT(
         rootViewController: UIViewController = UIViewController(),
         navItem: NavigationController.RootNavigationItem,
         file: StaticString = #filePath,
