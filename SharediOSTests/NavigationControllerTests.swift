@@ -57,23 +57,19 @@ final class NavigationControllerTests: XCTestCase {
     }
     
     func test_init_topViewControllerBarButtonisEnabled() {
-        let leftButton: (title: String, isEnabled: Bool) = ("", true)
-        let rightButton: (title: String, isEnabled: Bool) = ("", true)
-        let navItem = makeRootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
+        let navItem = makeRootNavigationItem(leftButton: ("", true), rightButton: ("", true))
         
         let sut = makeSUT(navItem: navItem)
         
-        XCTAssertEqual(sut.leftBarButtonItem?.isEnabled, leftButton.isEnabled, "Expected left button isEnabled to be \(leftButton.isEnabled)")
-        XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, rightButton.isEnabled, "Expected right button isEnabled to be \(rightButton.isEnabled)")
+        XCTAssertTrue(sut.leftBarButtonItem!.isEnabled, "Expected left button to be enabled")
+        XCTAssertTrue(sut.rightBarButtonItem!.isEnabled, "Expected right button to be enabled")
         
-        let leftButton1: (title: String, isEnabled: Bool) = ("", false)
-        let rightButton1: (title: String, isEnabled: Bool) = ("", false)
-        let navItem1 = makeRootNavigationItem(title: "", leftButton: leftButton1, rightButton: rightButton1)
+        let navItem1 = makeRootNavigationItem(leftButton: ("", false), rightButton: ("", false))
         
         let sut1 = makeSUT(navItem: navItem1)
         
-        XCTAssertEqual(sut1.leftBarButtonItem?.isEnabled, leftButton1.isEnabled, "Expected left button isEnabled to be \(leftButton1.isEnabled)")
-        XCTAssertEqual(sut1.rightBarButtonItem?.isEnabled, rightButton1.isEnabled, "Expected right button isEnabled to be \(rightButton1.isEnabled)")
+        XCTAssertFalse(sut1.leftBarButtonItem!.isEnabled, "Expected left button to be disabled")
+        XCTAssertFalse(sut1.rightBarButtonItem!.isEnabled, "Expected right button to be disabled")
     }
     
     private func makeSUT(
