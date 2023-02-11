@@ -52,8 +52,8 @@ public class NavigationController: UINavigationController {
             action: #selector(handleRightButtonTap)
         )
         
-        topViewController?.navigationItem.leftBarButtonItem?.isEnabled = navItem.leftButton.isEnabled
-        topViewController?.navigationItem.rightBarButtonItem?.isEnabled = navItem.rightButton.isEnabled
+        topViewController?.navigationItem.leftBarButtonItem?.isEnabled =  true // navItem.leftButton.isEnabled
+        topViewController?.navigationItem.rightBarButtonItem?.isEnabled = true // navItem.rightButton.isEnabled
     }
     
     required init?(coder aDecoder: NSCoder) {
