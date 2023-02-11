@@ -9,6 +9,10 @@ import XCTest
 import SharediOS
 
 final class NavigationControllerTests: XCTestCase {
+    func test_initWithCoder() {
+        XCTAssertNil(NavigationController(coder: NSCoder()))
+    }
+    
     func test_init_viewContollerList_deliversRootViewController() {
         let rootViewController = UIViewController()
         let sut = makeSUT(rootViewController: rootViewController, navItem: makeRootNavigationItem())
@@ -90,10 +94,6 @@ final class NavigationControllerTests: XCTestCase {
         sut.perform(sut.rightBarButtonItem?.action)
         
         XCTAssertEqual(callCount, 1)
-    }
-    
-    func test_initWithCoder() {
-        XCTAssertNil(NavigationController(coder: NSCoder()))
     }
     
     private func makeSUT(
