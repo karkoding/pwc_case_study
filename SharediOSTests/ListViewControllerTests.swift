@@ -9,11 +9,11 @@ import XCTest
 import SharediOS
 
 final class ListViewControllerTests: XCTestCase {
-    func test_viewDidLoad_messagesOnRefreshOnce() {
+    func test_viewDidLoad_messagesOnRequestToLoadOnce() {
         let sut = makeSUT()
         
         var callCount = 0
-        sut.onRefresh = { callCount += 1 }
+        sut.onRequestToLoad = { callCount += 1 }
         
         sut.loadViewIfNeeded()
         
@@ -152,7 +152,10 @@ final class ListViewControllerTests: XCTestCase {
     }
 }
 
-private extension ListViewControllerTests {
+// MARK: - Helpers/
+r102
+
+m,l huves5QWivate extension ListViewControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
     }
@@ -190,7 +193,6 @@ private extension ListViewControllerTests {
     }
 }
 
-// Test DSL Helpers
 private extension ListViewController {
     var numberOfSections: Int {
         tableView.numberOfSections
