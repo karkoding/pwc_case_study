@@ -11,7 +11,7 @@ import SharediOS
 final class NavigationControllerTests: XCTestCase {
     func test_init_viewContollerList_deliversRootViewController() {
         let rootViewController = UIViewController()
-        let navItem = NavigationController.RootNavigationItem(title: nil, leftButton: (nil, false), rightButton: (nil, false))
+        let navItem = makeRootNavigationItem(title: nil, leftButton: (nil, false), rightButton: (nil, false))
         let sut = makeSUT(rootViewController: rootViewController, navItem: navItem)
         
         XCTAssertEqual(sut.viewControllers, [rootViewController])
@@ -19,12 +19,12 @@ final class NavigationControllerTests: XCTestCase {
     
     func test_init_topViewControllerTitle() {
         let title = "Home"
-        let navItem = NavigationController.RootNavigationItem(title: title, leftButton: ("", true), rightButton: ("", true))
+        let navItem = makeRootNavigationItem(title: title, leftButton: ("", true), rightButton: ("", true))
         let sut = makeSUT(navItem: navItem)
         
         XCTAssertEqual(sut.rootNavigationItem?.title, title, "Expected title to be \(title)")
         
-        let navItem1 = NavigationController.RootNavigationItem(title: nil, leftButton: ("", true), rightButton: ("", true))
+        let navItem1 = makeRootNavigationItem(title: nil, leftButton: ("", true), rightButton: ("", true))
         let sut1 = NavigationController(rootViewController: UIViewController(), navItem: navItem1)
         
         XCTAssertNil(sut1.rootNavigationItem?.title, "Expected no title")
@@ -33,7 +33,7 @@ final class NavigationControllerTests: XCTestCase {
     func test_init_topViewControllerBarButtonTitle() {
         let leftButton: (title: String, isEnabled: Bool) = ("Cancel", true)
         let rightButton: (title: String, isEnabled: Bool) = ("Done", true)
-        let navItem = NavigationController.RootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
+        let navItem = makeRootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
         
         let sut = makeSUT(navItem: navItem)
         
@@ -44,7 +44,7 @@ final class NavigationControllerTests: XCTestCase {
     func test_init_topViewControllerBarButtonisEnabled() {
         let leftButton: (title: String, isEnabled: Bool) = ("", true)
         let rightButton: (title: String, isEnabled: Bool) = ("", true)
-        let navItem = NavigationController.RootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
+        let navItem = makeRootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
         
         let sut = makeSUT(navItem: navItem)
         
@@ -53,7 +53,7 @@ final class NavigationControllerTests: XCTestCase {
         
         let leftButton1: (title: String, isEnabled: Bool) = ("", false)
         let rightButton1: (title: String, isEnabled: Bool) = ("", false)
-        let navItem1 = NavigationController.RootNavigationItem(title: "", leftButton: leftButton1, rightButton: rightButton1)
+        let navItem1 = makeRootNavigationItem(title: "", leftButton: leftButton1, rightButton: rightButton1)
         
         let sut1 = makeSUT(navItem: navItem1)
         
@@ -70,6 +70,10 @@ final class NavigationControllerTests: XCTestCase {
         let sut = NavigationController(rootViewController: rootViewController, navItem: navItem)
         trackForMemoryLeak(sut, file: file, line: line)
         return sut
+    }
+    
+    func makeRootNavigationItem(title: String?, leftButton: (title: String?, isEnabled: Bool), rightButton: (title: String?, isEnabled: Bool)) -> NavigationController.RootNavigationItem {
+        NavigationController.RootNavigationItem(title: title, leftButton: leftButton, rightButton: rightButton)
     }
 }
 
