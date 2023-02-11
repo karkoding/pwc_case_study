@@ -22,21 +22,20 @@ final class NavigationControllerTests: XCTestCase {
         let navItem = NavigationController.RootNavigationItem(title: title, leftButton: ("", true), rightButton: ("", true))
         let sut = NavigationController(rootViewController: UIViewController(), navItem: navItem)
         
-        XCTAssertEqual(sut.topViewController?.navigationItem.title, title, "Expected title to be \(title)")
+        XCTAssertEqual(sut.rootNavigationItem?.title, title, "Expected title to be \(title)")
         
         let navItem1 = NavigationController.RootNavigationItem(title: nil, leftButton: ("", true), rightButton: ("", true))
         let sut1 = NavigationController(rootViewController: UIViewController(), navItem: navItem1)
         
-        XCTAssertNil(sut1.topViewController?.navigationItem.title, "Expected no title")
+        XCTAssertNil(sut1.rootNavigationItem?.title, "Expected no title")
     }
     
     func test_init_topViewControllerBarButtonTitle() {
-        let rootViewController = UIViewController()
         let leftButton: (title: String, isEnabled: Bool) = ("Cancel", true)
         let rightButton: (title: String, isEnabled: Bool) = ("Done", true)
         let navItem = NavigationController.RootNavigationItem(title: "", leftButton: leftButton, rightButton: rightButton)
         
-        let sut = NavigationController(rootViewController: rootViewController, navItem: navItem)
+        let sut = NavigationController(rootViewController: UIViewController(), navItem: navItem)
         
         XCTAssertEqual(sut.leftBarButtonItem?.title, leftButton.title, "Expected left button title to be \(leftButton.title)")
         XCTAssertEqual(sut.rightBarButtonItem?.title, rightButton.title, "Expected right button title to be \(rightButton.title)")
@@ -66,10 +65,14 @@ final class NavigationControllerTests: XCTestCase {
 
 private extension NavigationController {
     var leftBarButtonItem: UIBarButtonItem? {
-        topViewController?.navigationItem.leftBarButtonItem
+        rootNavigationItem?.leftBarButtonItem
     }
     
     var rightBarButtonItem: UIBarButtonItem? {
-        topViewController?.navigationItem.rightBarButtonItem
+        rootNavigationItem?.rightBarButtonItem
+    }
+    
+    var rootNavigationItem: UINavigationItem? {
+        topViewController?.navigationItem
     }
 }
