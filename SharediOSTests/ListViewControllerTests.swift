@@ -152,10 +152,8 @@ final class ListViewControllerTests: XCTestCase {
     }
 }
 
-// MARK: - Helpers/
-r102
-
-m,l huves5QWivate extension ListViewControllerTests {
+// MARK: - Helpers
+extension ListViewControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         ListViewController()
     }
