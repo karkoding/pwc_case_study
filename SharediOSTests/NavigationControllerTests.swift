@@ -30,6 +30,15 @@ final class NavigationControllerTests: XCTestCase {
         XCTAssertNil(sut1.rootNavigationItem?.title, "Expected no title")
     }
     
+    func test_init_topViewControllerBarButtons() {
+        let navItem = makeRootNavigationItem(leftButton: nil, rightButton: nil)
+        
+        let sut = makeSUT(navItem: navItem)
+        
+        XCTAssertNil(sut.leftBarButtonItem, "Expected no left button")
+        XCTAssertNil(sut.rightBarButtonItem, "Expected no right button")
+    }
+    
     func test_init_topViewControllerBarButtonTitle() {
         let leftButton: (title: String, isEnabled: Bool) = ("Cancel", true)
         let rightButton: (title: String, isEnabled: Bool) = ("Done", true)

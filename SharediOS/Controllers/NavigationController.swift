@@ -42,20 +42,25 @@ public class NavigationController: UINavigationController {
     
     private func configureNavigationItem() {
         rootNavigationItem?.title = navItem.title
-        rootNavigationItem?.leftBarButtonItem = UIBarButtonItem(
-            title: navItem.leftButton?.title,
-            image: nil,
-            target: self,
-            action: #selector(handleLeftButtonTap)
-        )
         
-        topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: navItem.rightButton?.title,
-            image: nil,
-            target: self,
-            action: #selector(handleRightButtonTap)
-        )
+        if navItem.leftButton != nil {
+            rootNavigationItem?.leftBarButtonItem = UIBarButtonItem(
+                title: navItem.leftButton?.title,
+                image: nil,
+                target: self,
+                action: #selector(handleLeftButtonTap)
+            )
+        }
         
+        if navItem.rightButton != nil {
+            rootNavigationItem?.rightBarButtonItem = UIBarButtonItem(
+                title: navItem.rightButton?.title,
+                image: nil,
+                target: self,
+                action: #selector(handleRightButtonTap)
+            )
+        }
+    
         rootNavigationItem?.leftBarButtonItem?.isEnabled = navItem.leftButton?.isEnabled ?? true
         rootNavigationItem?.rightBarButtonItem?.isEnabled = navItem.rightButton?.isEnabled ?? true
     }
