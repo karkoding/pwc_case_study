@@ -16,25 +16,25 @@ final class NavigationControllerTests: XCTestCase {
         XCTAssertEqual(sut.viewControllers, [rootViewController])
     }
     
-    func test_init_topViewControllerTitle() {
+    func test_init_rootViewControllerTitle() {
         let title = "Home"
         let sut = makeSUT(navItem: makeRootNavigationItem(title: title))
         
-        XCTAssertEqual(sut.rootNavigationItem?.title, title, "Expected title to be \(title)")
+        XCTAssertEqual(sut.navTitle, title, "Expected title to be \(title)")
         
         let sut1 = makeSUT(navItem: makeRootNavigationItem(title: nil))
         
-        XCTAssertNil(sut1.rootNavigationItem?.title, "Expected no title")
+        XCTAssertNil(sut1.navTitle, "Expected no title")
     }
     
-    func test_init_topViewControllerBarButtons() {
+    func test_init_rootViewControllerBarButtons() {
         let sut = makeSUT(navItem: makeRootNavigationItem(leftButton: nil, rightButton: nil))
         
         XCTAssertNil(sut.leftBarButtonItem, "Expected no left button")
         XCTAssertNil(sut.rightBarButtonItem, "Expected no right button")
     }
     
-    func test_init_topViewControllerBarButtonTitle() {
+    func test_init_rootViewControllerBarButtonTitle() {
         let leftButton: (title: String, isEnabled: Bool) = ("Cancel", true)
         let rightButton: (title: String, isEnabled: Bool) = ("Done", true)
         
@@ -50,7 +50,7 @@ final class NavigationControllerTests: XCTestCase {
         XCTAssertEqual(sut1.rightBarButtonItem?.title, "", "Expected right button title to be empty")
     }
     
-    func test_init_topViewControllerBarButtonisEnabled() {
+    func test_init_rootViewControllerBarButtonisEnabled() {
         let sut = makeSUT(navItem: makeRootNavigationItem(leftButton: ("", true), rightButton: ("", true)))
     
         XCTAssertEqual(sut.leftBarButtonItem?.isEnabled, true, "Expected left button to be enabled")
@@ -85,6 +85,10 @@ private extension NavigationController {
     
     var rightBarButtonItem: UIBarButtonItem? {
         rootNavigationItem?.rightBarButtonItem
+    }
+    
+    var navTitle: String? {
+        rootNavigationItem?.title
     }
     
     var rootNavigationItem: UINavigationItem? {
