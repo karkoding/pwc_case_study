@@ -63,14 +63,14 @@ final class NavigationControllerTests: XCTestCase {
     }
     
     func test_didTapLeftButton_messagesLeftButtonTappedOnce() {
-        var sut: NavigationController? = makeSUT(navItem: makeRootNavigationItem(leftButton: ("Cancel", true)))
+        let sut = makeSUT(navItem: makeRootNavigationItem(leftButton: ("Cancel", true)))
         
         var callCount = 0
-        sut?.leftButtonTapped = {
+        sut.leftButtonTapped = {
             callCount += 1
         }
         
-        sut?.perform(sut?.leftBarButtonItem?.action)
+        sut.perform(sut.leftBarButtonItem?.action)
         
         XCTAssertEqual(callCount, 1)
         
@@ -90,6 +90,10 @@ final class NavigationControllerTests: XCTestCase {
         sut.perform(sut.rightBarButtonItem?.action)
         
         XCTAssertEqual(callCount, 1)
+    }
+    
+    func test_initWithCoder() {
+        XCTAssertNil(NavigationController(coder: NSCoder()))
     }
     
     private func makeSUT(
