@@ -13,15 +13,14 @@ public final class ListViewController: UITableViewController {
     }
     
     public var onRequestToLoad: (() -> Void)?
-    public var configureTableView: ((UITableView) -> Void)?
+    public var configureListView: ((UITableView) -> Void)?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        onRequestToLoad?()
         
-        configureTableView?(tableView)
-        tableView.separatorStyle = .none
-        tableView.sectionHeaderTopPadding = 0
+        onRequestToLoad?()
+        configure()
+        configureListView?(tableView)
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,5 +55,10 @@ public final class ListViewController: UITableViewController {
     
     public func display(sectionController: [SectionController]) {
         tableModel = sectionController
+    }
+    
+    private func configure() {
+        tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = 0
     }
 }
