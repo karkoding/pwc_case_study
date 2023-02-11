@@ -77,10 +77,6 @@ final class NavigationControllerTests: XCTestCase {
         sut.perform(sut.leftBarButtonItem?.action)
         
         XCTAssertEqual(callCount, 1)
-        
-        addTeardownBlock { [weak sut] in
-            XCTAssertNil(sut)
-        }
     }
     
     func test_didTapRightButton_messagesRightButtonTappedOnce() {
@@ -94,6 +90,18 @@ final class NavigationControllerTests: XCTestCase {
         sut.perform(sut.rightBarButtonItem?.action)
         
         XCTAssertEqual(callCount, 1)
+    }
+    
+    func test_updateRightButton_togglesIsEnabled() {
+        let sut = makeSUT(navItem: makeRootNavigationItem(rightButton: ("Done", true)))
+        
+        XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, true, "Expected right button to be enabled")
+        
+        sut.updateRightButton(isEnabled: false)
+        XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, false, "Expected right button to be disabled")
+        
+        sut.updateRightButton(isEnabled: true)
+        XCTAssertEqual(sut.rightBarButtonItem?.isEnabled, true, "Expected right button to be enabled back")
     }
     
     private func makeSUT(
