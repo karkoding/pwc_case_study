@@ -61,6 +61,16 @@ final class NavigationControllerTests: XCTestCase {
         XCTAssertEqual(sut1.rightBarButtonItem?.isEnabled, rightButton1.isEnabled, "Expected right button isEnabled to be \(rightButton1.isEnabled)")
     }
     
+    private func makeSUT(
+        rootViewController: UIViewController,
+        navItem: NavigationController.RootNavigationItem,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> NavigationController {
+        let sut = NavigationController(rootViewController: rootViewController, navItem: navItem)
+        trackForMemoryLeak(sut, file: file, line: line)
+        return sut
+    }
 }
 
 private extension NavigationController {
