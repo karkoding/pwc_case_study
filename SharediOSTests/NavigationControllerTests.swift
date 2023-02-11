@@ -18,13 +18,16 @@ final class NavigationControllerTests: XCTestCase {
     }
     
     func test_init_topViewControllerTitle() {
-        let rootViewController = UIViewController()
         let title = "Home"
         let navItem = NavigationController.RootNavigationItem(title: title, leftButton: ("", true), rightButton: ("", true))
-        
-        let sut = NavigationController(rootViewController: rootViewController, navItem: navItem)
+        let sut = NavigationController(rootViewController: UIViewController(), navItem: navItem)
         
         XCTAssertEqual(sut.topViewController?.navigationItem.title, title, "Expected title to be \(title)")
+        
+        let navItem1 = NavigationController.RootNavigationItem(title: nil, leftButton: ("", true), rightButton: ("", true))
+        let sut1 = NavigationController(rootViewController: UIViewController(), navItem: navItem1)
+        
+        XCTAssertNil(sut1.topViewController?.navigationItem.title, "Expected no title")
     }
     
     func test_init_topViewControllerBarButtonTitle() {

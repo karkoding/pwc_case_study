@@ -26,7 +26,7 @@ public class NavigationController: UINavigationController {
 
     private let navItem: RootNavigationItem
     
-    var rootNavigationItem: UINavigationItem? {
+    private var rootNavigationItem: UINavigationItem? {
         topViewController?.navigationItem
     }
     
