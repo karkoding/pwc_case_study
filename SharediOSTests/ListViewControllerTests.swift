@@ -58,80 +58,37 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfSections, 0)
     }
     
-    func test_display_doesNotRenderHeaderOrItems_forItemWithNoSectionAndEmptyList() {
-        let sut = makeSUT()
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [])
-        
-        sut.display(sectionController: [sectionController])
-        
-        XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
-        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any items")
-    }
-    
     func test_display_rendersLatestItems() {
         let sut = makeSUT()
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
+        let sectionController = makeSectionController(cellControllers: CellControllerSpy())
         
         sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
 
-        let sectionController1 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy(), CellControllerSpy()])
-        let sectionController2 = makeSectionController(headerController: nil, cellControllers: [CellControllerSpy()])
+        let sectionController1 = makeSectionController(cellControllers: CellControllerSpy())
+        let sectionController2 = makeSectionController(cellControllers: CellControllerSpy())
 
         sut.display(sectionController: [sectionController1, sectionController2])
 
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two sections")
-        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2, "Expected to render 2 items in section 1")
+        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 2 items in section 1")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render 1 item in section 2")
-    }
-    
-    func test_display_renderSectionHeaderAndItems_forItemWithSectionAndNonEmptyList() {
-        let sut = makeSUT()
-        let itemCell = UITableViewCell()
-        let headerView = UIView()
-        let cellController = CellControllerSpy(tableViewCell: itemCell)
-        let headerController = HeaderControllerStub(view: headerView)
-        let sectionController = makeSectionController(headerController: headerController, cellControllers: [cellController])
-        
-        sut.display(sectionController: [sectionController])
-        
-        XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
-        
-        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
-        XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
     }
     
     func test_display_rendersItemsWithoutSectionHeader_forItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
-        let cellController = CellControllerSpy(tableViewCell: itemCell)
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
+        let sectionController = makeSectionController(cellControllers: CellControllerSpy(tableViewCell: itemCell))
         
         sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertNil(sut.headerViewIn(section: 0), "Expected no header view")
-        
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
     }
     
-    func test_display_rendersSectionHeaderWithoutItems_forItemWithSectionAndEmptyList() {
-        let sut = makeSUT()
-        let headerView = UIView()
-        let headerController = HeaderControllerStub(view: headerView)
-        let sectionController = makeSectionController(headerController: headerController, cellControllers: [])
-
-        sut.display(sectionController: [sectionController])
-        
-        XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
-        XCTAssertEqual(sut.headerViewIn(section: 0), headerView, "Expected to return same header view")
-        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 0, "Expected not to render any item")
-    }
     
     func test_display_rendersMultipleItemsInSection() {
         let sut = makeSUT()
@@ -139,19 +96,18 @@ final class ListViewControllerTests: XCTestCase {
         let itemCell2 = UITableViewCell()
         let cellController1 = CellControllerSpy(tableViewCell: itemCell1)
         let cellController2 = CellControllerSpy(tableViewCell: itemCell2)
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController1, cellController2])
         
-        sut.display(sectionController: [sectionController])
+        sut.display(sectionController: [cellController1, cellController2])
         
-        XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 2, "Expected to render two items")
+        XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two items")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell1, "Expected rendered item to be item cell 1")
-        XCTAssertEqual(sut.item(at: 1, in: 0), itemCell2, "Expected rendered item to be item cell 2")
+        XCTAssertEqual(sut.item(at: 1, in: 1), itemCell2, "Expected rendered item to be item cell 2")
     }
     
     func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
         let cellController = CellControllerSpy()
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
+        let sectionController = makeSectionController(cellControllers: cellController)
         
         sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
@@ -162,7 +118,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_didDeselectItem_requestsDidDeselectOnce() {
         let sut = makeSUT()
         let cellController = CellControllerSpy()
-        let sectionController = makeSectionController(headerController: nil, cellControllers: [cellController])
+        let sectionController = makeSectionController(cellControllers: cellController)
         
         sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
@@ -179,8 +135,8 @@ extension ListViewControllerTests {
         return sut
     }
     
-    func makeSectionController(headerController: HeaderController?, cellControllers: [CellController]) -> SectionController {
-        SectionController(headerController: headerController, cellControllers: cellControllers)
+    func makeSectionController(cellControllers: CellController) -> CellController {
+        cellControllers
     }
     
     final class CellControllerSpy: NSObject, CellController {
@@ -200,16 +156,6 @@ extension ListViewControllerTests {
         
         func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselectCellCount += 1 }
     }
-    
-    final class HeaderControllerStub: HeaderController {
-        private let view: UIView
-        
-        init(view: UIView) {
-            self.view = view
-        }
-        
-        func makeHeaderView() -> UIView { view }
-    }
 }
 
 private extension ListViewController {
@@ -227,11 +173,6 @@ private extension ListViewController {
     
     func numberOfRenderedItemsIn(section: Int) -> Int {
         tableView.numberOfRows(inSection: section)
-    }
-    
-    func headerViewIn(section: Int) -> UIView? {
-        let delegate = tableView.delegate
-        return delegate?.tableView?(tableView, viewForHeaderInSection: section)
     }
     
     func item(at row: Int, in section: Int) -> UITableViewCell? {
