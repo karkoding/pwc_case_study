@@ -51,8 +51,8 @@ public final class ListViewController: UITableViewController {
         tableModel[section].tableView?(tableView, viewForFooterInSection: section)
     }
     
-    public func display(sectionController: [CellController]) {
-        tableModel = sectionController
+    public func display(cellControllers: [CellController]) {
+        tableModel = cellControllers
     }
     
     private func configure() {
