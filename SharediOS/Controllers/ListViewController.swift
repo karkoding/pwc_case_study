@@ -44,7 +44,11 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        nil
+        tableModel[section].tableView?(tableView, viewForHeaderInSection: section)
+    }
+    
+    public override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        tableModel[section].tableView?(tableView, viewForFooterInSection: section)
     }
     
     public func display(sectionController: [CellController]) {

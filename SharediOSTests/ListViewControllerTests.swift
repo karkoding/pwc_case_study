@@ -104,6 +104,26 @@ final class ListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.item(at: 1, in: 1), itemCell2, "Expected rendered item to be item cell 2")
     }
     
+    func test_renderHeaderView_forSection() {
+        let sut = makeSUT()
+        let headerView = UIView()
+        let sectionController = SectionCellControllerSpy(tableViewCell: UITableViewCell(), headerView: headerView)
+        
+        sut.display(sectionController: [sectionController])
+        
+        XCTAssertEqual(sut.tableView(sut.tableView, viewForHeaderInSection: 0), headerView)
+    }
+    
+    func test_renderFooterView_forSection() {
+        let sut = makeSUT()
+        let footerView = UIView()
+        let sectionController = SectionCellControllerSpy(tableViewCell: UITableViewCell(), footerView: footerView)
+        
+        sut.display(sectionController: [sectionController])
+        
+        XCTAssertEqual(sut.tableView(sut.tableView, viewForFooterInSection: 0), footerView)
+    }
+    
     func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
         let sectionController = SectionCellControllerSpy()
@@ -134,12 +154,16 @@ extension ListViewControllerTests {
     }
     
     final class SectionCellControllerSpy: NSObject, CellController {
+        private let headerView: UIView?
+        private let footerView: UIView?
         private let tableViewCell: UITableViewCell
         private(set) var didSelectCellCount = 0
         private(set) var didDeselectCellCount = 0
         
-        init(tableViewCell: UITableViewCell = UITableViewCell()) {
+        init(tableViewCell: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
             self.tableViewCell = tableViewCell
+            self.headerView = headerView
+            self.footerView = footerView
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
@@ -149,6 +173,10 @@ extension ListViewControllerTests {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelectCellCount += 1 }
         
         func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselectCellCount += 1 }
+        
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {  headerView }
+        
+        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { footerView }
     }
 }
 
