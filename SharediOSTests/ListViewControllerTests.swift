@@ -60,15 +60,15 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_display_rendersLatestItems() {
         let sut = makeSUT()
-        let sectionController = makeSectionController(cellControllers: CellControllerSpy())
+        let sectionController = CellControllerSpy()
         
         sut.display(sectionController: [sectionController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
 
-        let sectionController1 = makeSectionController(cellControllers: CellControllerSpy())
-        let sectionController2 = makeSectionController(cellControllers: CellControllerSpy())
+        let sectionController1 = CellControllerSpy()
+        let sectionController2 = CellControllerSpy()
 
         sut.display(sectionController: [sectionController1, sectionController2])
 
@@ -80,7 +80,7 @@ final class ListViewControllerTests: XCTestCase {
     func test_display_rendersItemsWithoutSectionHeader_forItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
-        let sectionController = makeSectionController(cellControllers: CellControllerSpy(tableViewCell: itemCell))
+        let sectionController = CellControllerSpy(tableViewCell: itemCell)
         
         sut.display(sectionController: [sectionController])
         
@@ -106,24 +106,22 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
-        let cellController = CellControllerSpy()
-        let sectionController = makeSectionController(cellControllers: cellController)
+        let sectionController = CellControllerSpy()
         
         sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         
-        XCTAssertEqual(cellController.didSelectCellCount, 1)
+        XCTAssertEqual(sectionController.didSelectCellCount, 1)
     }
     
     func test_didDeselectItem_requestsDidDeselectOnce() {
         let sut = makeSUT()
-        let cellController = CellControllerSpy()
-        let sectionController = makeSectionController(cellControllers: cellController)
+        let sectionController = CellControllerSpy()
         
         sut.display(sectionController: [sectionController])
         sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
         
-        XCTAssertEqual(cellController.didDeselectCellCount, 1)
+        XCTAssertEqual(sectionController.didDeselectCellCount, 1)
     }
 }
 
@@ -133,10 +131,6 @@ extension ListViewControllerTests {
         let sut = ListViewController()
         trackForMemoryLeak(sut, file: file, line: line)
         return sut
-    }
-    
-    func makeSectionController(cellControllers: CellController) -> CellController {
-        cellControllers
     }
     
     final class CellControllerSpy: NSObject, CellController {
