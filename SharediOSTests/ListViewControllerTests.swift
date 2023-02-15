@@ -60,17 +60,12 @@ final class ListViewControllerTests: XCTestCase {
     
     func test_display_rendersLatestItems() {
         let sut = makeSUT()
-        let sectionController = SectionCellControllerSpy()
-        
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [ItemCellControllerSpy()])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
 
-        let sectionController1 = SectionCellControllerSpy()
-        let sectionController2 = SectionCellControllerSpy()
-
-        sut.display(cellControllers: [sectionController1, sectionController2])
+        sut.display(cellControllers: [ItemCellControllerSpy(), ItemCellControllerSpy()])
 
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two sections")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 2 items in section 1")
@@ -80,9 +75,9 @@ final class ListViewControllerTests: XCTestCase {
     func test_display_rendersItemsWithoutSectionHeader_forItemWithNoSectionAndNonEmptyList() {
         let sut = makeSUT()
         let itemCell = UITableViewCell()
-        let sectionController = SectionCellControllerSpy(tableViewCell: itemCell)
+        let itemCellController = ItemCellControllerSpy(tableViewCell: itemCell)
         
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [itemCellController])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
@@ -94,10 +89,10 @@ final class ListViewControllerTests: XCTestCase {
         let sut = makeSUT()
         let itemCell1 = UITableViewCell()
         let itemCell2 = UITableViewCell()
-        let sectionController1 = SectionCellControllerSpy(tableViewCell: itemCell1)
-        let sectionController2 = SectionCellControllerSpy(tableViewCell: itemCell2)
+        let itemCellController1 = ItemCellControllerSpy(tableViewCell: itemCell1)
+        let itemCellController2 = ItemCellControllerSpy(tableViewCell: itemCell2)
         
-        sut.display(cellControllers: [sectionController1, sectionController2])
+        sut.display(cellControllers: [itemCellController1, itemCellController2])
         
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two items")
         XCTAssertEqual(sut.item(at: 0, in: 0), itemCell1, "Expected rendered item to be item cell 1")
@@ -107,9 +102,9 @@ final class ListViewControllerTests: XCTestCase {
     func test_renderHeaderView_forSection() {
         let sut = makeSUT()
         let headerView = UIView()
-        let sectionController = SectionCellControllerSpy(tableViewCell: UITableViewCell(), headerView: headerView)
+        let itemCellController = ItemCellControllerSpy(tableViewCell: UITableViewCell(), headerView: headerView)
         
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [itemCellController])
         
         XCTAssertEqual(sut.tableView(sut.tableView, viewForHeaderInSection: 0), headerView)
     }
@@ -117,31 +112,31 @@ final class ListViewControllerTests: XCTestCase {
     func test_renderFooterView_forSection() {
         let sut = makeSUT()
         let footerView = UIView()
-        let sectionController = SectionCellControllerSpy(tableViewCell: UITableViewCell(), footerView: footerView)
+        let itemCellController = ItemCellControllerSpy(tableViewCell: UITableViewCell(), footerView: footerView)
         
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [itemCellController])
         
         XCTAssertEqual(sut.tableView(sut.tableView, viewForFooterInSection: 0), footerView)
     }
     
     func test_didSelectItem_requestsDidSelectOnce() {
         let sut = makeSUT()
-        let sectionController = SectionCellControllerSpy()
+        let itemCellController = ItemCellControllerSpy()
         
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [itemCellController])
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
         
-        XCTAssertEqual(sectionController.didSelectCellCount, 1)
+        XCTAssertEqual(itemCellController.didSelectCellCount, 1)
     }
     
     func test_didDeselectItem_requestsDidDeselectOnce() {
         let sut = makeSUT()
-        let sectionController = SectionCellControllerSpy()
+        let itemCellController = ItemCellControllerSpy()
         
-        sut.display(cellControllers: [sectionController])
+        sut.display(cellControllers: [itemCellController])
         sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
         
-        XCTAssertEqual(sectionController.didDeselectCellCount, 1)
+        XCTAssertEqual(itemCellController.didDeselectCellCount, 1)
     }
 }
 
@@ -153,7 +148,7 @@ extension ListViewControllerTests {
         return sut
     }
     
-    final class SectionCellControllerSpy: NSObject, CellController {
+    final class ItemCellControllerSpy: NSObject, CellController {
         private let headerView: UIView?
         private let footerView: UIView?
         private let tableViewCell: UITableViewCell
