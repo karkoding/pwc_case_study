@@ -13,12 +13,22 @@ public extension ListViewController {
         !(tableView.separatorStyle == .none)
     }
     
+    var sectionHeaderTopPadding: CGFloat {
+        tableView.sectionHeaderTopPadding
+    }
+    
     var numberOfSections: Int {
         tableView.numberOfSections
     }
     
-    var sectionHeaderTopPadding: CGFloat {
-        tableView.sectionHeaderTopPadding
+    func numberOfRenderedItemsIn(section: Int) -> Int {
+        tableView.numberOfRows(inSection: section)
+    }
+    
+    func itemAt(section: Int, row: Int) -> UITableViewCell? {
+        let dataSource = tableView.dataSource!
+        let indexPath = IndexPath(row: row, section: section)
+        return dataSource.tableView(tableView, cellForRowAt: indexPath)
     }
     
     func headerView(for section: Int) -> UIView? {
@@ -31,16 +41,6 @@ public extension ListViewController {
         return delegate?.tableView?(tableView, viewForFooterInSection: section)
     }
     
-    func numberOfRenderedItemsIn(section: Int) -> Int {
-        tableView.numberOfRows(inSection: section)
-    }
-    
-    func itemAt(section: Int, row: Int) -> UITableViewCell? {
-        let dataSource = tableView.dataSource!
-        let indexPath = IndexPath(row: row, section: section)
-        return dataSource.tableView(tableView, cellForRowAt: indexPath)
-    }
-
     func didSelectItemAt(section: Int, row: Int) {
         let delegate = tableView.delegate
         let indexPath =  IndexPath(row: row, section: section)
