@@ -108,7 +108,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         let itemCellController = ItemCellControllerSpy()
         
         sut.display(cellControllers: [itemCellController])
-        sut.didSelectItem(at: 0, row: 0)
+        sut.didSelectItemAt(section: 0, row: 0)
         
         XCTAssertEqual(itemCellController.didSelectCellCount, 1)
     }
@@ -118,7 +118,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         let itemCellController = ItemCellControllerSpy()
         
         sut.display(cellControllers: [itemCellController])
-        sut.didDeSelectItem(at: 0, row: 0)
+        sut.didDeSelectItemAt(section: 0, row: 0)
         
         XCTAssertEqual(itemCellController.didDeselectCellCount, 1)
     }
@@ -195,13 +195,13 @@ private extension ListViewController {
         return dataSource.tableView(tableView, cellForRowAt: indexPath)
     }
 
-    func didSelectItem(at section: Int, row: Int) {
+    func didSelectItemAt(section: Int, row: Int) {
         let delegate = tableView.delegate
         let indexPath =  IndexPath(row: row, section: section)
         delegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
     
-    func didDeSelectItem(at section: Int, row: Int) {
+    func didDeSelectItemAt(section: Int, row: Int) {
         let delegate = tableView.delegate
         let indexPath =  IndexPath(row: row, section: section)
         delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
