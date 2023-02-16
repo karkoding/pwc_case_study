@@ -22,36 +22,48 @@ class SingleSectionCellController {
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
-    func test_init_deliversEmptyCellControllers() {
+    func test_init_deliversEmptyCellController_onEmptyList() {
         let sut = makeSUT(cellControllers: [])
         
         XCTAssertEqual(sut.cellControllers.count, .zero)
     }
     
-    func test_init_deliversSingleCellController() {
+    func test_init_deliversSingleCellController_onSingleCellController() {
         let sut = makeSUT(cellControllers: [ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 1)
     }
     
-    func test_init_deliversMoreThanOneCellControllers() {
+    func test_init_deliversTwoCellControllers_onTwoCellControllers() {
         let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
     
-    func test_init_deliversHeaderView() {
+    func test_init_deliversHeaderView_onNonNilValue() {
         let headerView = UIView()
         let sut = makeSUT(cellControllers: [], headerView: headerView)
         
         XCTAssertEqual(sut.headerView, headerView)
     }
     
-    func test_init_deliversFooterView() {
+    func test_init_deliversFooterView_onNonNilValue() {
         let footerView = UIView()
         let sut = makeSUT(cellControllers: [], footerView: footerView)
         
         XCTAssertEqual(sut.footerView, footerView)
+    }
+    
+    func test_intit_deliversNoHeaderView_onNilValue() {
+        let sut = makeSUT(cellControllers: [], headerView: nil)
+        
+        XCTAssertNil(sut.headerView)
+    }
+    
+    func test_intit_deliversNoFooterView_onNilValue() {
+        let sut = makeSUT(cellControllers: [], footerView: nil)
+        
+        XCTAssertNil(sut.footerView)
     }
 }
 
