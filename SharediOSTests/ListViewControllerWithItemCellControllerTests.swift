@@ -20,7 +20,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         XCTAssertEqual(callCount, 1)
     }
     
-    func test_viewDidLoad_messagesConfigureTableViewOnce() {
+    func test_viewDidLoad_messagesConfigureListViewOnce() {
         let sut = makeSUT()
         
         var callCount = 0
@@ -60,14 +60,13 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
     
     func test_display_rendersItemCellController() {
         let sut = makeSUT()
-        let itemCell = UITableViewCell()
-        let itemCellController = ItemCellControllerSpy(tableViewCell: itemCell)
+        let itemCellView = ItemCellControllerSpy.makeItemCellView()
         
-        sut.display(cellControllers: [itemCellController])
+        sut.display(cellControllers: [ItemCellControllerSpy(itemCellView: itemCellView)])
         
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render one section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item")
-        XCTAssertEqual(sut.item(at: 0, in: 0), itemCell, "Expected rendered item to be item cell")
+        XCTAssertEqual(sut.item(at: 0, in: 0), itemCellView, "Expected rendered item to be item cell view")
     }
     
     func test_display_rendersLatestItemCellControllers() {
@@ -136,19 +135,19 @@ extension ListViewControllerWithItemCellControllerTests {
     final class ItemCellControllerSpy: NSObject, CellController {
         private let headerView: UIView?
         private let footerView: UIView?
-        private let tableViewCell: UITableViewCell
+        private let itemCellView: UITableViewCell
         private(set) var didSelectCellCount = 0
         private(set) var didDeselectCellCount = 0
         
-        init(tableViewCell: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
-            self.tableViewCell = tableViewCell
+        init(itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
+            self.itemCellView = itemCellView
             self.headerView = headerView
             self.footerView = footerView
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { tableViewCell }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { itemCellView }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelectCellCount += 1 }
         
@@ -157,6 +156,8 @@ extension ListViewControllerWithItemCellControllerTests {
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {  headerView }
         
         func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { footerView }
+        
+        static func makeItemCellView() -> UITableViewCell { UITableViewCell() }
     }
 }
 
