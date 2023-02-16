@@ -91,7 +91,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         
         sut.display(cellControllers: [itemCellController])
         
-        XCTAssertEqual(sut.tableView(sut.tableView, viewForHeaderInSection: 0), headerView)
+        XCTAssertEqual(sut.headerView(for: 0) , headerView)
     }
     
     func test_renderFooterView_forItemCellController() {
@@ -101,7 +101,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         
         sut.display(cellControllers: [itemCellController])
         
-        XCTAssertEqual(sut.tableView(sut.tableView, viewForFooterInSection: 0), footerView)
+        XCTAssertEqual(sut.footerView(for: 0), footerView)
     }
     
     func test_didSelectItem_requestsDidSelectOnce() {
@@ -109,7 +109,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         let itemCellController = ItemCellControllerSpy()
         
         sut.display(cellControllers: [itemCellController])
-        sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        sut.didSelectItem(at: 0, row: 0)
         
         XCTAssertEqual(itemCellController.didSelectCellCount, 1)
     }
@@ -119,7 +119,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         let itemCellController = ItemCellControllerSpy()
         
         sut.display(cellControllers: [itemCellController])
-        sut.tableView(sut.tableView, didDeselectRowAt: IndexPath(row: 0, section: 0))
+        sut.didDeSelectItem(at: 0, row: 0)
         
         XCTAssertEqual(itemCellController.didDeselectCellCount, 1)
     }
@@ -160,6 +160,7 @@ extension ListViewControllerWithItemCellControllerTests {
     }
 }
 
+// Test DSL Helpers
 private extension ListViewController {
     var isSeparatorLineVisible: Bool {
         !(tableView.separatorStyle == .none)
@@ -173,6 +174,16 @@ private extension ListViewController {
         tableView.sectionHeaderTopPadding
     }
     
+    func headerView(for section: Int) -> UIView? {
+        let delegate = tableView.delegate
+        return delegate?.tableView?(tableView, viewForHeaderInSection: section)
+    }
+    
+    func footerView(for section: Int) -> UIView? {
+        let delegate = tableView.delegate
+        return delegate?.tableView?(tableView, viewForFooterInSection: section)
+    }
+    
     func numberOfRenderedItemsIn(section: Int) -> Int {
         tableView.numberOfRows(inSection: section)
     }
@@ -181,5 +192,17 @@ private extension ListViewController {
         let dataSource = tableView.dataSource!
         let indexPath = IndexPath(row: row, section: section)
         return dataSource.tableView(tableView, cellForRowAt: indexPath)
+    }
+
+    func didSelectItem(at section: Int, row: Int) {
+        let delegate = tableView.delegate
+        let indexPath =  IndexPath(row: row, section: section)
+        delegate?.tableView?(tableView, didSelectRowAt: indexPath)
+    }
+    
+    func didDeSelectItem(at section: Int, row: Int) {
+        let delegate = tableView.delegate
+        let indexPath =  IndexPath(row: row, section: section)
+        delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
 }
