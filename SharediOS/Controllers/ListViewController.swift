@@ -50,7 +50,7 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        tableModel[section].tableView?(tableView, viewForFooterInSection: section)
+        cellController(forSection: section, in: tableView).tableView?(tableView, viewForFooterInSection: section)
     }
     
     public func display(cellControllers: [CellController]) {

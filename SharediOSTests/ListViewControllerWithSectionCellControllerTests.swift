@@ -143,19 +143,17 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let footerView2 = UIView()
         let footerView3 = UIView()
         
-        let itemCellControllerList = [
-            ItemCellControllerSpy(headerView: footerView1),
-            ItemCellControllerSpy(headerView: footerView2),
-            ItemCellControllerSpy(headerView: footerView3)
-        ]
-        
-        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList)
+        let section1 = ItemCellControllerSpy(footerView: footerView1)
+        let section2 = ItemCellControllerSpy(footerView: footerView2)
+        let section3 = ItemCellControllerSpy(footerView: footerView3)
+            
+        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
 
         sut.display(cellControllers: [multiSectionCellController])
 
-        XCTAssertEqual(sut.headerView(for: 0) , footerView1)
-        XCTAssertEqual(sut.headerView(for: 1) , footerView2)
-        XCTAssertEqual(sut.headerView(for: 2) , footerView3)
+        XCTAssertEqual(sut.footerView(for: 0) , footerView1)
+        XCTAssertEqual(sut.footerView(for: 1) , footerView2)
+        XCTAssertEqual(sut.footerView(for: 2) , footerView3)
     }
 }
 
@@ -210,7 +208,9 @@ extension ListViewControllerWithSectionCellControllerTests {
             cellControllers[section].tableView?(tableView, viewForHeaderInSection: section)
         }
         
-        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { footerView }
+        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+            cellControllers[section].tableView?(tableView, viewForFooterInSection: section)
+        }
     }
     
     final class ItemCellControllerSpy: NSObject, CellController {
