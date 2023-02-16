@@ -1,5 +1,5 @@
 //
-//  ListiOSTests.swift
+//  ListViewControllerWithItemCellControllerTests.swift
 //  SharediOS
 //
 //  Created by Karthik K Manoj on 09/02/23.
@@ -8,7 +8,7 @@
 import XCTest
 import SharediOS
 
-final class ListViewControllerTests: XCTestCase {
+final class ListViewControllerWithItemCellControllerTests: XCTestCase {
     func test_viewDidLoad_messagesOnRequestToLoadOnce() {
         let sut = makeSUT()
         
@@ -126,7 +126,7 @@ final class ListViewControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-extension ListViewControllerTests {
+extension ListViewControllerWithItemCellControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         let sut = ListViewController()
         trackForMemoryLeak(sut, file: file, line: line)
