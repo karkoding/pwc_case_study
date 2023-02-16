@@ -19,19 +19,19 @@ class SingleSectionCellController {
 
 final class SingleSectionCellControllerTests: XCTestCase {
     func test_init_deliversEmptyCellControllers() {
-        let sut = SingleSectionCellController(cellControllers: [])
+        let sut = makeSUT(cellControllers: [])
         
         XCTAssertEqual(sut.cellControllers.count, .zero)
     }
     
     func test_init_deliversSingleCellController() {
-        let sut = SingleSectionCellController(cellControllers: [ItemCellController()])
+        let sut = makeSUT(cellControllers: [ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 1)
     }
     
     func test_init_deliversMoreThanOneCellControllers() {
-        let sut = SingleSectionCellController(cellControllers: [ItemCellController(), ItemCellController()])
+        let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
@@ -39,8 +39,9 @@ final class SingleSectionCellControllerTests: XCTestCase {
 
 // MARK: - Helpers
 extension SingleSectionCellControllerTests {
-    func makeSUT(file: StaticString = #filePath, line: UInt = #line) {
-       
+    func makeSUT(cellControllers: [CellController], file: StaticString = #filePath, line: UInt = #line) -> SingleSectionCellController {
+        let sut = SingleSectionCellController(cellControllers: cellControllers)
+        return sut
     }
     
     final class ItemCellController: NSObject, CellController {
