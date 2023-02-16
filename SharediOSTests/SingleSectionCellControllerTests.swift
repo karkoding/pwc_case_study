@@ -18,10 +18,16 @@ class SingleSectionCellController {
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
-    func test_init_deliversEmptyCellControllersOnEmptyList() {
+    func test_init_deliversEmptyCellControllers() {
         let sut = SingleSectionCellController(cellControllers: [])
         
         XCTAssertEqual(sut.cellControllers.count, .zero)
+    }
+    
+    func test_init_deliversSingleCellController() {
+        let sut = SingleSectionCellController(cellControllers: [ItemCellController()])
+        
+        XCTAssertEqual(sut.cellControllers.count, 1)
     }
 }
 
@@ -29,6 +35,12 @@ final class SingleSectionCellControllerTests: XCTestCase {
 extension SingleSectionCellControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) {
        
+    }
+    
+    final class ItemCellController: NSObject, CellController {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
     }
 }
 
