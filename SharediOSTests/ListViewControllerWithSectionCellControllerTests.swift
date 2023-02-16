@@ -60,25 +60,22 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
     
     func test_display_rendersSectionItems() {
         let sut = makeSUT()
+        
         let itemCellView1 = ItemCellControllerSpy.makeItemCellView()
         let itemCellView2 = ItemCellControllerSpy.makeItemCellView()
         let itemCellView3 = ItemCellControllerSpy.makeItemCellView()
         
-        let itemCellControllerList = [
-            ItemCellControllerSpy(itemCellView: itemCellView1),
-            ItemCellControllerSpy(itemCellView: itemCellView2),
-            ItemCellControllerSpy(itemCellView: itemCellView3)
-        ]
+        let section1 = ItemCellControllerSpy(itemCellView: itemCellView1)
+        let section2 = ItemCellControllerSpy(itemCellView: itemCellView2)
+        let section3 = ItemCellControllerSpy(itemCellView: itemCellView3)
+        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
         
-        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList)
         sut.display(cellControllers: [multiSectionCellController])
         
         XCTAssertEqual(sut.numberOfSections, 3, "Expected to render one section")
-        
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item in section 1")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render an item in section 2")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 2), 1, "Expected to render an item in section 3")
-        
         XCTAssertEqual(sut.itemAt(section: 0, row: 0), itemCellView1, "Expected rendered item to be item cell view 1")
         XCTAssertEqual(sut.itemAt(section: 1, row: 0), itemCellView2, "Expected rendered item to be item cell view 2")
         XCTAssertEqual(sut.itemAt(section: 2, row: 0), itemCellView3, "Expected rendered item to be item cell view 3")
