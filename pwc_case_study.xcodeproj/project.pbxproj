@@ -25,6 +25,7 @@
 		DA38B50B299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */; };
 		DA42C498299EA0AB009A71BE /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */; };
 		DA42C49B299EA1FF009A71BE /* SharedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */; };
+		DA42C49E299EA806009A71BE /* SingleSectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49D299EA806009A71BE /* SingleSectionCellControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerWithMultiSectionCellControllerTests.swift; sourceTree = "<group>"; };
 		DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedHelpers.swift; sourceTree = "<group>"; };
+		DA42C49D299EA806009A71BE /* SingleSectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionCellControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				DA38B4DD299763A800C89A02 /* Helpers */,
 				DA38B4E029977AA200C89A02 /* NavigationControllerTests.swift */,
 				DA42C499299EA1C5009A71BE /* ListViewController */,
+				DA42C49D299EA806009A71BE /* SingleSectionCellControllerTests.swift */,
 			);
 			path = SharediOSTests;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				DA42C49B299EA1FF009A71BE /* SharedHelpers.swift in Sources */,
 				DA05C0DC2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift in Sources */,
 				DA42C498299EA0AB009A71BE /* ListViewControllerTests.swift in Sources */,
+				DA42C49E299EA806009A71BE /* SingleSectionCellControllerTests.swift in Sources */,
 				DA38B4E129977AA200C89A02 /* NavigationControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
