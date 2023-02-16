@@ -163,20 +163,12 @@ extension ListViewControllerWithSectionCellControllerTests {
     
     final class MultiSectionCellControllerStub: NSObject, CellController {
         private let cellControllers: [CellController]
-        private let headerView: UIView?
-        private let footerView: UIView?
-        private let itemCellView: UITableViewCell
-        
-        init(cellControllers: [CellController], itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
+   
+        init(cellControllers: [CellController]) {
             self.cellControllers = cellControllers
-            self.itemCellView = itemCellView
-            self.headerView = headerView
-            self.footerView = footerView
         }
         
-        func numberOfSections(in tableView: UITableView) -> Int {
-            cellControllers.count
-        }
+        func numberOfSections(in tableView: UITableView) -> Int { cellControllers.count }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             cellControllers[section].tableView(tableView, numberOfRowsInSection: section)
