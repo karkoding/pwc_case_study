@@ -157,18 +157,8 @@ extension ListViewControllerWithSectionCellControllerTests {
         return sut
     }
     
-    func makeMultiSectionCellController(
-        cellControllers: [CellController],
-        itemCellView: UITableViewCell = UITableViewCell(),
-        headerView: UIView? = nil,
-        footerView: UIView? = nil
-    ) -> MultiSectionCellControllerStub {
-        MultiSectionCellControllerStub(
-            cellControllers: cellControllers,
-            itemCellView: itemCellView,
-            headerView: headerView,
-            footerView: footerView
-        )
+    func makeMultiSectionCellController(cellControllers: [CellController]) -> MultiSectionCellControllerStub {
+        MultiSectionCellControllerStub(cellControllers: cellControllers)
     }
     
     final class MultiSectionCellControllerStub: NSObject, CellController {
@@ -177,7 +167,7 @@ extension ListViewControllerWithSectionCellControllerTests {
         private let footerView: UIView?
         private let itemCellView: UITableViewCell
         
-        init(cellControllers: [CellController],itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
+        init(cellControllers: [CellController], itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
             self.cellControllers = cellControllers
             self.itemCellView = itemCellView
             self.headerView = headerView
