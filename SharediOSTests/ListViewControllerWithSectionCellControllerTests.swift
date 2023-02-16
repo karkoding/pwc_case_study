@@ -122,13 +122,11 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let headerView2 = UIView()
         let headerView3 = UIView()
     
-        let itemCellControllerList = [
-            ItemCellControllerSpy(headerView: headerView1),
-            ItemCellControllerSpy(headerView: headerView2),
-            ItemCellControllerSpy(headerView: headerView3)
-        ]
-        
-        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList)
+        let section1 = ItemCellControllerSpy(headerView: headerView1)
+        let section2 = ItemCellControllerSpy(headerView: headerView2)
+        let section3 = ItemCellControllerSpy(headerView: headerView3)
+            
+        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
 
         sut.display(cellControllers: [multiSectionCellController])
 
