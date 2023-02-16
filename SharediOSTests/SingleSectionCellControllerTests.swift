@@ -30,7 +30,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.cellControllers.count, 1)
     }
     
-    func test_init_deliversMoreThanCellControllers() {
+    func test_init_deliversMoreThanOneCellControllers() {
         let sut = SingleSectionCellController(cellControllers: [ItemCellController(), ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 2)
