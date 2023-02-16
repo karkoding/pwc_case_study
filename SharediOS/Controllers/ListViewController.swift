@@ -29,9 +29,7 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
-        tableModel.reduce(0) { partialResult, cellController in
-            partialResult + (cellController.numberOfSections?(in: tableView) ?? 1)
-        }
+        tableModel.reduce(0) { $0 + ($1.numberOfSections?(in: tableView) ?? 1) }
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
