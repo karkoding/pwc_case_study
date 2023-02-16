@@ -87,9 +87,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
     func test_display_rendersLatestSectionItems() {
         let sut = makeSUT()
         let itemCellView = ItemCellControllerSpy.makeItemCellView()
-        let itemCellControllerList = [ItemCellControllerSpy(itemCellView: itemCellView)]
+        let section  = ItemCellControllerSpy(itemCellView: itemCellView)
         
-        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList)
+        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section])
         sut.display(cellControllers: [multiSectionCellController])
 
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
@@ -99,12 +99,10 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let itemCellView1 = ItemCellControllerSpy.makeItemCellView()
         let itemCellView2 = ItemCellControllerSpy.makeItemCellView()
         
-        let itemCellControllerList1 = [
-            ItemCellControllerSpy(itemCellView: itemCellView1),
-            ItemCellControllerSpy(itemCellView: itemCellView2)
-        ]
-        
-        let latestMultiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList1)
+        let section1 = ItemCellControllerSpy(itemCellView: itemCellView1)
+        let section2 = ItemCellControllerSpy(itemCellView: itemCellView2)
+    
+        let latestMultiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2])
         sut.display(cellControllers: [latestMultiSectionCellController])
 
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two sections")
