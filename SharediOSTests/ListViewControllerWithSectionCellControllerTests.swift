@@ -124,9 +124,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
 
         sut.display(cellControllers: [multiSectionCellController])
 
-        XCTAssertEqual(sut.headerView(for: 0) , headerView1)
-        XCTAssertEqual(sut.headerView(for: 1) , headerView2)
-        XCTAssertEqual(sut.headerView(for: 2) , headerView3)
+        XCTAssertEqual(sut.headerView(for: 0) , headerView1, "Expected section 1 to have header view 1")
+        XCTAssertEqual(sut.headerView(for: 1) , headerView2, "Expected section 2 to have header view 2")
+        XCTAssertEqual(sut.headerView(for: 2) , headerView3, "Expected section 3 to have header view 3")
     }
 
     func test_rendersFooterView_forSections() {
@@ -143,9 +143,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
 
         sut.display(cellControllers: [multiSectionCellController])
 
-        XCTAssertEqual(sut.footerView(for: 0) , footerView1)
-        XCTAssertEqual(sut.footerView(for: 1) , footerView2)
-        XCTAssertEqual(sut.footerView(for: 2) , footerView3)
+        XCTAssertEqual(sut.footerView(for: 0) , footerView1, "Expected section 1 to have footer view 1")
+        XCTAssertEqual(sut.footerView(for: 1) , footerView2, "Expected section 2 to have footer view 2")
+        XCTAssertEqual(sut.footerView(for: 2) , footerView3, "Expected section 3 to have footer view 3")
     }
 }
 
