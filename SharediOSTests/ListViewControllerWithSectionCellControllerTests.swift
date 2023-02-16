@@ -116,7 +116,7 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.itemAt(section: 1, row: 0), itemCellView2, "Expected rendered item to be item cell view 2")
     }
 
-    func test_renderHeaderView_forAllSections() {
+    func test_rendersHeaderView_forSections() {
         let sut = makeSUT()
         let headerView1 = UIView()
         let headerView2 = UIView()
@@ -137,15 +137,26 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.headerView(for: 2) , headerView3)
     }
 
-//    func test_renderFooterView_forItemCellController() {
-//        let sut = makeSUT()
-//        let footerView = UIView()
-//        let itemCellController = MultipleSectionCellController(footerView: footerView)
-//
-//        sut.display(cellControllers: [itemCellController])
-//
-//        XCTAssertEqual(sut.footerView(for: 0), footerView)
-//    }
+    func test_rendersFooterView_forSections() {
+        let sut = makeSUT()
+        let footerView1 = UIView()
+        let footerView2 = UIView()
+        let footerView3 = UIView()
+        
+        let itemCellControllerList = [
+            ItemCellControllerSpy(headerView: footerView1),
+            ItemCellControllerSpy(headerView: footerView2),
+            ItemCellControllerSpy(headerView: footerView3)
+        ]
+        
+        let multiSectionCellController = makeMultipleSectionCellController(cellControllers: itemCellControllerList)
+
+        sut.display(cellControllers: [multiSectionCellController])
+
+        XCTAssertEqual(sut.headerView(for: 0) , footerView1)
+        XCTAssertEqual(sut.headerView(for: 1) , footerView2)
+        XCTAssertEqual(sut.headerView(for: 2) , footerView3)
+    }
 //
 //    func test_didSelectItem_requestsDidSelectOnce() {
 //        let sut = makeSUT()
