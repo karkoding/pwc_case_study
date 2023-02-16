@@ -68,9 +68,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let section1 = SingleSectionCellControllerStub(itemCellView: itemCellView1)
         let section2 = SingleSectionCellControllerStub(itemCellView: itemCellView2)
         let section3 = SingleSectionCellControllerStub(itemCellView: itemCellView3)
-        let multiSectionCellController = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
+        let multiSection = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
         
-        sut.display(cellControllers: [multiSectionCellController])
+        sut.display(cellControllers: [multiSection])
         
         XCTAssertEqual(sut.numberOfSections, 3, "Expected to render one section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render an item in section 1")
@@ -86,9 +86,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         
         let itemCellView = SingleSectionCellControllerStub.makeItemCellView()
         let section  = SingleSectionCellControllerStub(itemCellView: itemCellView)
-        let multiSectionCellController = makeMultiSectionCellController(cellControllers: [section])
+        let multiSection = makeMultiSectionCellController(cellControllers: [section])
         
-        sut.display(cellControllers: [multiSectionCellController])
+        sut.display(cellControllers: [multiSection])
 
         XCTAssertEqual(sut.numberOfSections, 1, "Expected to render 1 section")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
@@ -99,9 +99,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         
         let section1 = SingleSectionCellControllerStub(itemCellView: itemCellView1)
         let section2 = SingleSectionCellControllerStub(itemCellView: itemCellView2)
-        let latestMultiSectionCellController = makeMultiSectionCellController(cellControllers: [section1, section2])
+        let latestMultiSection = makeMultiSectionCellController(cellControllers: [section1, section2])
         
-        sut.display(cellControllers: [latestMultiSectionCellController])
+        sut.display(cellControllers: [latestMultiSection])
 
         XCTAssertEqual(sut.numberOfSections, 2, "Expected to render two sections")
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 items in section 1")
@@ -120,9 +120,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let section2 = SingleSectionCellControllerStub(headerView: headerView2)
         let section3 = SingleSectionCellControllerStub(headerView: headerView3)
             
-        let multiSectionCellController = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
+        let multiSection = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
 
-        sut.display(cellControllers: [multiSectionCellController])
+        sut.display(cellControllers: [multiSection])
 
         XCTAssertEqual(sut.headerView(for: 0) , headerView1, "Expected section 1 to have header view 1")
         XCTAssertEqual(sut.headerView(for: 1) , headerView2, "Expected section 2 to have header view 2")
@@ -139,9 +139,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let section2 = SingleSectionCellControllerStub(footerView: footerView2)
         let section3 = SingleSectionCellControllerStub(footerView: footerView3)
             
-        let multiSectionCellController = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
+        let multiSection = makeMultiSectionCellController(cellControllers: [section1, section2, section3])
 
-        sut.display(cellControllers: [multiSectionCellController])
+        sut.display(cellControllers: [multiSection])
 
         XCTAssertEqual(sut.footerView(for: 0) , footerView1, "Expected section 1 to have footer view 1")
         XCTAssertEqual(sut.footerView(for: 1) , footerView2, "Expected section 2 to have footer view 2")
