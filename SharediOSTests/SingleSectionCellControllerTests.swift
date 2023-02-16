@@ -18,7 +18,6 @@ class SingleSectionCellController {
         self.headerView = headerView
         self.footerView = footerView
     }
-    
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
