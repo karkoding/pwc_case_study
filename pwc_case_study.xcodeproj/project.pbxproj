@@ -203,9 +203,9 @@
 		DA42C499299EA1C5009A71BE /* ListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */,
 				DA05C0DB2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift */,
 				DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */,
-				DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */,
 				DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */,
 			);
 			path = ListViewController;
