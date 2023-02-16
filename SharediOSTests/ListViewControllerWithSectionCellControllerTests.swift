@@ -162,8 +162,8 @@ extension ListViewControllerWithSectionCellControllerTests {
         itemCellView: UITableViewCell = UITableViewCell(),
         headerView: UIView? = nil,
         footerView: UIView? = nil
-    ) -> MultiSectionCellController {
-        MultiSectionCellController(
+    ) -> MultiSectionCellControllerStub {
+        MultiSectionCellControllerStub(
             cellControllers: cellControllers,
             itemCellView: itemCellView,
             headerView: headerView,
@@ -171,7 +171,7 @@ extension ListViewControllerWithSectionCellControllerTests {
         )
     }
     
-    final class MultiSectionCellController: NSObject, CellController {
+    final class MultiSectionCellControllerStub: NSObject, CellController {
         private let cellControllers: [CellController]
         private let headerView: UIView?
         private let footerView: UIView?
