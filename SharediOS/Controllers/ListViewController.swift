@@ -8,8 +8,13 @@
 import UIKit
 
 public final class ListViewController: UITableViewController {
+    private var cachedCellController: [Int: CellController] = [:]
+    
     private var tableModel = [CellController]() {
-        didSet { tableView.reloadData() }
+        didSet {
+            cachedCellController = [:]
+            tableView.reloadData()
+        }
     }
     
     public var onRequestToLoad: (() -> Void)?
@@ -63,14 +68,17 @@ public final class ListViewController: UITableViewController {
     }
     
     private func cellController(forSection section: Int, in tableView: UITableView) -> CellController {
+        if let cellController = cachedCellController[section] { return cellController }
+        
         var sectionCount = 0
         for cellController in tableModel {
             sectionCount += cellController.numberOfSections?(in: tableView) ?? 1
             if section < sectionCount {
+                cachedCellController[section] = cellController
                 return cellController
             }
         }
         
-        fatalError("CellController Not Found for section \(section)")
+        fatalError("Trying to access non existing cell controller for \(section)")
     }
 }
