@@ -18,7 +18,7 @@ class SingleSectionCellController {
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
-    func test_init_deliversCellControllers() {
+    func test_init_deliversEmptyCellControllersOnEmptyList() {
         let sut = SingleSectionCellController(cellControllers: [])
         
         XCTAssertEqual(sut.cellControllers.count, .zero)
