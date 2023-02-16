@@ -61,13 +61,13 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
     func test_display_rendersSectionItems() {
         let sut = makeSUT()
         
-        let itemCellView1 = SingleSectionControllerSpy.makeItemCellView()
-        let itemCellView2 = SingleSectionControllerSpy.makeItemCellView()
-        let itemCellView3 = SingleSectionControllerSpy.makeItemCellView()
+        let itemCellView1 = SingleSectionControllerStub.makeItemCellView()
+        let itemCellView2 = SingleSectionControllerStub.makeItemCellView()
+        let itemCellView3 = SingleSectionControllerStub.makeItemCellView()
         
-        let section1 = SingleSectionControllerSpy(itemCellView: itemCellView1)
-        let section2 = SingleSectionControllerSpy(itemCellView: itemCellView2)
-        let section3 = SingleSectionControllerSpy(itemCellView: itemCellView3)
+        let section1 = SingleSectionControllerStub(itemCellView: itemCellView1)
+        let section2 = SingleSectionControllerStub(itemCellView: itemCellView2)
+        let section3 = SingleSectionControllerStub(itemCellView: itemCellView3)
         let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
         
         sut.display(cellControllers: [multiSectionCellController])
@@ -84,8 +84,8 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
     func test_display_rendersLatestSectionItems() {
         let sut = makeSUT()
         
-        let itemCellView = SingleSectionControllerSpy.makeItemCellView()
-        let section  = SingleSectionControllerSpy(itemCellView: itemCellView)
+        let itemCellView = SingleSectionControllerStub.makeItemCellView()
+        let section  = SingleSectionControllerStub(itemCellView: itemCellView)
         let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section])
         
         sut.display(cellControllers: [multiSectionCellController])
@@ -94,11 +94,11 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 0), 1, "Expected to render 1 item")
         XCTAssertEqual(sut.itemAt(section: 0, row: 0), itemCellView, "Expected rendered item to be item cell view 1")
 
-        let itemCellView1 = SingleSectionControllerSpy.makeItemCellView()
-        let itemCellView2 = SingleSectionControllerSpy.makeItemCellView()
+        let itemCellView1 = SingleSectionControllerStub.makeItemCellView()
+        let itemCellView2 = SingleSectionControllerStub.makeItemCellView()
         
-        let section1 = SingleSectionControllerSpy(itemCellView: itemCellView1)
-        let section2 = SingleSectionControllerSpy(itemCellView: itemCellView2)
+        let section1 = SingleSectionControllerStub(itemCellView: itemCellView1)
+        let section2 = SingleSectionControllerStub(itemCellView: itemCellView2)
         let latestMultiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2])
         
         sut.display(cellControllers: [latestMultiSectionCellController])
@@ -116,9 +116,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let headerView2 = UIView()
         let headerView3 = UIView()
     
-        let section1 = SingleSectionControllerSpy(headerView: headerView1)
-        let section2 = SingleSectionControllerSpy(headerView: headerView2)
-        let section3 = SingleSectionControllerSpy(headerView: headerView3)
+        let section1 = SingleSectionControllerStub(headerView: headerView1)
+        let section2 = SingleSectionControllerStub(headerView: headerView2)
+        let section3 = SingleSectionControllerStub(headerView: headerView3)
             
         let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
 
@@ -135,9 +135,9 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         let footerView2 = UIView()
         let footerView3 = UIView()
         
-        let section1 = SingleSectionControllerSpy(footerView: footerView1)
-        let section2 = SingleSectionControllerSpy(footerView: footerView2)
-        let section3 = SingleSectionControllerSpy(footerView: footerView3)
+        let section1 = SingleSectionControllerStub(footerView: footerView1)
+        let section2 = SingleSectionControllerStub(footerView: footerView2)
+        let section3 = SingleSectionControllerStub(footerView: footerView3)
             
         let multiSectionCellController = makeMultipleSectionCellController(cellControllers: [section1, section2, section3])
 
@@ -205,7 +205,7 @@ extension ListViewControllerWithSectionCellControllerTests {
         }
     }
     
-    final class SingleSectionControllerSpy: NSObject, CellController {
+    final class SingleSectionControllerStub: NSObject, CellController {
         private let headerView: UIView?
         private let footerView: UIView?
         private let itemCellView: UITableViewCell
