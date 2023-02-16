@@ -171,19 +171,23 @@ extension ListViewControllerWithSectionCellControllerTests {
         func numberOfSections(in tableView: UITableView) -> Int { cellControllers.count }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            cellControllers[section].tableView(tableView, numberOfRowsInSection: section)
+            cellControllerFor(section: section).tableView(tableView, numberOfRowsInSection: section)
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            cellControllers[indexPath.section].tableView(tableView, cellForRowAt: indexPath)
+            cellControllerFor(section: indexPath.section).tableView(tableView, cellForRowAt: indexPath)
         }
         
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            cellControllers[section].tableView?(tableView, viewForHeaderInSection: section)
+            cellControllerFor(section: section).tableView?(tableView, viewForHeaderInSection: section)
         }
         
         func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-            cellControllers[section].tableView?(tableView, viewForFooterInSection: section)
+            cellControllerFor(section: section).tableView?(tableView, viewForFooterInSection: section)
+        }
+        
+        func cellControllerFor(section: Int) -> CellController {
+            cellControllers[section]
         }
     }
     
