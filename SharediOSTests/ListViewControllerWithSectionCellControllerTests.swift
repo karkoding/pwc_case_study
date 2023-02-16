@@ -1,14 +1,14 @@
 //
-//  ListViewControllerWithItemCellControllerTests.swift
-//  SharediOS
+//  ListViewControllerWithSectionCellControllerTests.swift
+//  SharediOSTests
 //
-//  Created by Karthik K Manoj on 09/02/23.
+//  Created by Karthik K Manoj on 16/02/23.
 //
 
 import XCTest
 import SharediOS
 
-final class ListViewControllerWithItemCellControllerTests: XCTestCase {
+final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
     func test_viewDidLoad_messagesOnRequestToLoadOnce() {
         let sut = makeSUT()
         
@@ -125,7 +125,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-extension ListViewControllerWithItemCellControllerTests {
+extension ListViewControllerWithSectionCellControllerTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         let sut = ListViewController()
         trackForMemoryLeak(sut, file: file, line: line)
@@ -158,52 +158,5 @@ extension ListViewControllerWithItemCellControllerTests {
         func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { footerView }
         
         static func makeItemCellView() -> UITableViewCell { UITableViewCell() }
-    }
-}
-
-// Test DSL Helpers
-public extension ListViewController {
-    var isSeparatorLineVisible: Bool {
-        !(tableView.separatorStyle == .none)
-    }
-    
-    var numberOfSections: Int {
-        tableView.numberOfSections
-    }
-    
-    var sectionHeaderTopPadding: CGFloat {
-        tableView.sectionHeaderTopPadding
-    }
-    
-    func headerView(for section: Int) -> UIView? {
-        let delegate = tableView.delegate
-        return delegate?.tableView?(tableView, viewForHeaderInSection: section)
-    }
-    
-    func footerView(for section: Int) -> UIView? {
-        let delegate = tableView.delegate
-        return delegate?.tableView?(tableView, viewForFooterInSection: section)
-    }
-    
-    func numberOfRenderedItemsIn(section: Int) -> Int {
-        tableView.numberOfRows(inSection: section)
-    }
-    
-    func item(at row: Int, in section: Int) -> UITableViewCell? {
-        let dataSource = tableView.dataSource!
-        let indexPath = IndexPath(row: row, section: section)
-        return dataSource.tableView(tableView, cellForRowAt: indexPath)
-    }
-
-    func didSelectItemAt(section: Int, row: Int) {
-        let delegate = tableView.delegate
-        let indexPath =  IndexPath(row: row, section: section)
-        delegate?.tableView?(tableView, didSelectRowAt: indexPath)
-    }
-    
-    func didDeSelectItemAt(section: Int, row: Int) {
-        let delegate = tableView.delegate
-        let indexPath =  IndexPath(row: row, section: section)
-        delegate?.tableView?(tableView, didDeselectRowAt: indexPath)
     }
 }
