@@ -10,9 +10,13 @@ import SharediOS
 
 class SingleSectionCellController {
     private(set) var cellControllers: [CellController]
+    private(set) var headerView: UIView?
+    private(set) var footerView: UIView?
     
-    init(cellControllers: [CellController]) {
+    init(cellControllers: [CellController], headerView: UIView?, footerView: UIView?) {
         self.cellControllers = cellControllers
+        self.headerView = headerView
+        self.footerView = footerView
     }
     
 }
@@ -35,12 +39,32 @@ final class SingleSectionCellControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
+    
+    func test_init_deliversHeaderView() {
+        let headerView = UIView()
+        let sut = makeSUT(cellControllers: [], headerView: headerView)
+        
+        XCTAssertEqual(sut.headerView, headerView)
+    }
+    
+    func test_init_deliversFooterView() {
+        let footerView = UIView()
+        let sut = makeSUT(cellControllers: [], footerView: footerView)
+        
+        XCTAssertEqual(sut.footerView, footerView)
+    }
 }
 
 // MARK: - Helpers
 extension SingleSectionCellControllerTests {
-    func makeSUT(cellControllers: [CellController], file: StaticString = #filePath, line: UInt = #line) -> SingleSectionCellController {
-        let sut = SingleSectionCellController(cellControllers: cellControllers)
+    func makeSUT(
+        cellControllers: [CellController],
+        headerView: UIView? = nil,
+        footerView: UIView? = nil,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SingleSectionCellController {
+        let sut = SingleSectionCellController(cellControllers: cellControllers, headerView: headerView, footerView: footerView)
         trackForMemoryLeak(sut)
         return sut
     }
