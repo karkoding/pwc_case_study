@@ -209,8 +209,6 @@ extension ListViewControllerWithSectionCellControllerTests {
         private let headerView: UIView?
         private let footerView: UIView?
         private let itemCellView: UITableViewCell
-        private(set) var didSelectCellCount = 0
-        private(set) var didDeselectCellCount = 0
         
         init(itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
             self.itemCellView = itemCellView
@@ -221,10 +219,6 @@ extension ListViewControllerWithSectionCellControllerTests {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { itemCellView }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelectCellCount += 1 }
-        
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselectCellCount += 1 }
         
         func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {  headerView }
         
