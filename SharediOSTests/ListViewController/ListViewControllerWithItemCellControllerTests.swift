@@ -9,7 +9,7 @@ import XCTest
 import SharediOS
 
 final class ListViewControllerWithItemCellControllerTests: XCTestCase {
-    func test_display_rendersItemCellController() {
+    func test_display_rendersItem() {
         let sut = makeSUT()
         let itemCellView = ItemCellControllerSpy.makeItemCellView()
         
@@ -20,7 +20,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.itemAt(section: 0, row: 0), itemCellView, "Expected rendered item to be item cell view")
     }
     
-    func test_display_rendersLatestItemCellControllers() {
+    func test_display_rendersLatestItems() {
         let sut = makeSUT()
         sut.display(cellControllers: [ItemCellControllerSpy()])
         
@@ -34,7 +34,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderedItemsIn(section: 1), 1, "Expected to render 1 item in section 2")
     }
     
-    func test_renderHeaderView_forItemCellController() {
+    func test_renderHeaderView_forItem() {
         let sut = makeSUT()
         let headerView = UIView()
         let itemCellController = ItemCellControllerSpy(headerView: headerView)
@@ -44,7 +44,7 @@ final class ListViewControllerWithItemCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.headerView(for: 0) , headerView)
     }
     
-    func test_renderFooterView_forItemCellController() {
+    func test_renderFooterView_forItem() {
         let sut = makeSUT()
         let footerView = UIView()
         let itemCellController = ItemCellControllerSpy(footerView: footerView)
