@@ -22,7 +22,7 @@
 		DA38B4D82996AE1600C89A02 /* UITableView+dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */; };
 		DA38B4DF299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B4DE299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift */; };
 		DA38B4E129977AA200C89A02 /* NavigationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B4E029977AA200C89A02 /* NavigationControllerTests.swift */; };
-		DA38B50B299DE7BE00C89A02 /* ListViewControllerWithSectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B50A299DE7BE00C89A02 /* ListViewControllerWithSectionCellControllerTests.swift */; };
+		DA38B50B299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +80,7 @@
 		DA38B4D72996AE1600C89A02 /* UITableView+dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeueing.swift"; sourceTree = "<group>"; };
 		DA38B4DE299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+trackForMemoryLeak.swift"; sourceTree = "<group>"; };
 		DA38B4E029977AA200C89A02 /* NavigationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerTests.swift; sourceTree = "<group>"; };
-		DA38B50A299DE7BE00C89A02 /* ListViewControllerWithSectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerWithSectionCellControllerTests.swift; sourceTree = "<group>"; };
+		DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerWithMultiSectionCellControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 			children = (
 				DA38B4DD299763A800C89A02 /* Helpers */,
 				DA05C0DB2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift */,
-				DA38B50A299DE7BE00C89A02 /* ListViewControllerWithSectionCellControllerTests.swift */,
+				DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */,
 				DA38B4E029977AA200C89A02 /* NavigationControllerTests.swift */,
 			);
 			path = SharediOSTests;
@@ -361,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA38B50B299DE7BE00C89A02 /* ListViewControllerWithSectionCellControllerTests.swift in Sources */,
+				DA38B50B299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift in Sources */,
 				DA38B4DF299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift in Sources */,
 				DA05C0DC2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift in Sources */,
 				DA38B4E129977AA200C89A02 /* NavigationControllerTests.swift in Sources */,
