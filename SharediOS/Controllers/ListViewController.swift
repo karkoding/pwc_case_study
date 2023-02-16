@@ -24,15 +24,17 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func numberOfSections(in tableView: UITableView) -> Int {
-        tableModel.count
+        tableModel.reduce(0) { partialResult, cellController in
+            partialResult + (cellController.numberOfSections?(in: tableView) ?? 1)
+        }
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableModel[section].tableView(tableView, numberOfRowsInSection: section)
+         cellController(forSection: section, in: tableView).tableView(tableView, numberOfRowsInSection: section)
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableModel[indexPath.section].tableView(tableView, cellForRowAt: indexPath)
+        cellController(forSection: indexPath.section, in: tableView).tableView(tableView, cellForRowAt: indexPath)
     }
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,7 +46,7 @@ public final class ListViewController: UITableViewController {
     }
     
     public override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        tableModel[section].tableView?(tableView, viewForHeaderInSection: section)
+        cellController(forSection: section, in: tableView).tableView?(tableView, viewForHeaderInSection: section)
     }
     
     public override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -58,5 +60,17 @@ public final class ListViewController: UITableViewController {
     private func configure() {
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = 0
+    }
+    
+    private func cellController(forSection section: Int, in tableView: UITableView) -> CellController {
+        var sectionCount = 0
+        for cellController in tableModel {
+            sectionCount += cellController.numberOfSections?(in: tableView) ?? 1
+            if section < sectionCount {
+                return cellController
+            }
+        }
+        
+        fatalError("CellController Not Found for section \(section)")
     }
 }
