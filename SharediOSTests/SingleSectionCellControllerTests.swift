@@ -42,26 +42,26 @@ final class SingleSectionCellControllerTests: XCTestCase {
     
     func test_init_deliversHeaderView_onNonNilValue() {
         let headerView = UIView()
-        let sut = makeSUT(cellControllers: [], headerView: headerView)
+        let sut = makeSUT(headerView: headerView)
         
         XCTAssertEqual(sut.headerView, headerView)
     }
     
     func test_init_deliversFooterView_onNonNilValue() {
         let footerView = UIView()
-        let sut = makeSUT(cellControllers: [], footerView: footerView)
+        let sut = makeSUT(footerView: footerView)
         
         XCTAssertEqual(sut.footerView, footerView)
     }
     
     func test_intit_deliversNoHeaderView_onNilValue() {
-        let sut = makeSUT(cellControllers: [], headerView: nil)
+        let sut = makeSUT(headerView: nil)
         
         XCTAssertNil(sut.headerView)
     }
     
     func test_intit_deliversNoFooterView_onNilValue() {
-        let sut = makeSUT(cellControllers: [], footerView: nil)
+        let sut = makeSUT(footerView: nil)
         
         XCTAssertNil(sut.footerView)
     }
@@ -70,7 +70,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
 // MARK: - Helpers
 extension SingleSectionCellControllerTests {
     func makeSUT(
-        cellControllers: [CellController],
+        cellControllers: [CellController] = [],
         headerView: UIView? = nil,
         footerView: UIView? = nil,
         file: StaticString = #filePath,
