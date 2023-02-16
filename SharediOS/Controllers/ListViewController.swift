@@ -8,11 +8,11 @@
 import UIKit
 
 public final class ListViewController: UITableViewController {
-    private var cachedCellController: [Int: CellController] = [:]
+    private var cachedCellControllerDict: [Int: CellController] = [:]
     
     private var tableModel = [CellController]() {
         didSet {
-            cachedCellController = [:]
+            cachedCellControllerDict = [:]
             tableView.reloadData()
         }
     }
@@ -68,13 +68,13 @@ public final class ListViewController: UITableViewController {
     }
     
     private func cellController(forSection section: Int, in tableView: UITableView) -> CellController {
-        if let cellController = cachedCellController[section] { return cellController }
+        if let cellController = cachedCellControllerDict[section] { return cellController }
         
         var sectionCount = 0
         for cellController in tableModel {
             sectionCount += cellController.numberOfSections?(in: tableView) ?? 1
             if section < sectionCount {
-                cachedCellController[section] = cellController
+                cachedCellControllerDict[section] = cellController
                 return cellController
             }
         }
