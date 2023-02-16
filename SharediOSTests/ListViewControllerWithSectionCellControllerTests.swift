@@ -157,26 +157,6 @@ final class ListViewControllerWithSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.headerView(for: 1) , footerView2)
         XCTAssertEqual(sut.headerView(for: 2) , footerView3)
     }
-//
-//    func test_didSelectItem_requestsDidSelectOnce() {
-//        let sut = makeSUT()
-//        let itemCellController = MultipleSectionCellController()
-//
-//        sut.display(cellControllers: [itemCellController])
-//        sut.didSelectItemAt(section: 0, row: 0)
-//
-//        XCTAssertEqual(itemCellController.didSelectCellCount, 1)
-//    }
-//
-//    func test_didDeselectItem_requestsDidDeselectOnce() {
-//        let sut = makeSUT()
-//        let itemCellController = MultipleSectionCellController()
-//
-//        sut.display(cellControllers: [itemCellController])
-//        sut.didDeSelectItemAt(section: 0, row: 0)
-//
-//        XCTAssertEqual(itemCellController.didDeselectCellCount, 1)
-//    }
 }
 
 // MARK: - Helpers
