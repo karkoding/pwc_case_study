@@ -8,7 +8,21 @@
 import XCTest
 import SharediOS
 
+class SingleSectionCellController {
+    private(set) var cellControllers: [CellController]
+    
+    init(cellControllers: [CellController]) {
+        self.cellControllers = cellControllers
+    }
+    
+}
+
 final class SingleSectionCellControllerTests: XCTestCase {
+    func test_init_deliversCellControllers() {
+        let sut = SingleSectionCellController(cellControllers: [])
+        
+        XCTAssertEqual(sut.cellControllers.count, .zero)
+    }
 }
 
 // MARK: - Helpers
