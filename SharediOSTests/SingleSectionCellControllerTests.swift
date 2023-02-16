@@ -41,6 +41,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
 extension SingleSectionCellControllerTests {
     func makeSUT(cellControllers: [CellController], file: StaticString = #filePath, line: UInt = #line) -> SingleSectionCellController {
         let sut = SingleSectionCellController(cellControllers: cellControllers)
+        trackForMemoryLeak(sut)
         return sut
     }
     
