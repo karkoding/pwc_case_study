@@ -64,7 +64,7 @@ public final class ListViewController: UITableViewController {
     
     private func configure() {
         tableView.separatorStyle = .none
-        tableView.sectionHeaderTopPadding = 0
+        tableView.sectionHeaderTopPadding = .zero
     }
     
     private func cellController(forSection section: Int, in tableView: UITableView) -> CellController {
