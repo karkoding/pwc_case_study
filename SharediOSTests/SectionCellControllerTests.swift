@@ -49,7 +49,7 @@ final class SectionCellControllerTests: XCTestCase {
     
     func test_intit_deliversNoFooterView_onNilValue() {
         let sut = makeSUT(footerView: nil)
-        
+
         XCTAssertNil(sut.footerView)
     }
     
@@ -70,7 +70,6 @@ final class SectionCellControllerTests: XCTestCase {
         let itemCell2 = UITableViewCell()
         let item1 = makeItemCellController(cell: itemCell1)
         let item2 = makeItemCellController(cell: itemCell2)
-        
         let sut = makeSUT(cellControllers: [item1, item2])
         
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), itemCell1)
@@ -79,7 +78,6 @@ final class SectionCellControllerTests: XCTestCase {
     
     func test_didSelectAnItem_inSection() {
         let item1 = makeItemCellController()
-        
         let sut = makeSUT(cellControllers: [item1])
         
         XCTAssertFalse(item1.didSelect)
@@ -91,7 +89,6 @@ final class SectionCellControllerTests: XCTestCase {
     
     func test_didDeselectAnItem_inSection() {
         let item1 = makeItemCellController()
-        
         let sut = makeSUT(cellControllers: [item1])
         
         XCTAssertFalse(item1.didDeselect)
