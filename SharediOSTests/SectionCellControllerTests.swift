@@ -9,10 +9,10 @@ import XCTest
 import SharediOS
 
 final class SectionCellControllerTests: XCTestCase {
-    func test_init_deliversEmptyCellController_onEmptyList() {
+    func test_init_deliversEmptyOnEmptyList() {
         let sut = makeSUT(cellControllers: [])
         
-        XCTAssertEqual(sut.cellControllers.count, .zero)
+        XCTAssertTrue(sut.cellControllers.isEmpty)
     }
     
     func test_init_deliversSingleCellController_onSingleCellController() {
