@@ -120,7 +120,7 @@ private extension SectionCellControllerTests {
         ItemCellController(cell: cell)
     }
     
-    final class ItemCellController: NSObect, CellController {
+    final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
         var didSelect = false
         var didDeselect = false
