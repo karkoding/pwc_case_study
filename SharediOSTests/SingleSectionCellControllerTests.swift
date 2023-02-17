@@ -32,6 +32,10 @@ class SectionCellController: NSObject, CellController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cellControllers[indexPath.item].tableView?(tableView, didSelectRowAt: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        cellControllers[indexPath.item].tableView?(tableView, didDeselectRowAt: indexPath)
+    }
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
@@ -114,6 +118,18 @@ final class SingleSectionCellControllerTests: XCTestCase {
         
         XCTAssertTrue(item1.didSelect)
     }
+    
+    func test_didDeselectAnItem_inSection() {
+        let item1 = ItemCellController()
+        
+        let sut = makeSUT(cellControllers: [item1])
+        
+        XCTAssertFalse(item1.didDeSelect)
+        
+        sut.tableView(UITableView(), didDeselectRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(item1.didDeSelect)
+    }
 }
 
 // MARK: - Helpers
@@ -133,6 +149,7 @@ extension SingleSectionCellControllerTests {
     final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
         var didSelect = false
+        var didDeSelect = false
         
         init(cell: UITableViewCell = UITableViewCell()) {
             self.cell = cell
@@ -146,6 +163,10 @@ extension SingleSectionCellControllerTests {
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             didSelect = true
+        }
+        
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+            didDeSelect = true
         }
     }
 }
