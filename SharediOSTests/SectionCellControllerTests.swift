@@ -21,7 +21,7 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.cellControllers.count, 1)
     }
     
-    func test_init_deliversTwoCellControllers_onTwoCellControllers() {
+    func test_init_deliversMultipleCellControllers_onMultipleCellControllers() {
         let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
         
         XCTAssertEqual(sut.cellControllers.count, 2)
@@ -41,13 +41,13 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.footerView, footerView)
     }
     
-    func test_intit_deliversNoHeaderView_onNilValue() {
+    func test_init_doesNotDeliversHeaderView_onNilValue() {
         let sut = makeSUT(headerView: nil)
         
         XCTAssertNil(sut.headerView)
     }
     
-    func test_intit_deliversNoFooterView_onNilValue() {
+    func test_intit_doesNotDeliverFooterView_onNilValue() {
         let sut = makeSUT(footerView: nil)
 
         XCTAssertNil(sut.footerView)
@@ -108,7 +108,11 @@ private extension SectionCellControllerTests {
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> SectionCellController {
-        let sut = SectionCellController(cellControllers: cellControllers, headerView: headerView, footerView: footerView)
+        let sut = SectionCellController(
+            cellControllers: cellControllers,
+            headerView: headerView,
+            footerView: footerView
+        )
         trackForMemoryLeak(sut)
         return sut
     }
