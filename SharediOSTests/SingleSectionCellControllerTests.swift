@@ -8,7 +8,7 @@
 import XCTest
 import SharediOS
 
-class SingleSectionCellController: NSObject, CellController {
+class SectionCellController: NSObject, CellController {
     private(set) var cellControllers: [CellController]
     private(set) var headerView: UIView?
     private(set) var footerView: UIView?
@@ -19,9 +19,7 @@ class SingleSectionCellController: NSObject, CellController {
         self.footerView = footerView
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cellControllers.count
@@ -110,8 +108,8 @@ extension SingleSectionCellControllerTests {
         footerView: UIView? = nil,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> SingleSectionCellController {
-        let sut = SingleSectionCellController(cellControllers: cellControllers, headerView: headerView, footerView: footerView)
+    ) -> SectionCellController {
+        let sut = SectionCellController(cellControllers: cellControllers, headerView: headerView, footerView: footerView)
         trackForMemoryLeak(sut)
         return sut
     }
