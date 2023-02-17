@@ -24,11 +24,11 @@ class SingleSectionCellController: NSObject, CellController {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        cellControllers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        cellControllers[indexPath.item].tableView(tableView, cellForRowAt: indexPath)
     }
 }
 
@@ -82,6 +82,24 @@ final class SingleSectionCellControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.numberOfSections(in: UITableView()), 1)
     }
+    
+    func test_numberOfRowsInSection() {
+        let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
+        
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
+    }
+    
+    func test_deliversItems_InSection() {
+        let itemCell1 = UITableViewCell()
+        let itemCell2 = UITableViewCell()
+        let item1 = ItemCellController(cell: itemCell1)
+        let item2 = ItemCellController(cell: itemCell2)
+        
+        let sut = makeSUT(cellControllers: [item1, item2])
+        
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), itemCell1)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), itemCell2)
+    }
 }
 
 // MARK: - Helpers
@@ -99,9 +117,17 @@ extension SingleSectionCellControllerTests {
     }
     
     final class ItemCellController: NSObject, CellController {
+        private let cell: UITableViewCell
+        
+        init(cell: UITableViewCell = UITableViewCell()) {
+            self.cell = cell
+        }
+        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            cell
+        }
     }
 }
 
