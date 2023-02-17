@@ -124,11 +124,11 @@ final class SingleSectionCellControllerTests: XCTestCase {
         
         let sut = makeSUT(cellControllers: [item1])
         
-        XCTAssertFalse(item1.didDeSelect)
+        XCTAssertFalse(item1.didDeselect)
         
         sut.tableView(UITableView(), didDeselectRowAt: IndexPath(row: 0, section: 0))
         
-        XCTAssertTrue(item1.didDeSelect)
+        XCTAssertTrue(item1.didDeselect)
     }
 }
 
@@ -149,7 +149,7 @@ extension SingleSectionCellControllerTests {
     final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
         var didSelect = false
-        var didDeSelect = false
+        var didDeselect = false
         
         init(cell: UITableViewCell = UITableViewCell()) {
             self.cell = cell
@@ -166,7 +166,7 @@ extension SingleSectionCellControllerTests {
         }
         
         func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-            didDeSelect = true
+            didDeselect = true
         }
     }
 }
