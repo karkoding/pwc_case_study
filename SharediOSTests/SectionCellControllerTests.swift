@@ -122,8 +122,8 @@ private extension SectionCellControllerTests {
     
     final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
-        var didSelect = false
-        var didDeselect = false
+        private(set) var didSelect = false
+        private(set) var didDeselect = false
         
         init(cell: UITableViewCell = UITableViewCell()) {
             self.cell = cell
@@ -131,17 +131,11 @@ private extension SectionCellControllerTests {
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            cell
-        }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { cell }
         
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            didSelect = true
-        }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelect = true }
         
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-            didDeselect = true
-        }
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselect = true }
     }
 }
 
