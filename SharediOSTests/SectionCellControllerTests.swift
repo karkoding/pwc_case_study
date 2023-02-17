@@ -72,34 +72,34 @@ final class SectionCellControllerTests: XCTestCase {
         let item2 = makeItemCellController(cell: itemCell2)
         let sut = makeSUT(cellControllers: [item1, item2])
         
-        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), itemCell1)
-        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), itemCell2)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: section)), itemCell1)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: section)), itemCell2)
     }
     
     func test_viewForHeaderInSection_deliversHeaderView() {
         let headerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: headerView)
         
-        XCTAssertEqual(sut.tableView(UITableView(), viewForHeaderInSection: 0), headerView)
+        XCTAssertEqual(sut.tableView(UITableView(), viewForHeaderInSection: section), headerView)
     }
     
     func test_viewForFooterInSection_deliversFooterView() {
         let footerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], footerView: footerView)
         
-        XCTAssertEqual(sut.tableView(UITableView(), viewForFooterInSection: 0), footerView)
+        XCTAssertEqual(sut.tableView(UITableView(), viewForFooterInSection: section), footerView)
     }
     
     func test_viewForHeaderInSection_doesNotDeliverHeaderView_onNilHeader() {
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: nil)
         
-        XCTAssertNil(sut.tableView(UITableView(), viewForHeaderInSection: 0))
+        XCTAssertNil(sut.tableView(UITableView(), viewForHeaderInSection: section))
     }
     
     func test_viewForFooterInSection_doesNotDeliverFooterView_onNilFooter() {
         let sut = makeSUT(cellControllers: [ItemCellController()], footerView: nil)
         
-        XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: 0))
+        XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: section))
     }
     
     func test_didSelectRowAt_selectsItem() {
@@ -108,7 +108,7 @@ final class SectionCellControllerTests: XCTestCase {
         
         XCTAssertFalse(item1.didSelect)
 
-        sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: 0))
+        sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: section))
         
         XCTAssertTrue(item1.didSelect)
     }
@@ -119,7 +119,7 @@ final class SectionCellControllerTests: XCTestCase {
         
         XCTAssertFalse(item1.didDeselect)
         
-        sut.tableView(UITableView(), didDeselectRowAt: IndexPath(row: 0, section: 0))
+        sut.tableView(UITableView(), didDeselectRowAt: IndexPath(row: 0, section: section))
         
         XCTAssertTrue(item1.didDeselect)
     }
@@ -127,6 +127,8 @@ final class SectionCellControllerTests: XCTestCase {
 
 // MARK: - Helpers
 private extension SectionCellControllerTests {
+    var section: Int { 0 }
+    
     func makeSUT(
         cellControllers: [CellController] = [],
         headerView: UIView? = nil,
