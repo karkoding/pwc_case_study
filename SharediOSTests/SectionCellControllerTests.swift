@@ -42,15 +42,11 @@ final class SectionCellControllerTests: XCTestCase {
     }
     
     func test_init_doesNotDeliversHeaderView_onNilValue() {
-        let sut = makeSUT(headerView: nil)
-        
-        XCTAssertNil(sut.headerView)
+        XCTAssertNil(makeSUT(headerView: nil).headerView)
     }
     
     func test_intit_doesNotDeliverFooterView_onNilValue() {
-        let sut = makeSUT(footerView: nil)
-        
-        XCTAssertNil(sut.footerView)
+        XCTAssertNil(makeSUT(footerView: nil).footerView)
     }
     
     func test_numberOfSections() {
