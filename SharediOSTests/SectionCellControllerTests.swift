@@ -1,5 +1,5 @@
 //
-//  SingleSectionCellControllerTests.swift
+//  SectionCellControllerTests.swift
 //  SharediOSTests
 //
 //  Created by Karthik K Manoj on 16/02/23.
@@ -8,7 +8,7 @@
 import XCTest
 import SharediOS
 
-final class SingleSectionCellControllerTests: XCTestCase {
+final class SectionCellControllerTests: XCTestCase {
     func test_init_deliversEmptyCellController_onEmptyList() {
         let sut = makeSUT(cellControllers: [])
         
@@ -103,7 +103,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-extension SingleSectionCellControllerTests {
+extension SectionCellControllerTests {
     func makeSUT(
         cellControllers: [CellController] = [],
         headerView: UIView? = nil,
