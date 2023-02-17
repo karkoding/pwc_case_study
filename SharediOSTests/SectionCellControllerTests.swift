@@ -90,6 +90,19 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), viewForFooterInSection: 0), footerView)
     }
     
+    func test_headerView_doesNotDeliverHeaderView_onNilHeader() {
+        let sut = makeSUT(cellControllers: [ItemCellController()], headerView: nil)
+        
+        XCTAssertNil(sut.tableView(UITableView(), viewForHeaderInSection: 0))
+    }
+    
+    func test_footerView_doesNotDeliverFooterView_onNilFooter() {
+        let sut = makeSUT(cellControllers: [ItemCellController()], footerView: nil)
+        
+        XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: 0))
+    }
+    
+    
     func test_didSelectAnItem_inSection() {
         let item1 = makeItemCellController()
         let sut = makeSUT(cellControllers: [item1])
