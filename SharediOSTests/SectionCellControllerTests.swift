@@ -76,14 +76,14 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), itemCell2)
     }
     
-    func test_deliversHeaderViewForSection() {
+    func test_headerView_deliversHeaderViewForSection() {
         let headerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: headerView)
         
         XCTAssertEqual(sut.tableView(UITableView(), viewForHeaderInSection: 0), headerView)
     }
     
-    func test_footerView_deliversHeaderViewForSection() {
+    func test_footerView_deliversFooterViewForSection() {
         let footerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], footerView: footerView)
         
