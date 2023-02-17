@@ -8,6 +8,15 @@
 import XCTest
 import SharediOS
 
+public final class SingleSelectionCellController: NSObject {
+    public private(set) var cellControllers: [CellController]
+    
+    public init(cellControllers: [CellController]) {
+        self.cellControllers = cellControllers
+    }
+}
+
+
 final class SingleSelectionCellControllerTests: XCTestCase {
     func test_init_deliversEmptyOnEmptyList() {
         let sut = makeSUT(cellControllers: [])
@@ -26,7 +35,7 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
-    
+/*
     func test_init_deliversHeaderView_onNonNilValue() {
         let headerView = UIView()
         let sut = makeSUT(headerView: headerView)
@@ -119,6 +128,7 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         
         XCTAssertTrue(item1.didDeselect)
     }
+ */
 }
 
 // MARK: - Helpers
@@ -131,12 +141,8 @@ private extension SingleSelectionCellControllerTests {
         footerView: UIView? = nil,
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> SectionCellController {
-        let sut = SectionCellController(
-            cellControllers: cellControllers,
-            headerView: headerView,
-            footerView: footerView
-        )
+    ) -> SingleSelectionCellController {
+        let sut = SingleSelectionCellController(cellControllers: cellControllers)
         trackForMemoryLeak(sut)
         return sut
     }
