@@ -26,6 +26,7 @@
 		DA42C498299EA0AB009A71BE /* ListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */; };
 		DA42C49B299EA1FF009A71BE /* SharedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */; };
 		DA42C49E299EA806009A71BE /* SingleSectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49D299EA806009A71BE /* SingleSectionCellControllerTests.swift */; };
+		DA42C4A0299F5EAF009A71BE /* SectionCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49F299F5EAF009A71BE /* SectionCellController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerTests.swift; sourceTree = "<group>"; };
 		DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedHelpers.swift; sourceTree = "<group>"; };
 		DA42C49D299EA806009A71BE /* SingleSectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionCellControllerTests.swift; sourceTree = "<group>"; };
+		DA42C49F299F5EAF009A71BE /* SectionCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCellController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				DA05C0ED2995476200F61DDC /* CellController.swift */,
 				DA05C0E92994288E00F61DDC /* ListViewController.swift */,
 				DA05C0EB299429C800F61DDC /* NavigationController.swift */,
+				DA42C49F299F5EAF009A71BE /* SectionCellController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA42C4A0299F5EAF009A71BE /* SectionCellController.swift in Sources */,
 				DA05C0EA2994288E00F61DDC /* ListViewController.swift in Sources */,
 				DA05C0EC299429C800F61DDC /* NavigationController.swift in Sources */,
 				DA05C0EE2995476200F61DDC /* CellController.swift in Sources */,
