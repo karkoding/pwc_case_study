@@ -63,19 +63,19 @@ final class SingleSelectionCellControllerTests: XCTestCase {
     }
     
     func test_numberOfSections() {
-        let twoSectionCellController = TwoSectionCellController()
-        let threeSectionCellController = ThreeSectionCellController()
+        let multiSection1 = MultiSectionCellController(numberOfSections: 2)
+        let multisection2 = MultiSectionCellController(numberOfSections: 3)
         
-        let sut = makeSUT(cellControllers: [twoSectionCellController, threeSectionCellController])
+        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
         
         XCTAssertEqual(sut.numberOfSections(in: UITableView()), 5)
     }
     
     func test_numberOfRowsInSections() {
-        let twoSectionCellController = TwoSectionCellController(numberOfItemsInSection: 2)
-        let threeSectionCellController = ThreeSectionCellController(numberOfItemsInSection: 3)
+        let multiSection1 = MultiSectionCellController(numberOfSections: 2, numberOfItemsInSection: 2)
+        let multisection2 = MultiSectionCellController(numberOfSections: 3, numberOfItemsInSection: 3)
         
-        let sut = makeSUT(cellControllers: [twoSectionCellController, threeSectionCellController])
+        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
         
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 0), 2)
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
@@ -173,28 +173,16 @@ private extension SingleSelectionCellControllerTests {
         ItemCellController(cell: cell)
     }
     
-    final class TwoSectionCellController: NSObject, CellController {
-        private(set) var numberOfItemsInSection = 0
+    final class MultiSectionCellController: NSObject, CellController {
+        private let numberOfSections: Int
+        private let numberOfItemsInSection: Int
         
-        init(numberOfItemsInSection: Int = 0) {
+        init(numberOfSections: Int = 1, numberOfItemsInSection: Int = 1) {
+            self.numberOfSections = numberOfSections
             self.numberOfItemsInSection = numberOfItemsInSection
         }
         
-        func numberOfSections(in tableView: UITableView) -> Int { 2 }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { numberOfItemsInSection }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
-    }
-    
-    final class ThreeSectionCellController: NSObject, CellController {
-        private(set) var numberOfItemsInSection = 0
-        
-        init(numberOfItemsInSection: Int = 0) {
-            self.numberOfItemsInSection = numberOfItemsInSection
-        }
-        
-        func numberOfSections(in tableView: UITableView) -> Int { 3 }
+        func numberOfSections(in tableView: UITableView) -> Int { numberOfSections}
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { numberOfItemsInSection }
         
