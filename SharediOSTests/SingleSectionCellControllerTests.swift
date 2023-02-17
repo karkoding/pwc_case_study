@@ -8,7 +8,7 @@
 import XCTest
 import SharediOS
 
-class SingleSectionCellController {
+class SingleSectionCellController: NSObject, CellController {
     private(set) var cellControllers: [CellController]
     private(set) var headerView: UIView?
     private(set) var footerView: UIView?
@@ -17,6 +17,18 @@ class SingleSectionCellController {
         self.cellControllers = cellControllers
         self.headerView = headerView
         self.footerView = footerView
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        UITableViewCell()
     }
 }
 
@@ -63,6 +75,12 @@ final class SingleSectionCellControllerTests: XCTestCase {
         let sut = makeSUT(footerView: nil)
         
         XCTAssertNil(sut.footerView)
+    }
+    
+    func test_numberOfSections() {
+        let sut = makeSUT(cellControllers: [ItemCellController()])
+        
+        XCTAssertEqual(sut.numberOfSections(in: UITableView()), 1)
     }
 }
 
