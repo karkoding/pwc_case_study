@@ -84,33 +84,27 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 2), 3)
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 3), 3)
     }
-//
-//    func test_cellForRowAt_deliversItemsInSection() {
-//        let section1Items = [UITableViewCell(), UITableViewCell()]
-//        let section2Items = [UITableViewCell(), UITableViewCell()]
-//        let section3Items = [UITableViewCell(), UITableViewCell()]
-//        let section4Items = [UITableViewCell(), UITableViewCell()]
-//
-//        let multiSection1 = MultiSectionCellController(cells: [section1Items, section2Items])
-//        let multisection2 = MultiSectionCellController(cells: [section3Items, section4Items])
-//
-//        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
-//
-//
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), section1Items[0])
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), section1Items[1])
-//
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 1)), section2Items[0])
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 1)), section2Items[1])
-//
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 2)), section3Items[0])
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 2)), section3Items[1])
-//
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 3)), section4Items[0])
-//        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 3)), section4Items[1])
-//    }
-//
-//
+
+    func test_cellForRowAt_deliversItemsInSection() {
+        let cell1 = UITableViewCell()
+        let cell2 = UITableViewCell()
+        
+        let item1 = ItemCellController(cell: cell1)
+        let item2 = ItemCellController(cell: cell2)
+
+        let twoSections = TwoSectionCellController(cellControllers: [item1])
+        let threeSections = ThreeSectionCellController(cellControllers: [item2])
+
+        let sut = makeSUT(cellControllers: [twoSections, threeSections])
+
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), cell1)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 1)), cell1)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 2)), cell2)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 3)), cell2)
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 4)), cell2)
+    }
+
+
     /*
     func test_viewForHeaderInSection_deliversHeaderView() {
         let headerView = UIView()
