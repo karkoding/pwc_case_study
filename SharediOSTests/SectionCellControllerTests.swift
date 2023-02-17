@@ -65,7 +65,7 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
     }
     
-    func test_deliversItems_InSection() {
+    func test_cellForRowAt_deliversItemsInSection() {
         let itemCell1 = UITableViewCell()
         let itemCell2 = UITableViewCell()
         let item1 = makeItemCellController(cell: itemCell1)
@@ -102,19 +102,18 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: 0))
     }
     
-    
-    func test_didSelectAnItem_inSection() {
+    func test_didSelectRowAt_inSection() {
         let item1 = makeItemCellController()
         let sut = makeSUT(cellControllers: [item1])
         
         XCTAssertFalse(item1.didSelect)
-        
+
         sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: 0))
         
         XCTAssertTrue(item1.didSelect)
     }
     
-    func test_didDeselectAnItem_inSection() {
+    func test_didDeselectRowAt_inSection() {
         let item1 = makeItemCellController()
         let sut = makeSUT(cellControllers: [item1])
         
