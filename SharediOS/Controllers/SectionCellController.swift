@@ -35,4 +35,8 @@ extension SectionCellController: CellController {
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         cellControllers[indexPath.item].tableView?(tableView, didDeselectRowAt: indexPath)
     }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        headerView
+    }
 }
