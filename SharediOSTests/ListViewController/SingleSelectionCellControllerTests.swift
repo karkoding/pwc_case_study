@@ -16,6 +16,32 @@ public final class SingleSelectionCellController: NSObject {
     }
 }
 
+extension SingleSelectionCellController: CellController {
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        cellControllers.reduce(0) { $0 + ($1.numberOfSections?(in: tableView) ?? 1) }
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        cellController(for: section, tableView: tableView).tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        UITableViewCell()
+    }
+    
+    func cellController(for section: Int, tableView: UITableView) -> CellController {
+        var sectionCount = 0
+        for controller in cellControllers {
+            sectionCount += controller.numberOfSections?(in: tableView) ?? 1
+            if section < sectionCount {
+                return controller
+            }
+        }
+        
+        fatalError("Trying to access non existing cell controller for \(section)")
+    }
+}
+
 
 final class SingleSelectionCellControllerTests: XCTestCase {
     func test_init_deliversEmptyOnEmptyList() {
@@ -35,34 +61,30 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
-/*
-    func test_init_deliversHeaderView_onNonNilValue() {
-        let headerView = UIView()
-        let sut = makeSUT(headerView: headerView)
-        
-        XCTAssertEqual(sut.headerView, headerView)
-    }
-    
-    func test_init_deliversFooterView_onNonNilValue() {
-        let footerView = UIView()
-        let sut = makeSUT(footerView: footerView)
-        
-        XCTAssertEqual(sut.footerView, footerView)
-    }
-    
-    func test_init_doesNotDeliversHeaderView_onNilValue() {
-        XCTAssertNil(makeSUT(headerView: nil).headerView)
-    }
-    
-    func test_intit_doesNotDeliverFooterView_onNilValue() {
-        XCTAssertNil(makeSUT(footerView: nil).footerView)
-    }
     
     func test_numberOfSections() {
-        let sut = makeSUT(cellControllers: [makeItemCellController()])
+        let twoSectionCellController = TwoSectionCellController()
+        let threeSectionCellController = ThreeSectionCellController()
         
-        XCTAssertEqual(sut.numberOfSections(in: UITableView()), 1)
+        let sut = makeSUT(cellControllers: [twoSectionCellController, threeSectionCellController])
+        
+        XCTAssertEqual(sut.numberOfSections(in: UITableView()), 5)
     }
+    
+    func test_numberOfRowsInSections() {
+        let twoSectionCellController = TwoSectionCellController(numberOfItemsInSection: 2)
+        let threeSectionCellController = ThreeSectionCellController(numberOfItemsInSection: 3)
+        
+        let sut = makeSUT(cellControllers: [twoSectionCellController, threeSectionCellController])
+        
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 0), 2)
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 2), 3)
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 3), 3)
+        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 4), 3)
+    }
+    
+    /*
     
     func test_numberOfRowsInSection() {
         let sut = makeSUT(cellControllers: [makeItemCellController(), makeItemCellController()])
@@ -149,6 +171,34 @@ private extension SingleSelectionCellControllerTests {
     
     func makeItemCellController(cell: UITableViewCell = UITableViewCell()) -> ItemCellController {
         ItemCellController(cell: cell)
+    }
+    
+    final class TwoSectionCellController: NSObject, CellController {
+        private(set) var numberOfItemsInSection = 0
+        
+        init(numberOfItemsInSection: Int = 0) {
+            self.numberOfItemsInSection = numberOfItemsInSection
+        }
+        
+        func numberOfSections(in tableView: UITableView) -> Int { 2 }
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { numberOfItemsInSection }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
+    }
+    
+    final class ThreeSectionCellController: NSObject, CellController {
+        private(set) var numberOfItemsInSection = 0
+        
+        init(numberOfItemsInSection: Int = 0) {
+            self.numberOfItemsInSection = numberOfItemsInSection
+        }
+        
+        func numberOfSections(in tableView: UITableView) -> Int { 3 }
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { numberOfItemsInSection }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
     }
     
     final class ItemCellController: NSObject, CellController {
