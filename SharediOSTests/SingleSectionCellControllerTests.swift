@@ -28,6 +28,10 @@ class SectionCellController: NSObject, CellController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         cellControllers[indexPath.item].tableView(tableView, cellForRowAt: indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cellControllers[indexPath.item].tableView?(tableView, didSelectRowAt: indexPath)
+    }
 }
 
 final class SingleSectionCellControllerTests: XCTestCase {
@@ -98,6 +102,18 @@ final class SingleSectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), itemCell1)
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), itemCell2)
     }
+    
+    func test_didSelectAnItem_inSection() {
+        let item1 = ItemCellController()
+        
+        let sut = makeSUT(cellControllers: [item1])
+        
+        XCTAssertFalse(item1.didSelect)
+        
+        sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: 0))
+        
+        XCTAssertTrue(item1.didSelect)
+    }
 }
 
 // MARK: - Helpers
@@ -116,6 +132,7 @@ extension SingleSectionCellControllerTests {
     
     final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
+        var didSelect = false
         
         init(cell: UITableViewCell = UITableViewCell()) {
             self.cell = cell
@@ -125,6 +142,10 @@ extension SingleSectionCellControllerTests {
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             cell
+        }
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            didSelect = true
         }
     }
 }
