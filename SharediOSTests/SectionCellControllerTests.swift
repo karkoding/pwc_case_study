@@ -76,33 +76,33 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), itemCell2)
     }
     
-    func test_headerView_deliversHeaderViewForSection() {
+    func test_viewForHeaderInSection_deliversHeaderView() {
         let headerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: headerView)
         
         XCTAssertEqual(sut.tableView(UITableView(), viewForHeaderInSection: 0), headerView)
     }
     
-    func test_footerView_deliversFooterViewForSection() {
+    func test_viewForFooterInSection_deliversFooterView() {
         let footerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], footerView: footerView)
         
         XCTAssertEqual(sut.tableView(UITableView(), viewForFooterInSection: 0), footerView)
     }
     
-    func test_headerView_doesNotDeliverHeaderViewForSection_onNilHeader() {
+    func test_viewForHeaderInSection_doesNotDeliverHeaderView_onNilHeader() {
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: nil)
         
         XCTAssertNil(sut.tableView(UITableView(), viewForHeaderInSection: 0))
     }
     
-    func test_footerView_doesNotDeliverFooterViewForSection_onNilFooter() {
+    func test_viewForFooterInSection_doesNotDeliverFooterView_onNilFooter() {
         let sut = makeSUT(cellControllers: [ItemCellController()], footerView: nil)
         
         XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: 0))
     }
     
-    func test_didSelectRowAt_inSection() {
+    func test_didSelectRowAt_selectsItem() {
         let item1 = makeItemCellController()
         let sut = makeSUT(cellControllers: [item1])
         
@@ -113,7 +113,7 @@ final class SectionCellControllerTests: XCTestCase {
         XCTAssertTrue(item1.didSelect)
     }
     
-    func test_didDeselectRowAt_inSection() {
+    func test_didDeselectRowAt_deselectsItem() {
         let item1 = makeItemCellController()
         let sut = makeSUT(cellControllers: [item1])
         
