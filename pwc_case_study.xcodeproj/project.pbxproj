@@ -27,6 +27,7 @@
 		DA42C49B299EA1FF009A71BE /* SharedHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */; };
 		DA42C49E299EA806009A71BE /* SectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */; };
 		DA42C4A0299F5EAF009A71BE /* SectionCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49F299F5EAF009A71BE /* SectionCellController.swift */; };
+		DA42C4A2299F9392009A71BE /* SingleSelectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C4A1299F9392009A71BE /* SingleSelectionCellControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedHelpers.swift; sourceTree = "<group>"; };
 		DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCellControllerTests.swift; sourceTree = "<group>"; };
 		DA42C49F299F5EAF009A71BE /* SectionCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCellController.swift; sourceTree = "<group>"; };
+		DA42C4A1299F9392009A71BE /* SingleSelectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionCellControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 				DA05C0DB2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift */,
 				DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */,
 				DA42C49A299EA1FF009A71BE /* SharedHelpers.swift */,
+				DA42C4A1299F9392009A71BE /* SingleSelectionCellControllerTests.swift */,
 			);
 			path = ListViewController;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			files = (
 				DA38B50B299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift in Sources */,
 				DA38B4DF299763BF00C89A02 /* XCTestCase+trackForMemoryLeak.swift in Sources */,
+				DA42C4A2299F9392009A71BE /* SingleSelectionCellControllerTests.swift in Sources */,
 				DA42C49B299EA1FF009A71BE /* SharedHelpers.swift in Sources */,
 				DA05C0DC2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift in Sources */,
 				DA42C498299EA0AB009A71BE /* ListViewControllerTests.swift in Sources */,
