@@ -103,7 +103,7 @@ final class SectionCellControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-extension SectionCellControllerTests {
+private extension SectionCellControllerTests {
     func makeSUT(
         cellControllers: [CellController] = [],
         headerView: UIView? = nil,
@@ -120,7 +120,7 @@ extension SectionCellControllerTests {
         ItemCellController(cell: cell)
     }
     
-    final class ItemCellController: NSObject, CellController {
+    final class ItemCellController: NSObect, CellController {
         private let cell: UITableViewCell
         var didSelect = false
         var didDeselect = false
