@@ -8,11 +8,11 @@
 import UIKit
 
 public final class SectionCellController: NSObject {
-    private(set) var cellControllers: [CellController]
-    private(set) var headerView: UIView?
-    private(set) var footerView: UIView?
+    public private(set) var cellControllers: [CellController]
+    public private(set) var headerView: UIView?
+    public private(set) var footerView: UIView?
     
-    init(cellControllers: [CellController], headerView: UIView?, footerView: UIView?) {
+    public init(cellControllers: [CellController], headerView: UIView?, footerView: UIView?) {
         self.cellControllers = cellControllers
         self.headerView = headerView
         self.footerView = footerView
