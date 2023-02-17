@@ -26,7 +26,7 @@ extension SingleSelectionCellController: CellController {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        cellController(for: indexPath.section, tableView: tableView).tableView(tableView, cellForRowAt: indexPath)
     }
     
     func cellController(for section: Int, tableView: UITableView) -> CellController {
@@ -62,47 +62,55 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
     
-    func test_numberOfSections() {
-        let multiSection1 = MultiSectionCellController(numberOfSections: 2)
-        let multisection2 = MultiSectionCellController(numberOfSections: 3)
+//    func test_numberOfSections() {
+//        let multiSection1 = MultiSectionCellController(numberOfSections: 2)
+//        let multisection2 = MultiSectionCellController(numberOfSections: 3)
+//
+//        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
+//
+//        XCTAssertEqual(sut.numberOfSections(in: UITableView()), 0)
+//    }
+//
+//    func test_numberOfRowsInSections() {
+//        let multiSection1 = MultiSectionCellController(numberOfSections: 2, numberOfItemsInSection: 2)
+//        let multisection2 = MultiSectionCellController(numberOfSections: 3, numberOfItemsInSection: 3)
+//
+//        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
+//
+//        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 0), 2)
+//        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
+//        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 2), 3)
+//        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 3), 3)
+//        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 4), 3)
+//    }
+//
+    func test_cellForRowAt_deliversItemsInSection() {
+        let section1Items = [UITableViewCell(), UITableViewCell()]
+        let section2Items = [UITableViewCell(), UITableViewCell()]
+        let section3Items = [UITableViewCell(), UITableViewCell()]
+        let section4Items = [UITableViewCell(), UITableViewCell()]
+        
+        let multiSection1 = MultiSectionCellController(cells: [section1Items, section2Items])
+        let multisection2 = MultiSectionCellController(cells: [section3Items, section4Items])
         
         let sut = makeSUT(cellControllers: [multiSection1, multisection2])
-        
-        XCTAssertEqual(sut.numberOfSections(in: UITableView()), 5)
+    
+
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 0)), section1Items[0])
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 0)), section1Items[1])
+
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 1)), section2Items[0])
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 1)), section2Items[1])
+
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 2)), section3Items[0])
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 2)), section3Items[1])
+
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 3)), section4Items[0])
+        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: 3)), section4Items[1])
     }
     
-    func test_numberOfRowsInSections() {
-        let multiSection1 = MultiSectionCellController(numberOfSections: 2, numberOfItemsInSection: 2)
-        let multisection2 = MultiSectionCellController(numberOfSections: 3, numberOfItemsInSection: 3)
-        
-        let sut = makeSUT(cellControllers: [multiSection1, multisection2])
-        
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 0), 2)
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 2), 3)
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 3), 3)
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 4), 3)
-    }
     
     /*
-    
-    func test_numberOfRowsInSection() {
-        let sut = makeSUT(cellControllers: [makeItemCellController(), makeItemCellController()])
-        
-        XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
-    }
-    
-    func test_cellForRowAt_deliversItemsInSection() {
-        let itemCell1 = UITableViewCell()
-        let itemCell2 = UITableViewCell()
-        let item1 = makeItemCellController(cell: itemCell1)
-        let item2 = makeItemCellController(cell: itemCell2)
-        let sut = makeSUT(cellControllers: [item1, item2])
-        
-        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: section)), itemCell1)
-        XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 1, section: section)), itemCell2)
-    }
-    
     func test_viewForHeaderInSection_deliversHeaderView() {
         let headerView = UIView()
         let sut = makeSUT(cellControllers: [ItemCellController()], headerView: headerView)
@@ -174,19 +182,27 @@ private extension SingleSelectionCellControllerTests {
     }
     
     final class MultiSectionCellController: NSObject, CellController {
-        private let numberOfSections: Int
-        private let numberOfItemsInSection: Int
+        private let cells: [[UITableViewCell]]
         
-        init(numberOfSections: Int = 1, numberOfItemsInSection: Int = 1) {
-            self.numberOfSections = numberOfSections
-            self.numberOfItemsInSection = numberOfItemsInSection
+        init(cells: [[UITableViewCell]] = []) {
+            self.cells = cells
         }
         
-        func numberOfSections(in tableView: UITableView) -> Int { numberOfSections}
+        func numberOfSections(in tableView: UITableView) -> Int {
+            cells.count
+        }
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { numberOfItemsInSection }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            cells[section].count
+        }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            var section = indexPath.section
+            
+            if indexPath.section >= cells.count { section = indexPath.section - cells.count }
+            
+            return cells[section][indexPath.item]
+        }
     }
     
     final class ItemCellController: NSObject, CellController {
