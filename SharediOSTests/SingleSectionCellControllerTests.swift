@@ -54,13 +54,13 @@ final class SingleSectionCellControllerTests: XCTestCase {
     }
     
     func test_numberOfSections() {
-        let sut = makeSUT(cellControllers: [ItemCellController()])
+        let sut = makeSUT(cellControllers: [makeItemCellController()])
         
         XCTAssertEqual(sut.numberOfSections(in: UITableView()), 1)
     }
     
     func test_numberOfRowsInSection() {
-        let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
+        let sut = makeSUT(cellControllers: [makeItemCellController(), makeItemCellController()])
         
         XCTAssertEqual(sut.tableView(UITableView(), numberOfRowsInSection: 1), 2)
     }
@@ -68,8 +68,8 @@ final class SingleSectionCellControllerTests: XCTestCase {
     func test_deliversItems_InSection() {
         let itemCell1 = UITableViewCell()
         let itemCell2 = UITableViewCell()
-        let item1 = ItemCellController(cell: itemCell1)
-        let item2 = ItemCellController(cell: itemCell2)
+        let item1 = makeItemCellController(cell: itemCell1)
+        let item2 = makeItemCellController(cell: itemCell2)
         
         let sut = makeSUT(cellControllers: [item1, item2])
         
@@ -78,7 +78,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
     }
     
     func test_didSelectAnItem_inSection() {
-        let item1 = ItemCellController()
+        let item1 = makeItemCellController()
         
         let sut = makeSUT(cellControllers: [item1])
         
@@ -90,7 +90,7 @@ final class SingleSectionCellControllerTests: XCTestCase {
     }
     
     func test_didDeselectAnItem_inSection() {
-        let item1 = ItemCellController()
+        let item1 = makeItemCellController()
         
         let sut = makeSUT(cellControllers: [item1])
         
@@ -114,6 +114,10 @@ extension SingleSectionCellControllerTests {
         let sut = SectionCellController(cellControllers: cellControllers, headerView: headerView, footerView: footerView)
         trackForMemoryLeak(sut)
         return sut
+    }
+    
+    func makeItemCellController(cell: UITableViewCell = UITableViewCell()) -> ItemCellController {
+        ItemCellController(cell: cell)
     }
     
     final class ItemCellController: NSObject, CellController {
