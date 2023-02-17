@@ -39,4 +39,8 @@ extension SectionCellController: CellController {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         headerView
     }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        footerView
+    }
 }
