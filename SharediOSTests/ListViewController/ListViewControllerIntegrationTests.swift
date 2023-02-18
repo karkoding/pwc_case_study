@@ -9,21 +9,19 @@ import XCTest
 import SharediOS
 
 final class ListViewControllerIntegrationTests: XCTestCase {
-    func test_numberOfSections_delivers4Sections() {
+    func test_display_deliversFourSections() {
         let sut = makeSUT()
-        let section1 = SectionCellControllerSpy()
-        let section2 = SectionCellControllerSpy()
-        let section3 = SectionCellControllerSpy()
+        let section1 = SectionCellControllerStub()
+        let section2 = SectionCellControllerStub()
+        let section3 = SectionCellControllerStub()
         let singleSelectionCellController = makeSingleSelectionCellController(cellControllers: [section1, section2, section3])
         
-        let section4 = SectionCellControllerSpy()
+        let section4 = SectionCellControllerStub()
         let multiSelectionCellController = makeMultiSelectionCellController(cellControllers: [section4])
+    
+        sut.display(cellControllers: [singleSelectionCellController, multiSelectionCellController]) // Crashes
         
-        let dataSource: [CellController] = [singleSelectionCellController, multiSelectionCellController]
-         
-        sut.display(cellControllers: dataSource) // Crashes 
-        
-        XCTAssertEqual(sut.numberOfSections, 4, "Expected to render 4 section")
+        XCTAssertEqual(sut.numberOfSections, 4, "Expected to render 4 sections")
     }
 }
 
@@ -43,33 +41,17 @@ extension ListViewControllerIntegrationTests {
         MultiSelectionCellController(cellControllers: cellControllers)
     }
     
-    final class SectionCellControllerSpy: NSObject, CellController {
-        private let headerView: UIView?
-        private let footerView: UIView?
+    final class SectionCellControllerStub: NSObject, CellController {
         private let itemCellView: UITableViewCell
-        private(set) var didSelectCellCount = 0
-        private(set) var didDeselectCellCount = 0
         
-        init(itemCellView: UITableViewCell = UITableViewCell(), headerView: UIView? = nil, footerView: UIView? = nil) {
+        init(itemCellView: UITableViewCell = UITableViewCell()) {
             self.itemCellView = itemCellView
-            self.headerView = headerView
-            self.footerView = footerView
         }
         
         func numberOfSections(in tableView: UITableView) -> Int { 1 }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { itemCellView }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelectCellCount += 1 }
-        
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) { didDeselectCellCount += 1 }
-        
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {  headerView }
-        
-        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { footerView }
-        
-        static func makeItemCell() -> UITableViewCell { UITableViewCell() }
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { UITableViewCell() }
     }
 }
