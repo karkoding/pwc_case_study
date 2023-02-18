@@ -172,7 +172,6 @@
 				DA38B4DD299763A800C89A02 /* Helpers */,
 				DA38B4E029977AA200C89A02 /* NavigationControllerTests.swift */,
 				DA42C499299EA1C5009A71BE /* ListViewController */,
-				DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */,
 			);
 			path = SharediOSTests;
 			sourceTree = "<group>";
@@ -217,6 +216,7 @@
 		DA42C499299EA1C5009A71BE /* ListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */,
 				DA42C497299EA0AB009A71BE /* ListViewControllerTests.swift */,
 				DA05C0DB2994284D00F61DDC /* ListViewControllerWithItemCellControllerTests.swift */,
 				DA38B50A299DE7BE00C89A02 /* ListViewControllerWithMultiSectionCellControllerTests.swift */,
