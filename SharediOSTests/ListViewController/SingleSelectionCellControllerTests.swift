@@ -29,6 +29,10 @@ extension SingleSelectionCellController: CellController {
         cellController(for: indexPath.section, tableView: tableView).tableView(tableView, cellForRowAt: indexPath)
     }
     
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        cellController(for: section, tableView: tableView).tableView?(tableView, viewForHeaderInSection: section)
+    }
+    
     func cellController(for section: Int, tableView: UITableView) -> CellController {
         var sectionCount = 0
         for controller in cellControllers {
@@ -103,57 +107,6 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 3)), cell2)
         XCTAssertEqual(sut.tableView(UITableView(), cellForRowAt: IndexPath(row: 0, section: 4)), cell2)
     }
-
-
-    /*
-    func test_viewForHeaderInSection_deliversHeaderView() {
-        let headerView = UIView()
-        let sut = makeSUT(cellControllers: [ItemCellController()], headerView: headerView)
-        
-        XCTAssertEqual(sut.tableView(UITableView(), viewForHeaderInSection: section), headerView)
-    }
-    
-    func test_viewForFooterInSection_deliversFooterView() {
-        let footerView = UIView()
-        let sut = makeSUT(cellControllers: [ItemCellController()], footerView: footerView)
-        
-        XCTAssertEqual(sut.tableView(UITableView(), viewForFooterInSection: section), footerView)
-    }
-    
-    func test_viewForHeaderInSection_doesNotDeliverHeaderView_onNilHeader() {
-        let sut = makeSUT(cellControllers: [ItemCellController()], headerView: nil)
-        
-        XCTAssertNil(sut.tableView(UITableView(), viewForHeaderInSection: section))
-    }
-    
-    func test_viewForFooterInSection_doesNotDeliverFooterView_onNilFooter() {
-        let sut = makeSUT(cellControllers: [ItemCellController()], footerView: nil)
-        
-        XCTAssertNil(sut.tableView(UITableView(), viewForFooterInSection: section))
-    }
-    
-    func test_didSelectRowAt_selectsItem() {
-        let item1 = makeItemCellController()
-        let sut = makeSUT(cellControllers: [item1])
-        
-        XCTAssertFalse(item1.didSelect)
-
-        sut.tableView(UITableView(), didSelectRowAt: IndexPath(row: 0, section: section))
-        
-        XCTAssertTrue(item1.didSelect)
-    }
-    
-    func test_didDeselectRowAt_deselectsItem() {
-        let item1 = makeItemCellController()
-        let sut = makeSUT(cellControllers: [item1])
-        
-        XCTAssertFalse(item1.didDeselect)
-        
-        sut.tableView(UITableView(), didDeselectRowAt: IndexPath(row: 0, section: section))
-        
-        XCTAssertTrue(item1.didDeselect)
-    }
- */
 }
 
 // MARK: - Helpers
@@ -214,20 +167,28 @@ private extension SingleSelectionCellControllerTests {
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             cellControllers[indexPath.item].tableView(tableView, cellForRowAt: indexPath)
         }
+        
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            cellControllers[section].tableView?(tableView, viewForHeaderInSection: section)
+        }
     }
     
     final class ItemCellController: NSObject, CellController {
         private let cell: UITableViewCell
+        private let headerView: UIView?
         private(set) var didSelect = false
         private(set) var didDeselect = false
         
-        init(cell: UITableViewCell = UITableViewCell()) {
+        init(cell: UITableViewCell = UITableViewCell(), headerView: UIView? = nil) {
             self.cell = cell
+            self.headerView = headerView
         }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell { cell }
+        
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? { headerView }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { didSelect = true }
         
