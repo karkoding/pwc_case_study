@@ -55,20 +55,20 @@ final class SingleSelectionCellControllerTests: XCTestCase {
     }
     
     func test_init_deliversSingleCellController_onSingleCellController() {
-        let sut = makeSUT(cellControllers: [ItemCellController()])
+        let sut = makeSUT(cellControllers: [ItemCellControllerStub()])
         
         XCTAssertEqual(sut.cellControllers.count, 1)
     }
     
     func test_init_deliversMultipleCellControllers_onMultipleCellControllers() {
-        let sut = makeSUT(cellControllers: [ItemCellController(), ItemCellController()])
+        let sut = makeSUT(cellControllers: [ItemCellControllerStub(), ItemCellControllerStub()])
         
         XCTAssertEqual(sut.cellControllers.count, 2)
     }
     
     func test_numberOfSections() {
-        let twoSections = TwoSectionCellController(cellControllers: [ItemCellController(), ItemCellController()])
-        let threeSections = ThreeSectionCellController(cellControllers: [ItemCellController(), ItemCellController(), ItemCellController()])
+        let twoSections = TwoSectionCellController(cellControllers: [ItemCellControllerStub(), ItemCellControllerStub()])
+        let threeSections = ThreeSectionCellController(cellControllers: [ItemCellControllerStub(), ItemCellControllerStub(), ItemCellControllerStub()])
         
         let sut = makeSUT(cellControllers: [twoSections, threeSections])
 
@@ -76,8 +76,8 @@ final class SingleSelectionCellControllerTests: XCTestCase {
     }
 
     func test_numberOfRowsInSections() {
-        let twoSections = TwoSectionCellController(cellControllers: [ItemCellController(), ItemCellController()])
-        let threeSections = ThreeSectionCellController(cellControllers: [ItemCellController(), ItemCellController(), ItemCellController()])
+        let twoSections = TwoSectionCellController(cellControllers: [ItemCellControllerStub(), ItemCellControllerStub()])
+        let threeSections = ThreeSectionCellController(cellControllers: [ItemCellControllerStub(), ItemCellControllerStub(), ItemCellControllerStub()])
         
         let sut = makeSUT(cellControllers: [twoSections, threeSections])
 
@@ -93,8 +93,8 @@ final class SingleSelectionCellControllerTests: XCTestCase {
         let cell1 = UITableViewCell()
         let cell2 = UITableViewCell()
         
-        let item1 = ItemCellController(cell: cell1)
-        let item2 = ItemCellController(cell: cell2)
+        let item1 = ItemCellControllerStub(cell: cell1)
+        let item2 = ItemCellControllerStub(cell: cell2)
 
         let twoSections = TwoSectionCellController(cellControllers: [item1])
         let threeSections = ThreeSectionCellController(cellControllers: [item2])
@@ -125,8 +125,8 @@ private extension SingleSelectionCellControllerTests {
         return sut
     }
     
-    func makeItemCellController(cell: UITableViewCell = UITableViewCell()) -> ItemCellController {
-        ItemCellController(cell: cell)
+    func makeItemCellController(cell: UITableViewCell = UITableViewCell()) -> ItemCellControllerStub {
+        ItemCellControllerStub(cell: cell)
     }
     
     final class TwoSectionCellController: NSObject, CellController {
@@ -173,7 +173,7 @@ private extension SingleSelectionCellControllerTests {
         }
     }
     
-    final class ItemCellController: NSObject, CellController {
+    final class ItemCellControllerStub: NSObject, CellController {
         private let cell: UITableViewCell
         private let headerView: UIView?
         private(set) var didSelect = false
