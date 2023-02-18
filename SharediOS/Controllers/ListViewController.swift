@@ -77,6 +77,6 @@ public final class ListViewController: UITableViewController {
             }
         }
         
-        fatalError("Trying to access non existing cell controller for \(section)")
+        fatalError("Trying to access non existing cell controller for section \(section)")
     }
 }
