@@ -42,12 +42,6 @@ extension ListViewControllerIntegrationTests {
     }
     
     final class SectionCellControllerStub: NSObject, CellController {
-        private let itemCellView: UITableViewCell
-        
-        init(itemCellView: UITableViewCell = UITableViewCell()) {
-            self.itemCellView = itemCellView
-        }
-        
         func numberOfSections(in tableView: UITableView) -> Int { 1 }
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 1 }
