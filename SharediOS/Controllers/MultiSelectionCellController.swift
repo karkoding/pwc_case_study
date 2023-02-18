@@ -1,5 +1,5 @@
 //
-//  SingleSelectionCellController.swift
+//  MultiSelectionCellController.swift
 //  SharediOS
 //
 //  Created by Karthik K Manoj on 18/02/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class SingleSelectionCellController: NSObject {
+public final class MultiSelectionCellController: NSObject {
     public private(set) var cellControllers: [CellController]
     
     public init(cellControllers: [CellController]) {
@@ -15,7 +15,7 @@ public final class SingleSelectionCellController: NSObject {
     }
 }
 
-extension SingleSelectionCellController: CellController {
+extension MultiSelectionCellController: CellController {
     public func numberOfSections(in tableView: UITableView) -> Int {
         cellControllers.reduce(0) { $0 + ($1.numberOfSections?(in: tableView) ?? 1) }
     }
