@@ -1,5 +1,5 @@
 //
-//  ListViewControllerWithMultiSectionCellControllerTests.swift
+//  ListViewControllerWithMultiSectionTests.swift
 //  SharediOSTests
 //
 //  Created by Karthik K Manoj on 16/02/23.
@@ -8,7 +8,7 @@
 import XCTest
 import SharediOS
 
-final class ListViewControllerWithMultiSectionCellControllerTests: XCTestCase {
+final class ListViewControllerWithMultiSectionTests: XCTestCase {
     func test_display_rendersSectionItems() {
         let sut = makeSUT()
         
@@ -101,7 +101,7 @@ final class ListViewControllerWithMultiSectionCellControllerTests: XCTestCase {
 }
 
 // MARK: - Helpers
-extension ListViewControllerWithMultiSectionCellControllerTests {
+extension ListViewControllerWithMultiSectionTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> ListViewController {
         let sut = ListViewController()
         trackForMemoryLeak(sut, file: file, line: line)
