@@ -7,6 +7,8 @@
 
 import UIKit
 
+// THIS IS NOT FULLY IMPLEMENTED FOR MULTISELECTION. WIP
+
 public final class MultiSelectionCellController: NSObject {
     public private(set) var cellControllers: [CellController]
     

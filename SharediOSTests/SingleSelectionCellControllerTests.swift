@@ -8,6 +8,8 @@
 import XCTest
 import SharediOS
 
+// THIS TEST IS IN PROGRESS.
+
 final class SingleSelectionCellControllerTests: XCTestCase {
     func test_init_deliversEmptyOnEmptyList() {
         let sut = makeSUT(cellControllers: [])

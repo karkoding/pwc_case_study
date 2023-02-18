@@ -7,6 +7,8 @@
 
 import UIKit
 
+// THIS IS NOT FULLY IMPLEMENTED FOR SINGLE SELECTION. WIP
+
 public final class SingleSelectionCellController: NSObject {
     public private(set) var cellControllers: [CellController]
     
