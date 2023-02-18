@@ -28,6 +28,7 @@
 		DA42C49E299EA806009A71BE /* SectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */; };
 		DA42C4A0299F5EAF009A71BE /* SectionCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C49F299F5EAF009A71BE /* SectionCellController.swift */; };
 		DA42C4A2299F9392009A71BE /* SingleSelectionCellControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C4A1299F9392009A71BE /* SingleSelectionCellControllerTests.swift */; };
+		DA42C4A429A10234009A71BE /* SingleSelectionCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA42C4A329A10233009A71BE /* SingleSelectionCellController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		DA42C49D299EA806009A71BE /* SectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCellControllerTests.swift; sourceTree = "<group>"; };
 		DA42C49F299F5EAF009A71BE /* SectionCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCellController.swift; sourceTree = "<group>"; };
 		DA42C4A1299F9392009A71BE /* SingleSelectionCellControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionCellControllerTests.swift; sourceTree = "<group>"; };
+		DA42C4A329A10233009A71BE /* SingleSelectionCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionCellController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				DA05C0E92994288E00F61DDC /* ListViewController.swift */,
 				DA05C0EB299429C800F61DDC /* NavigationController.swift */,
 				DA42C49F299F5EAF009A71BE /* SectionCellController.swift */,
+				DA42C4A329A10233009A71BE /* SingleSelectionCellController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA42C4A429A10234009A71BE /* SingleSelectionCellController.swift in Sources */,
 				DA42C4A0299F5EAF009A71BE /* SectionCellController.swift in Sources */,
 				DA05C0EA2994288E00F61DDC /* ListViewController.swift in Sources */,
 				DA05C0EC299429C800F61DDC /* NavigationController.swift in Sources */,
